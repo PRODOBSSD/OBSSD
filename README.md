@@ -1,2 +1,3 @@
-# spline-wrapper
-for embedding spline into a website
+# OBSSD WEBSITE
+i made this shi yessirski
+@imobssd
