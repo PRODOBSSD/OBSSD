@@ -1,3 +1,7 @@
 # OBSSD WEBSITE
-i made this shi yessirski
-@imobssd
+shi i wanna add
+  custom cursor
+  social media links
+  music player
+  about page
+  custom kits page
