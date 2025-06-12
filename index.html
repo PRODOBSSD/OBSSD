@@ -2,39 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Theoretical Spline Watermark Removal</title>
+  <title>OBSSD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.2/build/spline-viewer.js"></script>
   <style>
     html, body {
-      width: 100vw;
-      height: 100vh;
       margin: 0;
       padding: 0;
-      overflow: hidden; /* prevent scrollbars */
-      background: #000; /* or any color */
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #222;
+      /* Prevent resizing of body */
+      min-width: 100vw;
+      min-height: 100vh;
+    }
+    .centered-fixed {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 1024px;
+      height: 768px;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 16px rgba(0,0,0,0.5);
+      background: #fff;
+      overflow: hidden;
+      /* Prevent scaling on small screens */
+      min-width: 1024px;
+      min-height: 768px;
+      max-width: 1024px;
+      max-height: 768px;
     }
     spline-viewer {
       width: 1024px !important;
       height: 768px !important;
       display: block;
-      min-width: 1024px;
-      min-height: 768px;
-      max-width: 1024px;
-      max-height: 768px;
-      box-shadow: 0 0 16px rgba(0,0,0,0.5);
+      min-width: 1024px !important;
+      min-height: 768px !important;
+      max-width: 1024px !important;
+      max-height: 768px !important;
       background: #fff;
     }
   </style>
 </head>
 <body>
-
-  <!-- 3D Spline model -->
-  <spline-viewer url="https://prod.spline.design/EJhMoIOBazX7KmRT/scene.splinecode"></spline-viewer>
-
+  <div class="centered-fixed">
+    <!-- 3D Spline model -->
+    <spline-viewer url="https://prod.spline.design/EJhMoIOBazX7KmRT/scene.splinecode"></spline-viewer>
+  </div>
   <!-- Theoretical watermark removal script -->
   <script>
     const interval = setInterval(() => {
@@ -48,6 +63,5 @@
       }
     }, 500);
   </script>
-
 </body>
 </html>
