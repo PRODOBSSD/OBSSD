@@ -30,7 +30,7 @@
       margin: 0;
       padding: 0;
     }
-    /* Home Return button styling */
+    /* Homepage Link styling */
     .logo-link {
       position: fixed;
       bottom: 16px;
@@ -56,13 +56,20 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.24);
       outline: 2px solid #fff;
     }
-    /* Instagram button styling */
-    .instagram-link {
+    /* Social icons bar styling */
+    .social-bar {
       position: fixed;
       left: 50%;
       bottom: 20px;
       transform: translateX(-50%);
       z-index: 1001;
+      display: flex;
+      gap: 24px;
+      background: none;
+      padding: 0;
+      margin: 0;
+    }
+    .social-link {
       display: block;
       background: none;
       border: none;
@@ -70,7 +77,7 @@
       margin: 0;
       cursor: pointer;
     }
-    .instagram-link img {
+    .social-link img {
       width: 56px;
       height: 56px;
       display: block;
@@ -79,7 +86,7 @@
       background: #fff;
       transition: box-shadow 0.2s;
     }
-    .instagram-link:hover img, .instagram-link:focus img {
+    .social-link:hover img, .social-link:focus img {
       box-shadow: 0 4px 24px rgba(0,0,0,0.24);
       outline: 2px solid #fff;
     }
@@ -91,12 +98,13 @@
         bottom: 8px;
         left: 8px;
       }
-      .instagram-link img {
+      .social-bar {
+        gap: 12px;
+        bottom: 8px;
+      }
+      .social-link img {
         width: 36px;
         height: 36px;
-      }
-      .instagram-link {
-        bottom: 8px;
       }
     }
   </style>
@@ -108,10 +116,18 @@
     <img src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
   </a>
 
-  <!-- Instagram middle bottom button -->
-  <a href="https://www.instagram.com/imobssd/" class="instagram-link" target="_blank" title="Follow me on Instagram">
-    <img src="obssd_assets/OBSSD_INSTAGRAM.png" alt="Instagram">
-  </a>
+  <!-- Social icons bar: YouTube, Instagram, SoundCloud -->
+  <div class="social-bar">
+    <a href="https://www.youtube.com/@PRODOBSSD" class="social-link" target="_blank" title="Subscribe on YouTube">
+      <img src="obssd_assets/OBSSD_YOUTUBE.png" alt="YouTube">
+    </a>
+    <a href="https://www.instagram.com/imobssd/" class="social-link" target="_blank" title="Follow me on Instagram">
+      <img src="obssd_assets/OBSSD_INSTAGRAM.png" alt="Instagram">
+    </a>
+    <a href="https://soundcloud.com/imobssd" class="social-link" target="_blank" title="Listen on SoundCloud">
+      <img src="obssd_assets/OBSSD_SOUNDCLOUD.png" alt="SoundCloud">
+    </a>
+  </div>
 
   <!-- Your 3D Spline model -->
   <spline-viewer url="https://prod.spline.design/EJhMoIOBazX7KmRT/scene.splinecode"></spline-viewer>
