@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>LOOPS</title>
+  <title>Subscribe to Our Mailing List</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -88,8 +88,8 @@
     </div>
   </div>
   <script>
-    // Replace this URL with your backend or mailing list service endpoint
-    const SUBSCRIBE_URL = "https://your-server-endpoint.com/subscribe";
+    // Replace this URL with your Google Apps Script Web App URL
+    const SUBSCRIBE_URL = "https://script.google.com/macros/s/AKfycbwSJIAfgsTFS9RHuu9TdGBZqsmW6qWhAO6rxt4claIUxJ3_T-QXj5C29ad4vmTYEx1d/exec";
 
     document.getElementById('subscribe-form').addEventListener('submit', async function(event) {
       event.preventDefault();
@@ -100,15 +100,16 @@
       errorMsg.style.display = 'none';
 
       try {
+        const formData = new FormData();
+        formData.append('email', email);
+
         const response = await fetch(SUBSCRIBE_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email })
+          body: formData
         });
 
-        if (response.ok) {
+        const text = await response.text();
+        if (response.ok && text.toLowerCase().includes("success")) {
           successMsg.style.display = 'block';
           document.getElementById('subscribe-form').reset();
         } else {
