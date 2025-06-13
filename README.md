@@ -2,7 +2,7 @@
 shi i wanna add
 
 // loops page
-Add Spline 3d, Add return home button, Customize Buttons etc to look better, Add description
+Add Spline 3d, Customize Buttons etc to look better, Add description
 
  // music player
  
