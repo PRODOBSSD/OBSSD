@@ -1,8 +1,7 @@
 # OBSSD WEBSITE
 shi i wanna add
 
-// loops page
-Add Spline 3d
+// optimize 3d model
 
  // music player
  
