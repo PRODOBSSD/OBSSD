@@ -1,0 +1,5 @@
+body {
+  /* Use your PNG for the cursor, with a fallback to 'auto'. 
+     The hotspot is set at 0 0 (top-left corner), but you can adjust these numbers as needed. */
+  cursor: url('obssd_assets/OBSSD_FAVICON.png') 0 0, auto;
+}
