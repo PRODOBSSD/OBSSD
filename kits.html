@@ -93,6 +93,20 @@
     .demo-btn:hover {
       background: #333333;
     }
+    .product-logos {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 6px;
+    }
+    .product-logos img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    }
     /* Homepage Link styling */
     .logo-link {
       position: fixed;
@@ -170,6 +184,12 @@
         width: 36px;
         height: 36px;
       }
+      .product-image {
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+        max-height: 300px;
+      }
     }
   </style>
 </head>
@@ -179,7 +199,7 @@
   </div>
   <div class="product-grid">
 
-    <!-- Product Example Start -->
+    <!-- Product Example with 3 logos -->
     <div class="product-card">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1ip0g986k1dajkvbs4j6vo85110.jpg" alt="Product 1">
       <button class="product-name-btn" onclick="window.open('https://payhip.com/b/wn5aG', '_blank')">
@@ -190,10 +210,13 @@
         <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=2FOAM6TxeaU', '_blank')">
           Demo
         </button>
+        <div class="product-logos">
+          <img src="obssd_assets/LOGO_MOB.png" alt="Logo MOB">
+          <img src="obssd_assets/LOGO_OBSSD.png" alt="Logo OBSSD">
+        </div>
       </div>
     </div>
-    <!-- Product Example End -->
-
+    <!-- Product Example with 1 logo -->
     <div class="product-card">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1imh2dokg1bomcsj1i65don12bg10.png" alt="Product 2">
       <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DHSwIJpTbU_/?utm_source=ig_web_button_share_sheet&igsh=NjhicHJscDNwcWc0', '_blank')">
@@ -204,8 +227,21 @@
         <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=Udl4sDKCKeQ', '_blank')">
           Demo
         </button>
+        <div class="product-logos">
+          <img src="obssd_assets/LOGO_MOB.png" alt="Logo MOB">
+          <img src="obssd_assets/LOGO_OBSSD.png" alt="Logo OBSSD">
+        </div>
       </div>
     </div>
+    <!-- Product Example with no logos (for reference, just omit the div)
+    <div class="product-card">
+      ...
+      <div class="product-footer">
+        <span class="price">$9.99</span>
+        <button class="demo-btn">Demo</button>
+      </div>
+    </div>
+    -->
 
   </div>
 
