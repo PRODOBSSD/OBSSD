@@ -31,6 +31,18 @@
       margin-top: 0;
       color: #24292f;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+    }
+    .eye-logo {
+      height: 1.4em;
+      width: auto;
+      vertical-align: middle;
+      margin-left: 0.3em;
+      /* Responsive shrink if heading text wraps */
+      max-width: 2.2em;
     }
     label {
       display: block;
@@ -164,19 +176,19 @@
         width: 36px;
         height: 36px;
       }
-    }
-    /* Custom description styling */
-    .custom-description {
-      margin-top: 1.5em;
-      color: #9da2a8;
-      text-align: center;
-      font-size: 0.8em;
+      .eye-logo {
+        height: 1.2em;
+        max-width: 1.8em;
+      }
     }
   </style>
 </head>
 <body>
   <div class="subscribe-container">
-    <h2>Join Weekly Loops List</h2>
+    <h2>
+      Join Weekly Loops List
+      <img src="obssd_assets/OBSSD_EYE_LOGO.png" alt="Eye Logo" class="eye-logo">
+    </h2>
     <form id="subscribe-form" autocomplete="off">
       <label for="email">Email Address</label>
       <input type="email" id="email" name="email" required placeholder="you@example.com">
@@ -193,10 +205,6 @@
     </div>
     <div class="error-message" id="error-message">
       There was a problem. Please try again.
-    </div>
-    <!-- Custom description at the bottom of the subscribe container -->
-    <div class="custom-description">
-      Your email address won't be shared with third parties
     </div>
   </div>
   <!-- Home button (bottom left) -->
