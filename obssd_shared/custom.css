@@ -1,5 +1,5 @@
 body {
   /* Use your PNG for the cursor, with a fallback to 'auto'. 
      The hotspot is set at 0 0 (top-left corner), but you can adjust these numbers as needed. */
-  cursor: url('https://cdn.jsdelivr.net/gh/zenorocha/dracula-theme@master/cursors/text.png') 16 16, auto;
+  cursor: url('obssd_assets/OBSSD_CURSOR.png') 16 16, auto;
 }
