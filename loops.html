@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>LOOPS</title>
-  <script src="obssd_shared/favicon.js"></script>
-  <link rel="stylesheet" href="obssd_shared/custom.css">
+  <title>Subscribe to Our Mailing List</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -76,14 +74,14 @@
 </head>
 <body>
   <div class="subscribe-container">
-    <h2>Gain Access To Weekly Loops</h2>
+    <h2>Join Our Mailing List</h2>
     <form id="subscribe-form" autocomplete="off">
       <label for="email">Email Address</label>
       <input type="email" id="email" name="email" required placeholder="you@example.com">
       <button type="submit">Subscribe</button>
     </form>
     <div class="success-message" id="success-message">
-      Thank you! You will be added to my weekly loops
+      Thank you for subscribing!
     </div>
     <div class="error-message" id="error-message">
       There was a problem. Please try again.
@@ -100,6 +98,7 @@
       const errorMsg = document.getElementById('error-message');
       successMsg.style.display = 'none';
       errorMsg.style.display = 'none';
+      errorMsg.textContent = "There was a problem. Please try again.";
 
       try {
         const formData = new FormData();
@@ -114,6 +113,9 @@
         if (response.ok && text.toLowerCase().includes("success")) {
           successMsg.style.display = 'block';
           document.getElementById('subscribe-form').reset();
+        } else if (text.toLowerCase().includes("already exists")) {
+          errorMsg.textContent = "This email is already subscribed.";
+          errorMsg.style.display = 'block';
         } else {
           throw new Error('Failed to subscribe');
         }
