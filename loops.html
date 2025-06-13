@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Subscribe to Our Mailing List</title>
+  <title>LOOPS</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -55,8 +55,15 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    button:hover {
+    button.unsubscribe-btn {
+      background: #cf222e;
+      margin-top: 0.5em;
+    }
+    button:hover:not(.unsubscribe-btn) {
       background: #218639;
+    }
+    button.unsubscribe-btn:hover {
+      background: #a31e22;
     }
     .success-message, .error-message {
       text-align: center;
@@ -70,6 +77,11 @@
     .error-message {
       color: #cf222e;
     }
+    .divider {
+      border: none;
+      border-top: 1px solid #d0d7de;
+      margin: 2em 0;
+    }
   </style>
 </head>
 <body>
@@ -80,6 +92,12 @@
       <input type="email" id="email" name="email" required placeholder="you@example.com">
       <button type="submit">Subscribe</button>
     </form>
+    <hr class="divider">
+    <form id="unsubscribe-form" autocomplete="off">
+      <label for="unsubscribe-email">Unsubscribe Email Address</label>
+      <input type="email" id="unsubscribe-email" name="email" required placeholder="you@example.com">
+      <button type="submit" class="unsubscribe-btn">Unsubscribe</button>
+    </form>
     <div class="success-message" id="success-message">
       Thank you for subscribing!
     </div>
@@ -89,16 +107,21 @@
   </div>
   <script>
     // Replace this URL with your Google Apps Script Web App URL
-    const SUBSCRIBE_URL = "https://script.google.com/macros/s/AKfycbx3K6t6328fAnFZXf4m7U4WRaeTZZvnUcyCWoQSNHb01EmLd0sIKEaoPDauSuPuzDI-/exec";
+    const SUBSCRIBE_URL = "https://script.google.com/macros/s/AKfycbzfpO4SmqNQUNXE1-8SOjpAe1LucEZgkUYCuUR3UP-g4JUQZgStQ0Z4oBxe3auTMQOF/exec";
+
+    function hideMessages() {
+      document.getElementById('success-message').style.display = 'none';
+      const errorMsg = document.getElementById('error-message');
+      errorMsg.style.display = 'none';
+      errorMsg.textContent = "There was a problem. Please try again.";
+    }
 
     document.getElementById('subscribe-form').addEventListener('submit', async function(event) {
       event.preventDefault();
+      hideMessages();
       const email = document.getElementById('email').value;
       const successMsg = document.getElementById('success-message');
       const errorMsg = document.getElementById('error-message');
-      successMsg.style.display = 'none';
-      errorMsg.style.display = 'none';
-      errorMsg.textContent = "There was a problem. Please try again.";
 
       try {
         const formData = new FormData();
@@ -111,6 +134,7 @@
 
         const text = await response.text();
         if (response.ok && text.toLowerCase().includes("success")) {
+          successMsg.textContent = "Thank you for subscribing!";
           successMsg.style.display = 'block';
           document.getElementById('subscribe-form').reset();
         } else if (text.toLowerCase().includes("already exists")) {
@@ -118,6 +142,39 @@
           errorMsg.style.display = 'block';
         } else {
           throw new Error('Failed to subscribe');
+        }
+      } catch (error) {
+        errorMsg.style.display = 'block';
+      }
+    });
+
+    document.getElementById('unsubscribe-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      hideMessages();
+      const email = document.getElementById('unsubscribe-email').value;
+      const successMsg = document.getElementById('success-message');
+      const errorMsg = document.getElementById('error-message');
+
+      try {
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('action', 'unsubscribe');
+
+        const response = await fetch(SUBSCRIBE_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        const text = await response.text();
+        if (response.ok && text.toLowerCase().includes("unsubscribed")) {
+          successMsg.textContent = "You have been unsubscribed.";
+          successMsg.style.display = 'block';
+          document.getElementById('unsubscribe-form').reset();
+        } else if (text.toLowerCase().includes("email not found")) {
+          errorMsg.textContent = "This email was not found in our list.";
+          errorMsg.style.display = 'block';
+        } else {
+          throw new Error('Failed to unsubscribe');
         }
       } catch (error) {
         errorMsg.style.display = 'block';
