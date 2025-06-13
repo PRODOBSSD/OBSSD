@@ -2,13 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Digital Products</title>
+  <title>KITS</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f7f7f7;
       margin: 0;
       padding: 30px;
+    }
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .logo-img {
+      max-width: 220px;
+      height: auto;
+      display: block;
     }
     .product-grid {
       display: grid;
@@ -76,7 +87,9 @@
   </style>
 </head>
 <body>
-  <h1>Digital Products</h1>
+  <div class="logo-container">
+    <img class="logo-img" src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
+  </div>
   <div class="product-grid">
 
     <!-- Product Example Start -->
@@ -94,7 +107,6 @@
     </div>
     <!-- Product Example End -->
 
-    <!-- Add more products by copying the block above and editing details -->
     <div class="product-card">
       <img class="product-image" src="https://via.placeholder.com/400x400?text=Product+2" alt="Product 2">
       <button class="product-name-btn" onclick="window.open('https://yoursite.com/product2', '_blank')">
@@ -116,19 +128,6 @@
       <div class="product-footer">
         <span class="price">$14.99</span>
         <button class="demo-btn" onclick="window.open('https://yoursite.com/demo3', '_blank')">
-          Demo
-        </button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img class="product-image" src="https://via.placeholder.com/400x400?text=Product+2" alt="Product 2">
-      <button class="product-name-btn" onclick="window.open('https://yoursite.com/product2', '_blank')">
-        Pro Templates
-      </button>
-      <div class="product-footer">
-        <span class="price">$9.99</span>
-        <button class="demo-btn" onclick="window.open('https://yoursite.com/demo2', '_blank')">
           Demo
         </button>
       </div>
