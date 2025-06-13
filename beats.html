@@ -42,11 +42,12 @@
       padding: 0;
       display: block;
     }
+    /* Homepage Link styling */
     .logo-link {
       position: fixed;
       bottom: 16px;
       left: 16px;
-      z-index: 2;
+      z-index: 1000;
       display: block;
       background: none;
       border: none;
@@ -59,12 +60,13 @@
       height: auto;
       display: block;
       border-radius: 6px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-      transition: box-shadow 0.2s;
+      box-shadow: none;               /* Remove drop shadow */
+      transition: transform 0.2s;     /* Animate scaling */
       background: #fff;
     }
-    .logo-link:hover img, .logo-link:focus img {
-      box-shadow: 0 4px 24px rgba(0,0,0,0.24);
+    .logo-link:hover img, 
+    .logo-link:focus img {
+      transform: scale(1.15);         /* Scale up image on hover/focus */
       outline: 2px solid #fff;
     }
     @media (max-width: 500px) {
