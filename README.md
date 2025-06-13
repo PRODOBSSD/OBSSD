@@ -1,6 +1,8 @@
 # OBSSD WEBSITE
 shi i wanna add
 
+// custom kits page
+
 // loops page
 Add Spline 3d
 
@@ -8,4 +10,3 @@ Add Spline 3d
  
  // about page
  
- // custom kits page
