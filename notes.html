@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NOTES</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; }
+    #protected { display: none; }
+    textarea { width: 100%; height: 200px; margin-top: 10px; font-size: 1em; }
+    input[type="password"] { font-size: 1em; }
+  </style>
+</head>
+<body>
+  <div id="login">
+    <h2>Enter Password</h2>
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="checkPassword()">Login</button>
+    <p id="error" style="color:red;"></p>
+  </div>
 
+  <div id="protected">
+    <h1>📝 My Notes & To-Do List</h1>
+    <textarea id="notes" placeholder="Write your notes or to-do list here..."></textarea>
+    <p>Notes are saved automatically and privately in your browser.</p>
+    <button onclick="logout()">Log out</button>
+  </div>
+
+  <script>
+    const PASSWORD = "SWAG"; // Change this!
+
+    function checkPassword() {
+      const input = document.getElementById('password').value;
+      if (input === PASSWORD) {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('protected').style.display = 'block';
+        loadNotes();
+      } else {
+        document.getElementById('error').innerText = 'Incorrect password!';
+      }
+    }
+
+    function loadNotes() {
+      const saved = localStorage.getItem('myNotes');
+      if (saved) document.getElementById('notes').value = saved;
+    }
+
+    document.getElementById('notes').addEventListener('input', function() {
+      localStorage.setItem('myNotes', this.value);
+    });
+
+    function logout() {
+      document.getElementById('protected').style.display = 'none';
+      document.getElementById('login').style.display = 'block';
+      document.getElementById('password').value = '';
+    }
+
+    // Optional: Autofocus input on load
+    window.onload = () => { document.getElementById('password').focus(); }
+  </script>
+</body>
+</html>
