@@ -3,10 +3,19 @@
 <head>
   <title>NOTES</title>
   <style>
-    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; }
+    body { font-family: sans-serif; max-width: 700px; margin: 40px auto; }
     #protected { display: none; }
-    textarea { width: 100%; height: 200px; margin-top: 10px; font-size: 1em; }
+    #editor-toolbar button { margin-right: 6px; }
+    #editor {
+      border: 1px solid #ccc;
+      min-height: 200px;
+      padding: 10px;
+      margin-top: 10px;
+      background: #f9f9f9;
+      outline: none;
+    }
     input[type="password"] { font-size: 1em; }
+    .toolbar { margin-bottom: 10px; }
   </style>
 </head>
 <body>
@@ -19,9 +28,15 @@
 
   <div id="protected">
     <h1>📝 My Notes & To-Do List</h1>
-    <textarea id="notes" placeholder="Write your notes or to-do list here..."></textarea>
-    <p>Notes are saved automatically and privately in your browser.</p>
-    <button onclick="logout()">Log out</button>
+    <div class="toolbar" id="editor-toolbar">
+      <button onclick="format('bold')"><b>B</b></button>
+      <button onclick="format('insertOrderedList')">1.</button>
+      <button onclick="document.getElementById('imgInput').click()">🖼️</button>
+      <input type="file" id="imgInput" accept="image/*" style="display:none" onchange="insertImage(event)">
+      <button onclick="logout()">Log out</button>
+    </div>
+    <div id="editor" contenteditable="true" spellcheck="true"></div>
+    <p>Notes are saved automatically (including images) in your browser.</p>
   </div>
 
   <script>
@@ -38,14 +53,34 @@
       }
     }
 
-    function loadNotes() {
-      const saved = localStorage.getItem('myNotes');
-      if (saved) document.getElementById('notes').value = saved;
+    function format(command) {
+      document.execCommand(command, false, null);
+      saveNotes();
     }
 
-    document.getElementById('notes').addEventListener('input', function() {
-      localStorage.setItem('myNotes', this.value);
-    });
+    function insertImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.execCommand('insertImage', false, e.target.result);
+        saveNotes();
+      };
+      reader.readAsDataURL(file);
+      // reset file input so you can upload the same file again later if needed
+      event.target.value = '';
+    }
+
+    function saveNotes() {
+      localStorage.setItem('myNotesHTML', document.getElementById('editor').innerHTML);
+    }
+
+    function loadNotes() {
+      const saved = localStorage.getItem('myNotesHTML');
+      if (saved) document.getElementById('editor').innerHTML = saved;
+    }
+
+    document.getElementById('editor').addEventListener('input', saveNotes);
 
     function logout() {
       document.getElementById('protected').style.display = 'none';
@@ -53,7 +88,6 @@
       document.getElementById('password').value = '';
     }
 
-    // Optional: Autofocus input on load
     window.onload = () => { document.getElementById('password').focus(); }
   </script>
 </body>
