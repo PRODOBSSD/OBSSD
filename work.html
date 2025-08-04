@@ -126,8 +126,7 @@
       color: #222;
       margin-right: 6px;
     }
-
-    /* --- Portfolio items and container styling reverted --- */
+    /* --- Portfolio items and container styling --- */
     .portfolio-container {
       max-width: 900px;
       margin: 0 auto;
@@ -144,6 +143,27 @@
       flex-direction: column;
       align-items: center;
     }
+    .portfolio-media {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      min-width: 0;
+      min-height: 0;
+      border-radius: 0; /* Square edges */
+      overflow: hidden;
+      background: #eee;
+    }
+    .portfolio-media img, .portfolio-media iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0; /* Square edges */
+      background: #eee;
+      display: block;
+    }
     .portfolio-title {
       width: 100%;
       padding: 10px 0;
@@ -151,7 +171,7 @@
       background: #000000;
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 0; /* Square edges */
       font-size: 1.1em;
       cursor: pointer;
       transition: background 0.16s;
@@ -169,21 +189,6 @@
       color: #999;
       margin-bottom: 12px;
     }
-    .portfolio-media {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 6px;
-      min-height: 180px;
-    }
-    .portfolio-media img, .portfolio-media iframe {
-      max-width: 100%;
-      border-radius: 6px;
-      background: #eee;
-    }
-    /* ----------------------------------------------- */
-
     /* Social & Home buttons styles */
     .logo-link {
       position: fixed;
@@ -260,6 +265,9 @@
         width: 36px;
         height: 36px;
       }
+      .portfolio-container {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -291,31 +299,32 @@
   <div class="portfolio-container">
     <!-- Example: YouTube Video -->
     <div class="portfolio-item" data-tags="2d,Animated" data-date="2023-08-01">
+      <div class="portfolio-media">
+        <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+      </div>
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">My Video Work</button>
       <p class="portfolio-description">A video project exploring...</p>
       <p class="portfolio-date">Created: 2023-08-01</p>
-      <div class="portfolio-media">
-        <iframe width="360" height="202" src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-      </div>
     </div>
-    <!-- Example: Pinterest Photo Embed -->
+
+    <!-- Example: Pinterest Photo Embed (use direct image for cropping) -->
     <div class="portfolio-item" data-tags="Static,2d" data-date="2024-01-10">
+      <div class="portfolio-media">
+        <img src="/obssd_assets/pinterest_photo.jpg" alt="Pinterest Photo">
+      </div>
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Pinterest Photo</button>
       <p class="portfolio-description">A photo I curated on Pinterest...</p>
       <p class="portfolio-date">Created: 2024-01-10</p>
-      <div class="portfolio-media">
-        <a data-pin-do="embedPin" href="https://www.pinterest.com/pin/PINTEREST_PIN_ID/"></a>
-        <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
-      </div>
     </div>
+
     <!-- Example: Photo from GitHub project files -->
     <div class="portfolio-item" data-tags="Static,3d" data-date="2022-11-05">
-      <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Local Photo</button>
-      <p class="portfolio-description">A photo from my own collection...</p>
-      <p class="portfolio-date">Created: 2022-11-05</p>
       <div class="portfolio-media">
         <img src="/obssd_assets/my_photo.jpg" alt="Artwork">
       </div>
+      <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Local Photo</button>
+      <p class="portfolio-description">A photo from my own collection...</p>
+      <p class="portfolio-date">Created: 2022-11-05</p>
     </div>
     <!-- Add more portfolio items as needed -->
   </div>
