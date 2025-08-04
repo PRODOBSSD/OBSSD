@@ -89,6 +89,7 @@
       border-radius: 6px;
       background: #eee;
     }
+
     /* Social & Home buttons styles */
     .logo-link {
       position: fixed;
@@ -197,18 +198,25 @@
     #sort-date {
       font-family: 'Montserrat', sans-serif;
       color: #fff;
-      background: #000;
-      border: 2px solid #000;
+      background: #FFD600;  /* Yellow background when closed */
+      border: 2px solid #FFD600;
       border-radius: 6px;
       padding: 8px 18px;
       font-size: 1em;
       cursor: pointer;
       transition: background 0.18s, border-color 0.18s;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
     }
-    #sort-date.selected {
-      background: #FFD600;
-      border-color: #FFD600;
-      color: #000;
+    #sort-date:focus {
+      background: #000;  /* Black background when open */
+      color: #fff;
+      border-color: #000;
+    }
+    #sort-date option {
+      background: #000 !important;
+      color: #fff !important;
     }
     #portfolio-controls label {
       font-family: 'Montserrat', sans-serif;
@@ -312,12 +320,7 @@
           btn.classList.remove('selected');
         }
       });
-      // Highlight the dropdown if sort order is changed
-      if (sortOrder !== "desc") {
-        sortSelect.classList.add('selected');
-      } else {
-        sortSelect.classList.remove('selected');
-      }
+      // No need for JS dropdown highlight, CSS handles it
     }
 
     function filterAndSort() {
