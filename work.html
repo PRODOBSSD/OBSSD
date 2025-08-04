@@ -8,8 +8,140 @@
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
   <link rel="stylesheet" href="obssd_shared/custom.css">
   <style>
-    /* ...existing styles... */
-
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 30px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .logo-img {
+      max-width: 220px;
+      height: auto;
+      display: block;
+    }
+    .centered-filter-btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .filter-toggle-btn {
+      font-family: 'Montserrat', sans-serif;
+      padding: 14px 40px;
+      border-radius: 0px;
+      font-size: 1.16em;
+      font-weight: 600;
+      border: none;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      letter-spacing: 0.04em;
+      outline: none;
+      box-shadow: none;
+      user-select: none;
+      margin: 0 auto;
+      display: block;
+    }
+    .filter-toggle-btn.open {
+      background: #FFD600;
+      color: #000;
+      border: 2px solid #FFD600;
+    }
+    #portfolio-controls {
+      display: none;
+      margin-bottom: 12px;
+      transition: max-height 0.3s;
+      max-width: 900px;
+      margin: 0 auto 24px;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    #portfolio-controls.open {
+      display: flex;
+      justify-content: center;
+    }
+    @media (max-width: 700px) {
+      #portfolio-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+    .tag-filter {
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      background: #000;
+      border: 2px solid #000;
+      border-radius: 0px;
+      padding: 8px 18px;
+      margin-right: 2px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s;
+    }
+    .tag-filter.selected {
+      background: #FFD600;
+      border-color: #FFD600;
+      color: #000;
+    }
+    #sort-date {
+      font-family: 'Montserrat', sans-serif;
+      color: #000;
+      background: #FFD600;
+      border: 2px solid #FFD600;
+      border-radius: 0px;
+      padding: 8px 18px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    #sort-date:focus {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+    }
+    #sort-date option {
+      background: #000 !important;
+      color: #fff !important;
+    }
+    #portfolio-controls label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      color: #222;
+      margin-right: 6px;
+    }
+    .portfolio-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 32px;
+    }
+    .portfolio-item {
+      background: #fff;
+      border-radius: 0px;
+      box-shadow: 0 0px 0px rgba(0,0,0,0.06);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     .portfolio-media {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -59,16 +191,16 @@
       background: #eee;
       display: block;
     }
-    /* Hide arrows and indicator by default; only show on hover if more than one slide */
+    /* Hide controls by default; only show on hover if more than one slide */
     .portfolio-media-slider.controls-enabled .media-arrow-btn,
     .portfolio-media-slider.controls-enabled .media-slide-indicator {
-      opacity: 0 !important;
+      opacity: 0;
       pointer-events: none;
       transition: opacity 0.18s;
     }
-    .portfolio-media:hover .portfolio-media-slider.controls-enabled .media-arrow-btn,
-    .portfolio-media:hover .portfolio-media-slider.controls-enabled .media-slide-indicator {
-      opacity: 1 !important;
+    .portfolio-media-slider.controls-enabled:hover .media-arrow-btn,
+    .portfolio-media-slider.controls-enabled:hover .media-slide-indicator {
+      opacity: 1;
       pointer-events: auto;
     }
     /* Hide arrows and indicator completely if only one slide */
@@ -94,7 +226,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0; /* Always start hidden */
+      opacity: 0.85;
       user-select: none;
       /* opacity and pointer-events handled above */
     }
@@ -121,15 +253,138 @@
       font-size: 1em;
       z-index: 3;
       letter-spacing: 0.06em;
-      opacity: 0; /* Always start hidden */
-      /* opacity and pointer-events handled above */
     }
-    /* ...rest of your styles... */
+    .portfolio-title {
+      width: 100%;
+      padding: 10px 0;
+      margin-bottom: 10px;
+      background: #000000;
+      color: white;
+      border: none;
+      border-radius: 0;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.16s;
+    }
+    .portfolio-title:hover {
+      background: #333333;
+    }
+    .portfolio-description {
+      margin-bottom: 6px;
+      color: #444;
+      text-align: center;
+    }
+    .portfolio-date {
+      font-size: 0.96em;
+      color: #999;
+      margin-bottom: 12px;
+    }
+    .logo-link {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      z-index: 1000;
+      display: block;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+    .logo-link img {
+      width: 56px;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+      box-shadow: none;
+      transition: transform 0.2s;
+      background: #fff;
+    }
+    .logo-link:hover img, 
+    .logo-link:focus img {
+      transform: scale(1.15);
+      outline: 2px solid #fff;
+    }
+    .social-bar {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      z-index: 1001;
+      display: flex;
+      gap: 24px;
+      background: none;
+      padding: 0;
+      margin: 0;
+    }
+    .social-link {
+      display: block;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+    .social-link img {
+      width: 56px;
+      height: 56px;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      background: #fff;
+      transition: box-shadow 0.2s;
+    }
+    .social-link:hover img, .social-link:focus img {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.24);
+      outline: 2px solid #fff;
+    }
+    @media (max-width: 500px) {
+      .logo-link img {
+        width: 40px;
+      }
+      .logo-link {
+        bottom: 8px;
+        left: 8px;
+      }
+      .social-bar {
+        gap: 12px;
+        bottom: 8px;
+      }
+      .social-link img {
+        width: 36px;
+        height: 36px;
+      }
+      .portfolio-container {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- ...rest of your markup... -->
+  <!-- Logo at the top -->
+  <div class="logo-container">
+    <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
+  </div>
 
+  <!-- Centered Filter Button -->
+  <div class="centered-filter-btn-container">
+    <button id="filter-menu-toggle" class="filter-toggle-btn">FILTER</button>
+  </div>
+  <div id="portfolio-controls">
+    <label>Tags:</label>
+    <button class="tag-filter" data-tag="2d">2D</button>
+    <button class="tag-filter" data-tag="3d">3D</button>
+    <button class="tag-filter" data-tag="Animated">Animated</button>
+    <button class="tag-filter" data-tag="Static">Static</button>
+    <button class="tag-filter" data-tag="all">All</button>
+    <label style="margin-left:20px;">Sort by:</label>
+    <select id="sort-date">
+      <option value="desc">Most Recent</option>
+      <option value="asc">Oldest First</option>
+    </select>
+  </div>
+
+  <!-- Portfolio container -->
   <div class="portfolio-container">
 
     <!-- Portfolio item with multiple slides (YouTube + image) -->
@@ -191,7 +446,23 @@
     <!-- Add more portfolio items as needed -->
   </div>
 
-  <!-- ...rest of your markup... -->
+  <!-- Home button (bottom left) -->
+  <a href="https://www.obssd.online" class="logo-link" title="Go to OBSSD">
+    <img src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
+  </a>
+
+  <!-- Social icons bar (bottom middle) -->
+  <div class="social-bar">
+    <a href="https://www.youtube.com/@PRODOBSSD" class="social-link" target="_blank" title="Subscribe on YouTube">
+      <img src="obssd_assets/OBSSD_YOUTUBE.png" alt="YouTube">
+    </a>
+    <a href="https://www.instagram.com/imobssd/" class="social-link" target="_blank" title="Follow me on Instagram">
+      <img src="obssd_assets/OBSSD_INSTAGRAM.png" alt="Instagram">
+    </a>
+    <a href="https://soundcloud.com/imobssd" class="social-link" target="_blank" title="Listen on SoundCloud">
+      <img src="obssd_assets/OBSSD_SOUNDCLOUD.png" alt="SoundCloud">
+    </a>
+  </div>
 
   <script>
   document.addEventListener("DOMContentLoaded", function () {
