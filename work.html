@@ -1,24 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NLWC8KV66N');
-</script>
   <meta charset="UTF-8">
   <meta name="description" content="Work created by New Zealand based producer and visual artist OBSSD">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WORK</title>
-  <!-- Add Favicon and Custom Cursor -->
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
   <link rel="stylesheet" href="obssd_shared/custom.css">
-  <!-- Add Montserrat font from Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
@@ -138,7 +126,6 @@
       color: #222;
       margin-right: 6px;
     }
-    /* --- Portfolio items and container styling --- */
     .portfolio-container {
       max-width: 900px;
       margin: 0 auto;
@@ -164,17 +151,92 @@
       margin-bottom: 10px;
       min-width: 0;
       min-height: 0;
-      border-radius: 0; /* Square edges */
+      border-radius: 0;
+      overflow: hidden;
+      background: #eee;
+      position: relative;
+    }
+    /* Slider controls */
+    .portfolio-media-slider {
+      width: 100%;
+      aspect-ratio: 1/1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
       overflow: hidden;
       background: #eee;
     }
-    .portfolio-media img, .portfolio-media iframe {
+    .media-slide {
+      width: 100%;
+      height: 100%;
+      display: none;
+      position: absolute;
+      left: 0; top: 0;
+      border-radius: 0;
+      background: #eee;
+      justify-content: center;
+      align-items: center;
+    }
+    .media-slide.active {
+      display: flex;
+      position: relative;
+      z-index: 1;
+    }
+    .media-slide img, .media-slide iframe, .media-slide video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 0; /* Square edges */
+      border-radius: 0;
       background: #eee;
       display: block;
+    }
+    .media-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 0;
+      font-size: 2em;
+      font-weight: bold;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+      transition: background 0.18s, color 0.18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.85;
+      user-select: none;
+    }
+    .media-arrow-btn:hover {
+      background: #FFD600;
+      color: #000;
+    }
+    .media-arrow-left {
+      left: 8px;
+    }
+    .media-arrow-right {
+      right: 8px;
+    }
+    .media-slide-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.85);
+      color: #222;
+      padding: 3px 14px;
+      border-radius: 0;
+      font-weight: 600;
+      font-size: 1em;
+      z-index: 3;
+      letter-spacing: 0.06em;
     }
     .portfolio-title {
       width: 100%;
@@ -183,7 +245,7 @@
       background: #000000;
       color: white;
       border: none;
-      border-radius: 0; /* Square edges */
+      border-radius: 0;
       font-size: 1.1em;
       cursor: pointer;
       transition: background 0.16s;
@@ -201,7 +263,6 @@
       color: #999;
       margin-bottom: 12px;
     }
-    /* Social & Home buttons styles */
     .logo-link {
       position: fixed;
       bottom: 16px;
@@ -309,30 +370,58 @@
 
   <!-- Portfolio container -->
   <div class="portfolio-container">
-    <!-- Example: YouTube Video -->
+
+    <!-- Portfolio item with multiple slides (YouTube + image) -->
     <div class="portfolio-item" data-tags="2d,Animated" data-date="2023-08-01">
       <div class="portfolio-media">
-        <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+        <div class="portfolio-media-slider">
+          <button class="media-arrow-btn media-arrow-left" aria-label="Previous">&lt;</button>
+          <div class="media-slide active">
+            <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="media-slide">
+            <img src="/obssd_assets/slide1.jpg" alt="Slide 1">
+          </div>
+          <button class="media-arrow-btn media-arrow-right" aria-label="Next">&gt;</button>
+          <span class="media-slide-indicator">1 / 2</span>
+        </div>
       </div>
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">My Video Work</button>
       <p class="portfolio-description">A video project exploring...</p>
       <p class="portfolio-date">Created: 2023-08-01</p>
     </div>
 
-    <!-- Example: Pinterest Photo Embed (use direct image for cropping) -->
+    <!-- Portfolio item with images only -->
     <div class="portfolio-item" data-tags="Static,2d" data-date="2024-01-10">
       <div class="portfolio-media">
-        <img src="/obssd_assets/pinterest_photo.jpg" alt="Pinterest Photo">
+        <div class="portfolio-media-slider">
+          <button class="media-arrow-btn media-arrow-left" aria-label="Previous">&lt;</button>
+          <div class="media-slide active">
+            <img src="/obssd_assets/pinterest_photo.jpg" alt="Pinterest Photo">
+          </div>
+          <div class="media-slide">
+            <img src="/obssd_assets/slide2.jpg" alt="Photo 2">
+          </div>
+          <button class="media-arrow-btn media-arrow-right" aria-label="Next">&gt;</button>
+          <span class="media-slide-indicator">1 / 2</span>
+        </div>
       </div>
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Pinterest Photo</button>
       <p class="portfolio-description">A photo I curated on Pinterest...</p>
       <p class="portfolio-date">Created: 2024-01-10</p>
     </div>
 
-    <!-- Example: Photo from GitHub project files -->
+    <!-- Portfolio item with single image -->
     <div class="portfolio-item" data-tags="Static,3d" data-date="2022-11-05">
       <div class="portfolio-media">
-        <img src="/obssd_assets/my_photo.jpg" alt="Artwork">
+        <div class="portfolio-media-slider">
+          <button class="media-arrow-btn media-arrow-left" aria-label="Previous">&lt;</button>
+          <div class="media-slide active">
+            <img src="/obssd_assets/my_photo.jpg" alt="Artwork">
+          </div>
+          <button class="media-arrow-btn media-arrow-right" aria-label="Next">&gt;</button>
+          <span class="media-slide-indicator">1 / 1</span>
+        </div>
       </div>
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Local Photo</button>
       <p class="portfolio-description">A photo from my own collection...</p>
@@ -359,10 +448,10 @@
     </a>
   </div>
 
-  <!-- Portfolio Filter/Sort Script -->
+  <!-- Portfolio Filter/Sort Script & Slider JS -->
   <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Toggle menu
+    // Filter menu toggle
     const filterToggle = document.getElementById('filter-menu-toggle');
     const controls = document.getElementById('portfolio-controls');
     filterToggle.addEventListener('click', function () {
@@ -388,7 +477,6 @@
     }
 
     function filterAndSort() {
-      // Filter
       items.forEach(item => {
         const tags = item.getAttribute('data-tags').split(',');
         if (currentTag === "all" || tags.includes(currentTag)) {
@@ -397,8 +485,6 @@
           item.style.display = "none";
         }
       });
-
-      // Sort
       const container = items[0].parentNode;
       const sortedItems = items
         .filter(item => item.style.display !== "none")
@@ -407,8 +493,6 @@
           const dateB = new Date(b.getAttribute('data-date'));
           return sortOrder === "desc" ? dateB - dateA : dateA - dateB;
         });
-
-      // Reorder in DOM
       sortedItems.forEach(item => container.appendChild(item));
       updateButtonStyles();
     }
@@ -426,6 +510,41 @@
     });
 
     filterAndSort();
+
+    // --- Portfolio Media Slider Logic ---
+    document.querySelectorAll('.portfolio-media-slider').forEach(function(slider) {
+      const slides = Array.from(slider.querySelectorAll('.media-slide'));
+      const leftBtn = slider.querySelector('.media-arrow-left');
+      const rightBtn = slider.querySelector('.media-arrow-right');
+      const indicator = slider.querySelector('.media-slide-indicator');
+      let currentSlide = 0;
+
+      function updateSlider() {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === currentSlide);
+        });
+        indicator.textContent = (currentSlide + 1) + ' / ' + slides.length;
+        leftBtn.style.opacity = slides.length > 1 ? 0.85 : 0.3;
+        rightBtn.style.opacity = slides.length > 1 ? 0.85 : 0.3;
+        leftBtn.disabled = slides.length <= 1;
+        rightBtn.disabled = slides.length <= 1;
+      }
+      leftBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (slides.length > 1) {
+          currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+          updateSlider();
+        }
+      });
+      rightBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (slides.length > 1) {
+          currentSlide = (currentSlide + 1) % slides.length;
+          updateSlider();
+        }
+      });
+      updateSlider();
+    });
   });
   </script>
 </body>
