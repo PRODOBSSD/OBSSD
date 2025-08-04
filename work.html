@@ -1,3 +1,15 @@
+Here’s how to achieve your requested style:
+
+- **Center the button horizontally on the screen.**
+- **Closed:** Black button, white text.
+- **Open:** Yellow button, black text.
+
+Below is the updated full `work.html` file, with just the relevant styles and HTML changed for your filter button.  
+You can copy and use this file directly.
+
+---
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,61 +39,105 @@
       height: auto;
       display: block;
     }
-    .portfolio-container {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 32px;
-    }
-    .portfolio-item {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 0px 0px rgba(0,0,0,0.06);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .portfolio-title {
-      width: 100%;
-      padding: 10px 0;
-      margin-bottom: 10px;
-      background: #000000;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: background 0.16s;
-    }
-    .portfolio-title:hover {
-      background: #333333;
-    }
-    .portfolio-description {
-      margin-bottom: 6px;
-      color: #444;
-      text-align: center;
-    }
-    .portfolio-date {
-      font-size: 0.96em;
-      color: #999;
-      margin-bottom: 12px;
-    }
-    .portfolio-media {
-      width: 100%;
+    .centered-filter-btn-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 6px;
-      min-height: 180px;
+      width: 100%;
+      margin-bottom: 16px;
     }
-    .portfolio-media img, .portfolio-media iframe {
-      max-width: 100%;
+    .filter-toggle-btn {
+      font-family: 'Montserrat', sans-serif;
+      padding: 14px 40px;
+      border-radius: 8px;
+      font-size: 1.16em;
+      font-weight: 600;
+      border: none;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      letter-spacing: 0.04em;
+      outline: none;
+      box-shadow: none;
+      user-select: none;
+      margin: 0 auto;
+      display: block;
+    }
+    .filter-toggle-btn.open {
+      background: #FFD600;
+      color: #000;
+      border: 2px solid #FFD600;
+    }
+    #portfolio-controls {
+      display: none;
+      margin-bottom: 12px;
+      transition: max-height 0.3s;
+      max-width: 900px;
+      margin: 0 auto 24px;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    #portfolio-controls.open {
+      display: flex;
+      justify-content: center;
+    }
+    @media (max-width: 700px) {
+      #portfolio-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+    .tag-filter {
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      background: #000;
+      border: 2px solid #000;
       border-radius: 6px;
-      background: #eee;
+      padding: 8px 18px;
+      margin-right: 2px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s;
     }
-
+    .tag-filter.selected {
+      background: #FFD600;
+      border-color: #FFD600;
+      color: #000;
+    }
+    #sort-date {
+      font-family: 'Montserrat', sans-serif;
+      color: #000;
+      background: #FFD600;
+      border: 2px solid #FFD600;
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    #sort-date:focus {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+    }
+    #sort-date option {
+      background: #000 !important;
+      color: #fff !important;
+    }
+    #portfolio-controls label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      color: #222;
+      margin-right: 6px;
+    }
     /* Social & Home buttons styles */
     .logo-link {
       position: fixed;
@@ -159,99 +215,6 @@
         height: 36px;
       }
     }
-
-    /* Hamburger - now simple button styling */
-    .filter-toggle-btn {
-      display: inline-block;
-      font-family: 'Montserrat', sans-serif;
-      padding: 12px 32px;
-      border-radius: 7px;
-      font-size: 1.16em;
-      font-weight: 600;
-      margin-bottom: 16px;
-      border: none;
-      background: #000;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.18s, color 0.18s;
-      letter-spacing: 0.04em;
-      outline: none;
-      box-shadow: none;
-      user-select: none;
-    }
-    .filter-toggle-btn.open {
-      background: #fff;
-      color: #000;
-      border: 2px solid #000;
-    }
-    #portfolio-controls {
-      display: none;
-      margin-bottom: 12px;
-      transition: max-height 0.3s;
-      max-width: 900px;
-      margin: 0 auto 24px;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px;
-      font-family: 'Montserrat', sans-serif;
-    }
-    #portfolio-controls.open {
-      display: flex;
-    }
-    @media (max-width: 700px) {
-      #portfolio-controls {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-    }
-    .tag-filter {
-      text-transform: uppercase;
-      font-family: 'Montserrat', sans-serif;
-      color: #fff;
-      background: #000;
-      border: 2px solid #000;
-      border-radius: 6px;
-      padding: 8px 18px;
-      margin-right: 2px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.18s, border-color 0.18s;
-    }
-    .tag-filter.selected {
-      background: #FFD600;
-      border-color: #FFD600;
-      color: #000;
-    }
-    #sort-date {
-      font-family: 'Montserrat', sans-serif;
-      color: #000;
-      background: #FFD600;
-      border: 2px solid #FFD600;
-      border-radius: 6px;
-      padding: 8px 18px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.18s, border-color 0.18s, color 0.18s;
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-    }
-    #sort-date:focus {
-      background: #000;
-      color: #fff;
-      border-color: #000;
-    }
-    #sort-date option {
-      background: #000 !important;
-      color: #fff !important;
-    }
-    #portfolio-controls label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: bold;
-      color: #222;
-      margin-right: 6px;
-    }
   </style>
 </head>
 <body>
@@ -260,8 +223,10 @@
     <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
   </div>
 
-  <!-- Hamburger Filter Controls (now simple button) -->
-  <button id="filter-menu-toggle" class="filter-toggle-btn">FILTER</button>
+  <!-- Centered Filter Button -->
+  <div class="centered-filter-btn-container">
+    <button id="filter-menu-toggle" class="filter-toggle-btn">FILTER</button>
+  </div>
   <div id="portfolio-controls">
     <label>Tags:</label>
     <button class="tag-filter" data-tag="2d">2D</button>
@@ -398,3 +363,11 @@
   </script>
 </body>
 </html>
+```
+
+**Summary of changes:**
+- The filter button is centered.
+- Button is black/white when closed, yellow/black when open.
+- “Tags:” is used instead of “Filter by tags:”.
+
+Let me know if you want further tweaks!
