@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-NLWC8KV66N');
-  </script>
   <meta charset="UTF-8">
   <meta name="description" content="Work created by New Zealand based producer and visual artist OBSSD">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -168,31 +160,29 @@
       }
     }
 
-    /* Hamburger and dropdown styling */
-    .filter-hamburger {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      padding: 12px 18px;
+    /* Hamburger - now simple button styling */
+    .filter-toggle-btn {
+      display: inline-block;
       font-family: 'Montserrat', sans-serif;
-      background: #000;
-      color: #fff;
-      border: none;
+      padding: 12px 32px;
       border-radius: 7px;
-      font-size: 1.12em;
+      font-size: 1.16em;
       font-weight: 600;
       margin-bottom: 16px;
-      transition: background 0.18s;
-      gap: 12px;
+      border: none;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      letter-spacing: 0.04em;
+      outline: none;
+      box-shadow: none;
       user-select: none;
     }
-    .filter-hamburger:hover {
-      background: #333;
-    }
-    .filter-hamburger .hamburger-icon {
-      width: 28px;
-      height: 28px;
-      display: block;
+    .filter-toggle-btn.open {
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
     }
     #portfolio-controls {
       display: none;
@@ -235,8 +225,8 @@
     }
     #sort-date {
       font-family: 'Montserrat', sans-serif;
-      color: #000;             /* Black text */
-      background: #FFD600;     /* Yellow background */
+      color: #000;
+      background: #FFD600;
       border: 2px solid #FFD600;
       border-radius: 6px;
       padding: 8px 18px;
@@ -248,8 +238,8 @@
       -moz-appearance: none;
     }
     #sort-date:focus {
-      background: #000;        /* Black background when open */
-      color: #fff;             /* White text when open */
+      background: #000;
+      color: #fff;
       border-color: #000;
     }
     #sort-date option {
@@ -270,17 +260,10 @@
     <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
   </div>
 
-  <!-- Hamburger Filter Controls -->
-  <div id="filter-menu-toggle" class="filter-hamburger">
-    <svg class="hamburger-icon" viewBox="0 0 32 32" fill="none">
-      <rect y="7" width="32" height="4" rx="2" fill="white"/>
-      <rect y="15" width="32" height="4" rx="2" fill="white"/>
-      <rect y="23" width="32" height="4" rx="2" fill="white"/>
-    </svg>
-    <span>Filter</span>
-  </div>
+  <!-- Hamburger Filter Controls (now simple button) -->
+  <button id="filter-menu-toggle" class="filter-toggle-btn">FILTER</button>
   <div id="portfolio-controls">
-    <label>Filter by tags:</label>
+    <label>Tags:</label>
     <button class="tag-filter" data-tag="2d">2D</button>
     <button class="tag-filter" data-tag="3d">3D</button>
     <button class="tag-filter" data-tag="Animated">Animated</button>
@@ -295,7 +278,6 @@
 
   <!-- Portfolio container -->
   <div class="portfolio-container">
-
     <!-- Example: YouTube Video -->
     <div class="portfolio-item" data-tags="2d,Animated" data-date="2023-08-01">
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">My Video Work</button>
@@ -305,7 +287,6 @@
         <iframe width="360" height="202" src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
-
     <!-- Example: Pinterest Photo Embed -->
     <div class="portfolio-item" data-tags="Static,2d" data-date="2024-01-10">
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Pinterest Photo</button>
@@ -316,7 +297,6 @@
         <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
       </div>
     </div>
-
     <!-- Example: Photo from GitHub project files -->
     <div class="portfolio-item" data-tags="Static,3d" data-date="2022-11-05">
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Local Photo</button>
@@ -326,9 +306,7 @@
         <img src="/obssd_assets/my_photo.jpg" alt="Artwork">
       </div>
     </div>
-
     <!-- Add more portfolio items as needed -->
-
   </div>
 
   <!-- Home button (bottom left) -->
@@ -352,11 +330,12 @@
   <!-- Portfolio Filter/Sort Script -->
   <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Hamburger dropdown functionality
+    // Toggle menu
     const filterToggle = document.getElementById('filter-menu-toggle');
     const controls = document.getElementById('portfolio-controls');
     filterToggle.addEventListener('click', function () {
       controls.classList.toggle('open');
+      filterToggle.classList.toggle('open');
     });
 
     // Filter/sort logic
@@ -374,7 +353,6 @@
           btn.classList.remove('selected');
         }
       });
-      // No need for JS dropdown highlight, CSS handles it
     }
 
     function filterAndSort() {
