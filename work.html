@@ -167,15 +167,53 @@
         height: 36px;
       }
     }
-    /* Filter and Sort Controls Styling */
+
+    /* Hamburger and dropdown styling */
+    .filter-hamburger {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 12px 18px;
+      font-family: 'Montserrat', sans-serif;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 1.12em;
+      font-weight: 600;
+      margin-bottom: 16px;
+      transition: background 0.18s;
+      gap: 12px;
+      user-select: none;
+    }
+    .filter-hamburger:hover {
+      background: #333;
+    }
+    .filter-hamburger .hamburger-icon {
+      width: 28px;
+      height: 28px;
+      display: block;
+    }
     #portfolio-controls {
+      display: none;
+      margin-bottom: 12px;
+      transition: max-height 0.3s;
       max-width: 900px;
       margin: 0 auto 24px;
-      display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 16px;
       font-family: 'Montserrat', sans-serif;
+    }
+    #portfolio-controls.open {
+      display: flex;
+    }
+    @media (max-width: 700px) {
+      #portfolio-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
     }
     .tag-filter {
       text-transform: uppercase;
@@ -197,21 +235,21 @@
     }
     #sort-date {
       font-family: 'Montserrat', sans-serif;
-      color: #000;
-      background: #FFD600;  /* Yellow background when closed */
+      color: #000;             /* Black text */
+      background: #FFD600;     /* Yellow background */
       border: 2px solid #FFD600;
       border-radius: 6px;
       padding: 8px 18px;
       font-size: 1em;
       cursor: pointer;
-      transition: background 0.18s, border-color 0.18s;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
       appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
     }
     #sort-date:focus {
-      background: #000;  /* Black background when open */
-      color: #fff;
+      background: #000;        /* Black background when open */
+      color: #fff;             /* White text when open */
       border-color: #000;
     }
     #sort-date option {
@@ -232,7 +270,15 @@
     <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
   </div>
 
-  <!-- Portfolio Filters and Sort -->
+  <!-- Hamburger Filter Controls -->
+  <div id="filter-menu-toggle" class="filter-hamburger">
+    <svg class="hamburger-icon" viewBox="0 0 32 32" fill="none">
+      <rect y="7" width="32" height="4" rx="2" fill="white"/>
+      <rect y="15" width="32" height="4" rx="2" fill="white"/>
+      <rect y="23" width="32" height="4" rx="2" fill="white"/>
+    </svg>
+    <span>Filter</span>
+  </div>
   <div id="portfolio-controls">
     <label>Filter by tags:</label>
     <button class="tag-filter" data-tag="2d">2D</button>
@@ -306,6 +352,14 @@
   <!-- Portfolio Filter/Sort Script -->
   <script>
   document.addEventListener("DOMContentLoaded", function () {
+    // Hamburger dropdown functionality
+    const filterToggle = document.getElementById('filter-menu-toggle');
+    const controls = document.getElementById('portfolio-controls');
+    filterToggle.addEventListener('click', function () {
+      controls.classList.toggle('open');
+    });
+
+    // Filter/sort logic
     const items = Array.from(document.querySelectorAll('.portfolio-item'));
     const filterButtons = document.querySelectorAll('.tag-filter');
     const sortSelect = document.getElementById('sort-date');
