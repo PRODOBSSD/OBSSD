@@ -192,26 +192,11 @@
       display: block;
     }
     /* Arrow & indicator: hidden by default, shown on hover if more than one slide */
-    .media-arrow-btn, .media-slide-indicator {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.18s;
-    }
-    .portfolio-media-slider.show-controls .media-arrow-btn,
-    .portfolio-media-slider.show-controls .media-slide-indicator {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .portfolio-media-slider.show-controls:hover .media-arrow-btn,
-    .portfolio-media-slider.show-controls:hover .media-slide-indicator {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    /* Show controls if more than one slide */
     .portfolio-media-slider.controls-enabled .media-arrow-btn,
     .portfolio-media-slider.controls-enabled .media-slide-indicator {
       opacity: 0;
       pointer-events: none;
+      transition: opacity 0.18s;
     }
     .portfolio-media-slider.controls-enabled:hover .media-arrow-btn,
     .portfolio-media-slider.controls-enabled:hover .media-slide-indicator {
@@ -238,7 +223,6 @@
       justify-content: center;
       opacity: 0.85;
       user-select: none;
-      /* opacity and pointer-events handled above */
     }
     .media-arrow-btn:hover {
       background: #FFD600;
@@ -263,7 +247,11 @@
       font-size: 1em;
       z-index: 3;
       letter-spacing: 0.06em;
-      /* opacity and pointer-events handled above */
+    }
+    /* Hide arrows and indicator completely if only one slide */
+    .portfolio-media-slider:not(.controls-enabled) .media-arrow-btn,
+    .portfolio-media-slider:not(.controls-enabled) .media-slide-indicator {
+      display: none !important;
     }
     .portfolio-title {
       width: 100%;
@@ -548,6 +536,8 @@
       // Enable controls only if more than one slide
       if (slides.length > 1) {
         slider.classList.add('controls-enabled');
+      } else {
+        slider.classList.remove('controls-enabled');
       }
 
       function updateSlider() {
