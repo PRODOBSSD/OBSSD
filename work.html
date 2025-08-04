@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NLWC8KV66N');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NLWC8KV66N');
+  </script>
   <meta charset="UTF-8">
   <meta name="description" content="Work created by New Zealand based producer and visual artist OBSSD">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +89,6 @@
       border-radius: 6px;
       background: #eee;
     }
-
     /* Social & Home buttons styles */
     .logo-link {
       position: fixed;
@@ -118,7 +116,6 @@
       transform: scale(1.15);
       outline: 2px solid #fff;
     }
-
     .social-bar {
       position: fixed;
       left: 50%;
@@ -177,11 +174,26 @@
     <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
   </div>
 
+  <!-- Portfolio Filters and Sort -->
+  <div id="portfolio-controls" style="max-width:900px;margin:0 auto 24px;display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+    <label>Filter by tags:</label>
+    <button class="tag-filter" data-tag="2d">2d</button>
+    <button class="tag-filter" data-tag="3d">3d</button>
+    <button class="tag-filter" data-tag="Animated">Animated</button>
+    <button class="tag-filter" data-tag="Static">Static</button>
+    <button class="tag-filter" data-tag="all">All</button>
+    <label style="margin-left:20px;">Sort by:</label>
+    <select id="sort-date">
+      <option value="desc">Most Recent</option>
+      <option value="asc">Oldest First</option>
+    </select>
+  </div>
+
   <!-- Portfolio container -->
   <div class="portfolio-container">
 
     <!-- Example: YouTube Video -->
-    <div class="portfolio-item">
+    <div class="portfolio-item" data-tags="2d,Animated" data-date="2023-08-01">
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">My Video Work</button>
       <p class="portfolio-description">A video project exploring...</p>
       <p class="portfolio-date">Created: 2023-08-01</p>
@@ -191,7 +203,7 @@
     </div>
 
     <!-- Example: Pinterest Photo Embed -->
-    <div class="portfolio-item">
+    <div class="portfolio-item" data-tags="Static,2d" data-date="2024-01-10">
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Pinterest Photo</button>
       <p class="portfolio-description">A photo I curated on Pinterest...</p>
       <p class="portfolio-date">Created: 2024-01-10</p>
@@ -202,7 +214,7 @@
     </div>
 
     <!-- Example: Photo from GitHub project files -->
-    <div class="portfolio-item">
+    <div class="portfolio-item" data-tags="Static,3d" data-date="2022-11-05">
       <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Local Photo</button>
       <p class="portfolio-description">A photo from my own collection...</p>
       <p class="portfolio-date">Created: 2022-11-05</p>
@@ -232,5 +244,55 @@
       <img src="obssd_assets/OBSSD_SOUNDCLOUD.png" alt="SoundCloud">
     </a>
   </div>
+
+  <!-- Portfolio Filter/Sort Script -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const items = Array.from(document.querySelectorAll('.portfolio-item'));
+    const filterButtons = document.querySelectorAll('.tag-filter');
+    const sortSelect = document.getElementById('sort-date');
+    let currentTag = "all";
+    let sortOrder = "desc";
+
+    function filterAndSort() {
+      // Filter
+      items.forEach(item => {
+        const tags = item.getAttribute('data-tags').split(',');
+        if (currentTag === "all" || tags.includes(currentTag)) {
+          item.style.display = "";
+        } else {
+          item.style.display = "none";
+        }
+      });
+
+      // Sort
+      const container = items[0].parentNode;
+      const sortedItems = items
+        .filter(item => item.style.display !== "none")
+        .sort((a, b) => {
+          const dateA = new Date(a.getAttribute('data-date'));
+          const dateB = new Date(b.getAttribute('data-date'));
+          return sortOrder === "desc" ? dateB - dateA : dateA - dateB;
+        });
+
+      // Reorder in DOM
+      sortedItems.forEach(item => container.appendChild(item));
+    }
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        currentTag = this.getAttribute('data-tag');
+        filterAndSort();
+      });
+    });
+
+    sortSelect.addEventListener('change', function () {
+      sortOrder = this.value;
+      filterAndSort();
+    });
+
+    filterAndSort();
+  });
+  </script>
 </body>
 </html>
