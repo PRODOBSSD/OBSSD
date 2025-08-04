@@ -1,20 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NLWC8KV66N');
-</script>
   <meta charset="UTF-8">
-  <meta name="description" content="Work created by New Zealand based producer and visual artist OBSSD">
+  <meta name="description" content="Art portfolio by OBSSD">
   <title>WORK</title>
-  <!-- Add Favicon and Custom Cursor -->
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
   <link rel="stylesheet" href="obssd_shared/custom.css">
-  <!-- Add Montserrat font from Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 30px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .logo-img {
+      max-width: 220px;
+      height: auto;
+      display: block;
+    }
+    .portfolio-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 32px;
+    }
+    .portfolio-item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0px 0px rgba(0,0,0,0.06);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .portfolio-title {
+      width: 100%;
+      padding: 10px 0;
+      margin-bottom: 10px;
+      background: #000000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.16s;
+    }
+    .portfolio-title:hover {
+      background: #333333;
+    }
+    .portfolio-description {
+      margin-bottom: 6px;
+      color: #444;
+      text-align: center;
+    }
+    .portfolio-date {
+      font-size: 0.96em;
+      color: #999;
+      margin-bottom: 12px;
+    }
+    .portfolio-media {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 6px;
+      min-height: 180px;
+    }
+    .portfolio-media img, .portfolio-media iframe {
+      max-width: 100%;
+      border-radius: 6px;
+      background: #eee;
+    }
+
+    /* Social & Home buttons styles */
+    .logo-link {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      z-index: 1000;
+      display: block;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+    .logo-link img {
+      width: 56px;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+      box-shadow: none;
+      transition: transform 0.2s;
+      background: #fff;
+    }
+    .logo-link:hover img, 
+    .logo-link:focus img {
+      transform: scale(1.15);
+      outline: 2px solid #fff;
+    }
+
+    .social-bar {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      z-index: 1001;
+      display: flex;
+      gap: 24px;
+      background: none;
+      padding: 0;
+      margin: 0;
+    }
+    .social-link {
+      display: block;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+    .social-link img {
+      width: 56px;
+      height: 56px;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      background: #fff;
+      transition: box-shadow 0.2s;
+    }
+    .social-link:hover img, .social-link:focus img {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.24);
+      outline: 2px solid #fff;
+    }
+    @media (max-width: 500px) {
+      .logo-link img {
+        width: 40px;
+      }
+      .logo-link {
+        bottom: 8px;
+        left: 8px;
+      }
+      .social-bar {
+        gap: 12px;
+        bottom: 8px;
+      }
+      .social-link img {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo at the top -->
+  <div class="logo-container">
+    <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
+  </div>
+
+  <!-- Portfolio container -->
+  <div class="portfolio-container">
+
+    <!-- Example: YouTube Video -->
+    <div class="portfolio-item">
+      <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">My Video Work</button>
+      <p class="portfolio-description">A video project exploring...</p>
+      <p class="portfolio-date">Created: 2023-08-01</p>
+      <div class="portfolio-media">
+        <iframe width="360" height="202" src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- Example: Pinterest Photo Embed -->
+    <div class="portfolio-item">
+      <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Pinterest Photo</button>
+      <p class="portfolio-description">A photo I curated on Pinterest...</p>
+      <p class="portfolio-date">Created: 2024-01-10</p>
+      <div class="portfolio-media">
+        <a data-pin-do="embedPin" href="https://www.pinterest.com/pin/PINTEREST_PIN_ID/"></a>
+        <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+      </div>
+    </div>
+
+    <!-- Example: Photo from GitHub project files -->
+    <div class="portfolio-item">
+      <button onclick="window.open('https://custom-link.com', '_blank')" class="portfolio-title">Local Photo</button>
+      <p class="portfolio-description">A photo from my own collection...</p>
+      <p class="portfolio-date">Created: 2022-11-05</p>
+      <div class="portfolio-media">
+        <img src="/obssd_assets/my_photo.jpg" alt="Artwork">
+      </div>
+    </div>
+
+    <!-- Add more portfolio items as needed -->
+
+  </div>
+
+  <!-- Home button (bottom left) -->
+  <a href="https://www.obssd.online" class="logo-link" title="Go to OBSSD">
+    <img src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
+  </a>
+
+  <!-- Social icons bar (bottom middle) -->
+  <div class="social-bar">
+    <a href="https://www.youtube.com/@PRODOBSSD" class="social-link" target="_blank" title="Subscribe on YouTube">
+      <img src="obssd_assets/OBSSD_YOUTUBE.png" alt="YouTube">
+    </a>
+    <a href="https://www.instagram.com/imobssd/" class="social-link" target="_blank" title="Follow me on Instagram">
+      <img src="obssd_assets/OBSSD_INSTAGRAM.png" alt="Instagram">
+    </a>
+    <a href="https://soundcloud.com/imobssd" class="social-link" target="_blank" title="Listen on SoundCloud">
+      <img src="obssd_assets/OBSSD_SOUNDCLOUD.png" alt="SoundCloud">
+    </a>
+  </div>
+</body>
+</html>
