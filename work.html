@@ -166,6 +166,56 @@
         height: 36px;
       }
     }
+    /* Filter and Sort Controls Styling */
+    #portfolio-controls {
+      max-width: 900px;
+      margin: 0 auto 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .tag-filter {
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      background: #000;
+      border: 2px solid #000;
+      border-radius: 6px;
+      padding: 8px 18px;
+      margin-right: 2px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s;
+    }
+    .tag-filter.selected {
+      background: #FFD600;
+      border-color: #FFD600;
+      color: #000;
+    }
+    #sort-date {
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      background: #000;
+      border: 2px solid #000;
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s;
+    }
+    #sort-date.selected {
+      background: #FFD600;
+      border-color: #FFD600;
+      color: #000;
+    }
+    #portfolio-controls label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      color: #222;
+      margin-right: 6px;
+    }
   </style>
 </head>
 <body>
@@ -175,10 +225,10 @@
   </div>
 
   <!-- Portfolio Filters and Sort -->
-  <div id="portfolio-controls" style="max-width:900px;margin:0 auto 24px;display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+  <div id="portfolio-controls">
     <label>Filter by tags:</label>
-    <button class="tag-filter" data-tag="2d">2d</button>
-    <button class="tag-filter" data-tag="3d">3d</button>
+    <button class="tag-filter" data-tag="2d">2D</button>
+    <button class="tag-filter" data-tag="3d">3D</button>
     <button class="tag-filter" data-tag="Animated">Animated</button>
     <button class="tag-filter" data-tag="Static">Static</button>
     <button class="tag-filter" data-tag="all">All</button>
@@ -254,6 +304,22 @@
     let currentTag = "all";
     let sortOrder = "desc";
 
+    function updateButtonStyles() {
+      filterButtons.forEach(btn => {
+        if (btn.getAttribute('data-tag') === currentTag) {
+          btn.classList.add('selected');
+        } else {
+          btn.classList.remove('selected');
+        }
+      });
+      // Highlight the dropdown if sort order is changed
+      if (sortOrder !== "desc") {
+        sortSelect.classList.add('selected');
+      } else {
+        sortSelect.classList.remove('selected');
+      }
+    }
+
     function filterAndSort() {
       // Filter
       items.forEach(item => {
@@ -277,6 +343,7 @@
 
       // Reorder in DOM
       sortedItems.forEach(item => container.appendChild(item));
+      updateButtonStyles();
     }
 
     filterButtons.forEach(btn => {
