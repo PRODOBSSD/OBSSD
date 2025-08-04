@@ -156,7 +156,6 @@
       background: #eee;
       position: relative;
     }
-    /* Slider controls */
     .portfolio-media-slider {
       width: 100%;
       aspect-ratio: 1/1;
@@ -192,6 +191,33 @@
       background: #eee;
       display: block;
     }
+    /* Arrow & indicator: hidden by default, shown on hover if more than one slide */
+    .media-arrow-btn, .media-slide-indicator {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s;
+    }
+    .portfolio-media-slider.show-controls .media-arrow-btn,
+    .portfolio-media-slider.show-controls .media-slide-indicator {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .portfolio-media-slider.show-controls:hover .media-arrow-btn,
+    .portfolio-media-slider.show-controls:hover .media-slide-indicator {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* Show controls if more than one slide */
+    .portfolio-media-slider.controls-enabled .media-arrow-btn,
+    .portfolio-media-slider.controls-enabled .media-slide-indicator {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .portfolio-media-slider.controls-enabled:hover .media-arrow-btn,
+    .portfolio-media-slider.controls-enabled:hover .media-slide-indicator {
+      opacity: 1;
+      pointer-events: auto;
+    }
     .media-arrow-btn {
       position: absolute;
       top: 50%;
@@ -207,12 +233,12 @@
       line-height: 1;
       cursor: pointer;
       z-index: 2;
-      transition: background 0.18s, color 0.18s;
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0.85;
       user-select: none;
+      /* opacity and pointer-events handled above */
     }
     .media-arrow-btn:hover {
       background: #FFD600;
@@ -237,6 +263,7 @@
       font-size: 1em;
       z-index: 3;
       letter-spacing: 0.06em;
+      /* opacity and pointer-events handled above */
     }
     .portfolio-title {
       width: 100%;
@@ -448,7 +475,6 @@
     </a>
   </div>
 
-  <!-- Portfolio Filter/Sort Script & Slider JS -->
   <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Filter menu toggle
@@ -519,6 +545,11 @@
       const indicator = slider.querySelector('.media-slide-indicator');
       let currentSlide = 0;
 
+      // Enable controls only if more than one slide
+      if (slides.length > 1) {
+        slider.classList.add('controls-enabled');
+      }
+
       function updateSlider() {
         slides.forEach((slide, i) => {
           slide.classList.toggle('active', i === currentSlide);
@@ -528,6 +559,12 @@
         rightBtn.style.opacity = slides.length > 1 ? 0.85 : 0.3;
         leftBtn.disabled = slides.length <= 1;
         rightBtn.disabled = slides.length <= 1;
+        // Show/hide controls and indicator
+        if (slides.length > 1) {
+          slider.classList.add('controls-enabled');
+        } else {
+          slider.classList.remove('controls-enabled');
+        }
       }
       leftBtn.addEventListener('click', function(e) {
         e.preventDefault();
