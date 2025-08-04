@@ -191,7 +191,7 @@
       background: #eee;
       display: block;
     }
-    /* Arrow & indicator: hidden by default, shown on hover if more than one slide */
+    /* Hide controls by default; only show on hover if more than one slide */
     .portfolio-media-slider.controls-enabled .media-arrow-btn,
     .portfolio-media-slider.controls-enabled .media-slide-indicator {
       opacity: 0;
@@ -202,6 +202,11 @@
     .portfolio-media-slider.controls-enabled:hover .media-slide-indicator {
       opacity: 1;
       pointer-events: auto;
+    }
+    /* Hide arrows and indicator completely if only one slide */
+    .portfolio-media-slider:not(.controls-enabled) .media-arrow-btn,
+    .portfolio-media-slider:not(.controls-enabled) .media-slide-indicator {
+      display: none !important;
     }
     .media-arrow-btn {
       position: absolute;
@@ -223,6 +228,7 @@
       justify-content: center;
       opacity: 0.85;
       user-select: none;
+      /* opacity and pointer-events handled above */
     }
     .media-arrow-btn:hover {
       background: #FFD600;
@@ -247,11 +253,6 @@
       font-size: 1em;
       z-index: 3;
       letter-spacing: 0.06em;
-    }
-    /* Hide arrows and indicator completely if only one slide */
-    .portfolio-media-slider:not(.controls-enabled) .media-arrow-btn,
-    .portfolio-media-slider:not(.controls-enabled) .media-slide-indicator {
-      display: none !important;
     }
     .portfolio-title {
       width: 100%;
@@ -549,12 +550,6 @@
         rightBtn.style.opacity = slides.length > 1 ? 0.85 : 0.3;
         leftBtn.disabled = slides.length <= 1;
         rightBtn.disabled = slides.length <= 1;
-        // Show/hide controls and indicator
-        if (slides.length > 1) {
-          slider.classList.add('controls-enabled');
-        } else {
-          slider.classList.remove('controls-enabled');
-        }
       }
       leftBtn.addEventListener('click', function(e) {
         e.preventDefault();
