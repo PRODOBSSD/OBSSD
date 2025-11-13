@@ -23,6 +23,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      background: none !important;
     }
     body {
       min-height: 100vh;
@@ -31,6 +32,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      background: none !important;
     }
     spline-viewer {
       flex: 1 1 0%;
@@ -42,6 +44,7 @@
       border: none;
       margin: 0;
       padding: 0;
+      background: none !important;
     }
     /* Title element styling */
     .obssd-title {
@@ -51,7 +54,7 @@
       z-index: 1002;
       margin: 0;
       padding: 0;
-      background: none;
+      background: none !important;
       border: none;
       display: block;
     }
@@ -62,7 +65,7 @@
       margin: 0;
       border-radius: 0;
       box-shadow: none;
-      background: none;
+      background: none !important;
     }
     @media (max-width: 1500px) {
       .obssd-title {
@@ -73,21 +76,22 @@
     /* Contact section styling (new) */
     .contact-section {
       position: fixed;
-      right: 16px; /* Small margin from right of screen */
-      bottom: 0;   /* Always touches the bottom edge, no margin */
+      right: 16px;
+      bottom: 0;
       z-index: 1001;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: none;
+      background: none !important;
       margin: 0;
       padding: 0;
-      pointer-events: none; /* allow interacts only for contained elements which override this */
+      pointer-events: none;
     }
     .contact-image-container {
       position: relative;
       display: block;
       width: 350px;
+      background: none !important;
       pointer-events: auto;
     }
     .contact-image {
@@ -97,7 +101,7 @@
       border: none;
       border-radius: 0;
       box-shadow: none;
-      background: none;
+      background: transparent !important;
       pointer-events: auto;
     }
     .contact-links {
@@ -110,14 +114,17 @@
       transform: translateX(-50%);
       width: 100%;
       text-align: center;
-      bottom: 28px; /* Lower third of image; adjust this value to position vertically as needed */
-      /* pointer events so links are clickable */
+      /* move further down, towards lower third (use bottom: 14% for more space) */
+      bottom: 14%;
       pointer-events: auto;
-      background: none;
+      background: none !important;
       margin: 0;
       padding: 0;
       line-height: 2.1;
       user-select: text;
+    }
+    .contact-links div {
+      background: none !important;
     }
     .contact-links a {
       color: #3a3a3a;
@@ -128,12 +135,14 @@
       font-weight: 700;
       font-family: 'Cascadia Code', monospace;
       font-size: 1.2rem;
+      background: none !important;
       pointer-events: auto;
     }
     .contact-links a:hover,
     .contact-links a:focus {
       color: #000000;
       outline: none;
+      background: none !important;
     }
     @media (max-width: 500px) {
       .contact-section {
@@ -148,7 +157,7 @@
       }
       .contact-links {
         font-size: 1rem;
-        bottom: 12px;
+        bottom: 8%;
       }
     }
   </style>
