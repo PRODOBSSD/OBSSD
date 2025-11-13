@@ -122,7 +122,7 @@
       position: fixed;
       bottom: 16px;
       left: 16px;
-      z-index: 1000;
+      z-index: 1001;
       display: block;
       background: none;
       border: none;
@@ -150,7 +150,7 @@
       left: 50%;
       bottom: 20px;
       transform: translateX(-50%);
-      z-index: 1001;
+      z-index: 1002;
       display: flex;
       gap: 24px;
       background: none;
@@ -201,6 +201,124 @@
         max-height: 300px;
       }
     }
+    /* --- Loops Signup Banner Styles --- */
+    #loop-signup-banner {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100vw;
+      z-index: 1100;
+      background: rgba(0,0,0,0.98);
+      color: #fff;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.18);
+      text-align: center;
+      padding: 0.5em 0 0.5em 0;
+      /* Responsive: will stack elements on small screens */
+    }
+    #loop-signup-banner .subscribe-container {
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      border-radius: 0;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    #loop-signup-banner h2 {
+      color: #fff;
+      margin-top: 0.7em;
+      margin-bottom: 0.35em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4em;
+      font-size: 1.15em;
+      font-weight: 700;
+    }
+    #loop-signup-banner .eye-logo {
+      height: 1.15em;
+      vertical-align: middle;
+      margin-left: 0.3em;
+      max-width: 2.2em;
+    }
+    #loop-signup-banner label {
+      color: #dedede;
+      font-weight: bold;
+      margin-bottom: 0.3em;
+    }
+    #loop-signup-banner input[type="email"] {
+      width: 54%;
+      max-width: 170px;
+      padding: 0.35em 0.5em;
+      border: 1px solid #333;
+      border-radius: 4px;
+      margin-bottom: 0.25em;
+      font-size: 1em;
+      background: #fff;
+      color: #000;
+      box-sizing: border-box;
+      font-family: 'Montserrat';
+      margin-right: 0.5em;
+      margin-left: 0.5em;
+    }
+    #loop-signup-banner button {
+      background: #2da44e;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.35em 1.1em;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Montserrat';
+      margin-right: 0.3em;
+      margin-bottom: 0.15em;
+    }
+    #loop-signup-banner button.unsubscribe-btn {
+      background: #cf222e;
+      margin-top: 0.15em;
+      margin-left: 0.1em;
+    }
+    #loop-signup-banner button:hover:not(.unsubscribe-btn) {
+      background: #249240;
+    }
+    #loop-signup-banner button.unsubscribe-btn:hover {
+      background: #a31e22;
+    }
+    #loop-signup-banner .success-message, 
+    #loop-signup-banner .error-message {
+      text-align: center;
+      font-size: 0.95em;
+      display: none;
+      margin-top: 0.2em;
+    }
+    #loop-signup-banner .success-message {
+      color: #2da44e;
+    }
+    #loop-signup-banner .error-message {
+      color: #cf222e;
+    }
+    #loop-signup-banner .divider {
+      border: none;
+      border-top: 1px solid #333;
+      margin: 0.35em 0;
+    }
+    #loop-signup-banner .custom-description {
+      margin: 0.25em 0 0.5em 0;
+      color: #bbb;
+      text-align: center;
+      font-size: 0.82em;
+    }
+    @media (max-width: 600px) {
+      #loop-signup-banner input[type="email"] {
+        width: 70%;
+        max-width: 115px;
+        font-size: 0.95em;
+      }
+      #loop-signup-banner h2 {
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
@@ -208,7 +326,6 @@
     <img class="logo-img" src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
   </div>
   <div class="product-grid">
-
     <!-- Product Example with 3 logos -->
     <div class="product-card">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1ip0g986k1dajkvbs4j6vo85110.jpg" alt="Product 1">
@@ -223,7 +340,6 @@
       </div>
     </div>
     <!-- Product Example with 1 logo -->
-
     <div class="product-card">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ivup4icn16rr3a4if0gbu1up810.jpg" alt="Product 2">
       <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DL_6Z46zVBd/?utm_source=ig_web_copy_link&igsh=NjNhazZxZTQ5cHhh', '_blank')">
@@ -267,14 +383,41 @@
       </div>
     </div>
     -->
-
   </div>
 
+  <!-- Loops Signup Banner (Sticky Bottom) -->
+  <div id="loop-signup-banner">
+    <div class="subscribe-container">
+      <h2>
+        Join Weekly Loops List
+        <img src="obssd_assets/OBSSD_EYE_LOGO.png" alt="Eye Logo" class="eye-logo">
+      </h2>
+      <form id="subscribe-form" autocomplete="off">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+        <button type="submit">Subscribe</button>
+      </form>
+      <hr class="divider">
+      <form id="unsubscribe-form" autocomplete="off">
+        <label for="unsubscribe-email">Unsubscribe Email Address</label>
+        <input type="email" id="unsubscribe-email" name="email" required placeholder="you@example.com">
+        <button type="submit" class="unsubscribe-btn">Unsubscribe</button>
+      </form>
+      <div class="success-message" id="success-message">
+        Thank you ! You have been added to my weekly loops
+      </div>
+      <div class="error-message" id="error-message">
+        There was a problem. Please try again.
+      </div>
+      <div class="custom-description">
+        Your information is secure and will not be shared.
+      </div>
+    </div>
+  </div>
   <!-- Home button (bottom left) -->
   <a href="https://www.obssd.online" class="logo-link" title="Go to OBSSD">
     <img src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
   </a>
-
   <!-- Social icons bar (bottom middle) -->
   <div class="social-bar">
     <a href="https://www.youtube.com/@PRODOBSSD" class="social-link" target="_blank" title="Subscribe on YouTube">
@@ -287,5 +430,81 @@
       <img src="obssd_assets/OBSSD_SOUNDCLOUD.png" alt="SoundCloud">
     </a>
   </div>
+  <script>
+    // Replace this URL with your Google Apps Script Web App URL
+    const SUBSCRIBE_URL = "https://script.google.com/macros/s/AKfycbx8foiTr9yDC1opGbhpSFdg2ZDjvgpgKx3OGN5dbVoIQ2gpUw42uIx2bEQLLx88is2d/exec";
+
+    function hideMessages() {
+      document.getElementById('success-message').style.display = 'none';
+      const errorMsg = document.getElementById('error-message');
+      errorMsg.style.display = 'none';
+      errorMsg.textContent = "There was a problem. Please try again.";
+    }
+
+    document.getElementById('subscribe-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      hideMessages();
+      const email = document.getElementById('email').value;
+      const successMsg = document.getElementById('success-message');
+      const errorMsg = document.getElementById('error-message');
+
+      try {
+        const formData = new FormData();
+        formData.append('email', email);
+
+        const response = await fetch(SUBSCRIBE_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        const text = await response.text();
+        if (response.ok && text.toLowerCase().includes("success")) {
+          successMsg.textContent = "Thank you for subscribing!";
+          successMsg.style.display = 'block';
+          document.getElementById('subscribe-form').reset();
+        } else if (text.toLowerCase().includes("already exists")) {
+          errorMsg.textContent = "This email is already subscribed.";
+          errorMsg.style.display = 'block';
+        } else {
+          throw new Error('Failed to subscribe');
+        }
+      } catch (error) {
+        errorMsg.style.display = 'block';
+      }
+    });
+
+    document.getElementById('unsubscribe-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      hideMessages();
+      const email = document.getElementById('unsubscribe-email').value;
+      const successMsg = document.getElementById('success-message');
+      const errorMsg = document.getElementById('error-message');
+
+      try {
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('action', 'unsubscribe');
+
+        const response = await fetch(SUBSCRIBE_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        const text = await response.text();
+        if (response.ok && text.toLowerCase().includes("unsubscribed")) {
+          successMsg.textContent = "You have been unsubscribed.";
+          successMsg.style.display = 'block';
+          document.getElementById('unsubscribe-form').reset();
+        } else if (text.toLowerCase().includes("email not found")) {
+          errorMsg.textContent = "This email was not found in our list.";
+          errorMsg.style.display = 'block';
+        } else {
+          throw new Error('Failed to unsubscribe');
+        }
+      } catch (error) {
+        errorMsg.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
