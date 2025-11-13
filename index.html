@@ -15,6 +15,8 @@
   <title>OBSSD</title>
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
   <link rel="stylesheet" href="obssd_shared/custom.css">
+  <!-- Load Cascadia Code font from CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
   <style>
     html, body {
       height: 100%;
@@ -44,8 +46,8 @@
     /* Title element styling */
     .obssd-title {
       position: fixed;
-      top: 20px;        /* Small space from top */
-      left: 0;          /* Always at left edge, no side margin */
+      top: 20px;
+      left: 0;
       z-index: 1002;
       margin: 0;
       padding: 0;
@@ -55,10 +57,10 @@
     }
     .obssd-title img {
       display: block;
-      width: 300px;     /* Adjust this width to your preferred size */
+      width: 300px;
       height: auto;
       margin: 0;
-      border-radius: 0; /* No rounding */
+      border-radius: 0;
       box-shadow: none;
       background: none;
     }
@@ -67,48 +69,86 @@
         display: none !important;
       }
     }
-    /* Social icons bar styling */
-    .social-bar {
+
+    /* Contact section styling (new) */
+    .contact-section {
       position: fixed;
-      left: 50%;
-      bottom: 20px;
-      transform: translateX(-50%);
+      right: 16px; /* Small margin from right of screen */
+      bottom: 0;   /* Always touches the bottom edge, no margin */
       z-index: 1001;
       display: flex;
-      gap: 24px;
+      flex-direction: column;
+      align-items: center;
       background: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
+      pointer-events: none; /* allow interacts only for contained elements which override this */
     }
-    .social-link {
+    .contact-image-container {
+      position: relative;
       display: block;
-      background: none;
+      width: 350px;
+      pointer-events: auto;
+    }
+    .contact-image {
+      width: 100%;
+      display: block;
+      margin: 0;
       border: none;
-      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background: none;
+      pointer-events: auto;
+    }
+    .contact-links {
+      font-family: 'Cascadia Code', monospace;
+      color: #3a3a3a;
+      font-size: 1.2rem;
+      font-weight: 400;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
+      bottom: 28px; /* Lower third of image; adjust this value to position vertically as needed */
+      /* pointer events so links are clickable */
+      pointer-events: auto;
+      background: none;
       margin: 0;
+      padding: 0;
+      line-height: 2.1;
+      user-select: text;
+    }
+    .contact-links a {
+      color: #3a3a3a;
+      text-decoration: none;
+      margin: 0 14px;
+      transition: color 0.2s;
       cursor: pointer;
+      font-weight: 700;
+      font-family: 'Cascadia Code', monospace;
+      font-size: 1.2rem;
+      pointer-events: auto;
     }
-    .social-link img {
-      width: 56px;
-      height: 56px;
-      display: block;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-      background: #fff;
-      transition: box-shadow 0.2s;
-    }
-    .social-link:hover img, .social-link:focus img {
-      box-shadow: 0 4px 24px rgba(0,0,0,0.24);
-      outline: 2px solid #fff;
+    .contact-links a:hover,
+    .contact-links a:focus {
+      color: #000000;
+      outline: none;
     }
     @media (max-width: 500px) {
-      .social-bar {
-        gap: 12px;
-        bottom: 8px;
+      .contact-section {
+        right: 4px;
       }
-      .social-link img {
-        width: 36px;
-        height: 36px;
+      .contact-image-container {
+        width: 200px;
+      }
+      .contact-links a {
+        font-size: 1rem;
+        margin: 0 6px;
+      }
+      .contact-links {
+        font-size: 1rem;
+        bottom: 12px;
       }
     }
   </style>
@@ -120,21 +160,26 @@
   <div class="obssd-title">
     <img src="obssd_assets/OBSSD_TITLE.png" alt="OBSSD Title">
   </div>
-
-  <!-- Social icons bar: YouTube, Instagram, SoundCloud -->
-  <div class="social-bar">
-    <a href="https://www.youtube.com/@PRODOBSSD" class="social-link" target="_blank" title="Subscribe on YouTube">
-      <img src="obssd_assets/OBSSD_YOUTUBE.png" alt="YouTube">
-    </a>
-    <a href="https://www.instagram.com/imobssd/" class="social-link" target="_blank" title="Follow me on Instagram">
-      <img src="obssd_assets/OBSSD_INSTAGRAM.png" alt="Instagram">
-    </a>
-    <a href="https://soundcloud.com/imobssd" class="social-link" target="_blank" title="Listen on SoundCloud">
-      <img src="obssd_assets/OBSSD_SOUNDCLOUD.png" alt="SoundCloud">
-    </a>
+  
+  <!-- Contact section bottom right -->
+  <div class="contact-section">
+    <div class="contact-image-container">
+      <img src="obssd_assets/CONTACT_TITLE.png" alt="Contact" class="contact-image">
+      <div class="contact-links">
+        <div>
+          <a href="mailto:prodobssd@gmail.com" target="_blank">email</a>
+          <a href="https://www.instagram.com/imobssd/" target="_blank">instagram</a>
+          <a href="https://www.youtube.com/@PRODOBSSD" target="_blank">youtube</a>
+        </div>
+        <div>
+          <a href="https://soundcloud.com/imobssd" target="_blank">soundcloud</a>
+          <a href="https://t.me/OBSSDofficial" target="_blank">telegram</a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Your 3D Spline model -->
+  <!-- 3D Spline model -->
   <spline-viewer url="https://prod.spline.design/IpymUJkBQNdCi3i7/scene.splinecode"></spline-viewer>
 
   <!-- Theoretical watermark removal script -->
