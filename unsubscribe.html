@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unsubscribe from Weekly Loops</title>
+  <meta name="description" content="Unsubscribe from OBSSD weekly loop emails">
+  <link rel="stylesheet" href="obssd_shared/custom.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat';
+      background: #fafafa;
+      margin: 0;
+      padding: 30px;
+      min-height: 100vh;
+      height: 100vh;
+      width: 100vw;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .unsubscribe-container {
+      background: #fff;
+      box-shadow: 0 0 12px rgba(0,0,0,0.07);
+      border-radius: 12px;
+      padding: 2em;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+    }
+    h2 {
+      color: #222;
+      margin-top: 0;
+      font-size: 1.2em;
+      font-weight: 700;
+    }
+    label {
+      color: #555;
+      font-weight: bold;
+      margin-bottom: 0.3em;
+      display: block;
+      text-align: left;
+      margin-left: 14px;
+      margin-top: 1.2em;
+    }
+    input[type="email"] {
+      width: 85%;
+      max-width: 240px;
+      padding: 0.35em 0.5em;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      margin-bottom: 0.25em;
+      font-size: 1em;
+      background: #fff;
+      color: #000;
+      box-sizing: border-box;
+      font-family: 'Montserrat';
+      margin-right: 0.5em;
+      margin-left: 0.5em;
+      display: block;
+      margin: 0 auto 1.1em auto;
+    }
+    button {
+      background: #cf222e;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.35em 1.1em;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Montserrat';
+      margin-bottom: 1em;
+      margin-top: 0.5em;
+    }
+    button:hover {
+      background: #a31e22;
+    }
+    .success-message {
+      color: #2da44e;
+      font-size: 0.98em;
+      margin-top: 1em;
+      display: none;
+    }
+    .error-message {
+      color: #cf222e;
+      font-size: 0.98em;
+      margin-top: 1em;
+      display: none;
+    }
+    .custom-description {
+      margin: 0.75em 0 0.2em 0;
+      color: #555;
+      text-align: center;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="unsubscribe-container">
+    <h2>Unsubscribe from Weekly Loops</h2>
+    <form id="unsubscribe-form" autocomplete="off">
+      <label for="unsubscribe-email">Email Address</label>
+      <input type="email" id="unsubscribe-email" name="email" required placeholder="you@example.com">
+      <button type="submit">Unsubscribe</button>
+    </form>
+    <div class="success-message" id="success-message">You have been unsubscribed.</div>
+    <div class="error-message" id="error-message">There was a problem. Please try again.</div>
+    <div class="custom-description">Your information is secure and will not be shared.</div>
+  </div>
+  <script>
+    const SUBSCRIBE_URL = "https://script.google.com/macros/s/AKfycbx8foiTr9yDC1opGbhpSFdg2ZDjvgpgKx3OGN5dbVoIQ2gpUw42uIx2bEQLLx88is2d/exec";
 
+    function hideMessages() {
+      document.getElementById('success-message').style.display = 'none';
+      const errorMsg = document.getElementById('error-message');
+      errorMsg.style.display = 'none';
+      errorMsg.textContent = "There was a problem. Please try again.";
+    }
+
+    document.getElementById('unsubscribe-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      hideMessages();
+      const email = document.getElementById('unsubscribe-email').value;
+      const successMsg = document.getElementById('success-message');
+      const errorMsg = document.getElementById('error-message');
+
+      try {
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('action', 'unsubscribe');
+
+        const response = await fetch(SUBSCRIBE_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        const text = await response.text();
+        if (response.ok && text.toLowerCase().includes("unsubscribed")) {
+          successMsg.textContent = "You have been unsubscribed.";
+          successMsg.style.display = 'block';
+          document.getElementById('unsubscribe-form').reset();
+        } else if (text.toLowerCase().includes("email not found")) {
+          errorMsg.textContent = "This email was not found in our list.";
+          errorMsg.style.display = 'block';
+        } else {
+          throw new Error('Failed to unsubscribe');
+        }
+      } catch (error) {
+        errorMsg.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
