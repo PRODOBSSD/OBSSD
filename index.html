@@ -11,7 +11,7 @@
   gtag('config', 'G-NLWC8KV66N');
 </script>
   <meta charset="UTF-8">
-  <meta name="description" content="OBSSD is a New Zealand based producer and visual artist. Explore a range of beats, kits, and loops on the OBSSD ONLINE website! To get in contact send me a message @imobssd on Instagram.">
+  <meta name="description" content="OBSSD is a New Zealand based producer and visual artist. Explore a range of beats, kits, and loops on the OBSSD ONLINE website! To get in contact send me a message [...]">
   <title>OBSSD</title>
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
   <link rel="stylesheet" href="obssd_shared/custom.css">
@@ -41,32 +41,31 @@
       margin: 0;
       padding: 0;
     }
-    /* Homepage Link styling */
-    .logo-link {
+    /* Title element styling */
+    .obssd-title {
       position: fixed;
-      bottom: 16px;
-      left: 16px;
-      z-index: 1000;
-      display: block;
+      top: 20px;        /* Small space from top */
+      left: 0;          /* Always at left edge, no side margin */
+      z-index: 1002;
+      margin: 0;
+      padding: 0;
       background: none;
       border: none;
-      padding: 0;
-      margin: 0;
-      cursor: pointer;
-    }
-    .logo-link img {
-      width: 56px;
-      height: auto;
       display: block;
-      border-radius: 6px;
-      box-shadow: none;               /* Remove drop shadow */
-      transition: transform 0.2s;     /* Animate scaling */
-      background: #fff;
     }
-    .logo-link:hover img, 
-    .logo-link:focus img {
-      transform: scale(1.15);         /* Scale up image on hover/focus */
-      outline: 2px solid #fff;
+    .obssd-title img {
+      display: block;
+      width: 180px;     /* Adjust this width to your preferred size */
+      height: auto;
+      margin: 0;
+      border-radius: 0; /* No rounding */
+      box-shadow: none;
+      background: none;
+    }
+    @media (max-width: 1500px) {
+      .obssd-title {
+        display: none !important;
+      }
     }
     /* Social icons bar styling */
     .social-bar {
@@ -103,13 +102,6 @@
       outline: 2px solid #fff;
     }
     @media (max-width: 500px) {
-      .logo-link img {
-        width: 40px;
-      }
-      .logo-link {
-        bottom: 8px;
-        left: 8px;
-      }
       .social-bar {
         gap: 12px;
         bottom: 8px;
@@ -124,9 +116,10 @@
 </head>
 <body>
 
-  <a href="https://www.obssd.online" class="logo-link" title="Go to OBSSD">
-    <img src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
-  </a>
+  <!-- Title element in top left (replaces old home button) -->
+  <div class="obssd-title">
+    <img src="obssd_assets/OBSSD_TITLE.png" alt="OBSSD Title">
+  </div>
 
   <!-- Social icons bar: YouTube, Instagram, SoundCloud -->
   <div class="social-bar">
