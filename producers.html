@@ -249,8 +249,34 @@
       margin-right: 0.5em;
       margin-left: 0.5em;
     }
-    #loop-signup-banner button {
-      background: #2da44e;
+    /* Updated: Align the form row and button colors */
+    #loop-signup-banner .subscribe-container form {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      margin-bottom: 0.7em;
+    }
+    #loop-signup-banner .subscribe-btn {
+      background: #ffd600;
+      color: #222;
+      border: none;
+      border-radius: 4px;
+      padding: 0.35em 1.1em;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Montserrat';
+      margin-right: 0.3em;
+      margin-bottom: 0.15em;
+      transition: background 0.15s;
+    }
+    #loop-signup-banner .subscribe-btn:hover {
+      background: #ffe066;
+    }
+    #loop-signup-banner .unsubscribe-btn {
+      background: #000;
       color: #fff;
       border: none;
       border-radius: 4px;
@@ -258,20 +284,13 @@
       font-size: 1em;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.2s;
       font-family: 'Montserrat';
-      margin-right: 0.3em;
-      margin-bottom: 0.15em;
-    }
-    #loop-signup-banner button.unsubscribe-btn {
-      background: #cf222e;
       margin-left: 0.1em;
+      margin-bottom: 0.15em;
+      transition: background 0.15s;
     }
-    #loop-signup-banner button:hover:not(.unsubscribe-btn) {
-      background: #249240;
-    }
-    #loop-signup-banner button.unsubscribe-btn:hover {
-      background: #a31e22;
+    #loop-signup-banner .unsubscribe-btn:hover {
+      background: #333;
     }
     #loop-signup-banner .success-message, 
     #loop-signup-banner .error-message {
@@ -305,6 +324,12 @@
       }
       #loop-signup-banner h2 {
         font-size: 1em;
+      }
+      #loop-signup-banner .subscribe-container form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.4em;
+        margin-bottom: 0.7em;
       }
     }
   </style>
@@ -362,12 +387,12 @@
         <!-- Removed Eye Logo -->
       </h2>
       <form id="subscribe-form" autocomplete="off">
-        <label for="email">Email Address</label>
+        <label for="email" style="margin-bottom: 0; font-weight: 600; color: #555;">Email Address</label>
         <input type="email" id="email" name="email" required placeholder="you@example.com">
-        <button type="submit">Subscribe</button>
+        <button type="submit" class="subscribe-btn">Subscribe</button>
+        <button type="button" class="unsubscribe-btn" onclick="window.open('unsubscribe.html', '_blank')">Unsubscribe</button>
       </form>
       <hr class="divider">
-      <button class="unsubscribe-btn" onclick="window.open('unsubscribe.html', '_blank')">Unsubscribe</button>
       <div class="success-message" id="success-message">
         Thank you ! You have been added to my weekly loops
       </div>
