@@ -26,10 +26,17 @@
       margin-bottom: 32px;
     }
 
+    /* Updated logo styling */
     .logo-img {
-      max-width: 220px;
+      max-width: 380px;
       height: auto;
       display: block;
+      cursor: pointer;
+      transition: transform 0.22s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    }
+
+    .logo-img:hover {
+      transform: scale(1.06);
     }
 
     /* UPDATED GRID — allows 3 per row */
@@ -115,7 +122,9 @@
 
   <!-- Logo at the top -->
   <div class="logo-container">
-    <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
+    <a href="https://obssd.online/">
+      <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
+    </a>
   </div>
 
   <!-- Portfolio container -->
@@ -157,7 +166,7 @@
       </div>
     </div>
 
-    <!-- Add more items here -->
+    <!-- Add more portfolio items here -->
 
   </div>
 
