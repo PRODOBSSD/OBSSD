@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-NLWC8KV66N');
-  </script>
   <meta charset="UTF-8">
-  <meta name="description" content="Work created by New Zealand based producer and visual artist OBSSD">
+  <meta name="description" content="Visual portfolio">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title id="custom-title-placeholder">Portfolio</title>
+  <title>Portfolio</title>
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
   <link rel="stylesheet" href="obssd_shared/custom.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
@@ -36,168 +28,99 @@
       height: auto;
       display: block;
     }
-    .page-title {
-      text-align: center;
-      font-weight: 700;
-      font-size: 2.3em;
-      margin-top: 0;
-      margin-bottom: 8px;
-      letter-spacing: 0.06em;
-      background: #000;
-      color: #fff;
-      padding: 18px 0;
-      border-radius: 0;
-      font-family: 'Montserrat', sans-serif;
-    }
     .portfolio-container {
       max-width: 900px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(404px, 1fr));
       gap: 32px;
+    }
+    @media (max-width: 500px) {
+      .portfolio-container {
+        grid-template-columns: 1fr;
+      }
     }
     .portfolio-item {
       background: #fff;
-      border-radius: 0px;
+      border-radius: 0;
       box-shadow: 0 0px 0px rgba(0,0,0,0.06);
-      padding: 16px;
+      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-    .portfolio-media,
-    .portfolio-media-slider,
-    .media-slide {
-      background: transparent;
+      width: 100%;
     }
     .portfolio-media {
       width: 100%;
-      aspect-ratio: 1 / 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 10px;
-      min-width: 0;
-      min-height: 0;
       border-radius: 0;
       overflow: hidden;
       position: relative;
+      margin: 0 0 0 0;
     }
-    .portfolio-media-slider {
+    .portfolio-media iframe,
+    .portfolio-media img {
       width: 100%;
-      aspect-ratio: 1/1;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 0;
-      overflow: hidden;
-    }
-    .media-slide {
-      width: 100%;
-      height: 100%;
-      display: none;
-      position: absolute;
-      left: 0; top: 0;
-      border-radius: 0;
-      justify-content: center;
-      align-items: center;
-    }
-    .media-slide.active {
-      display: flex;
-      position: relative;
-      z-index: 1;
-    }
-    .media-slide img,
-    .media-slide iframe,
-    .media-slide video {
-      width: 100%;
-      height:100%;
-      object-fit: contain;
-      border-radius: 0;
-      background: transparent;
+      max-width: 404px;
+      min-width: 250px;
+      height: 316px;
+      border: none;
       display: block;
+      background: #eee;
+      margin: 0;
     }
-    .portfolio-media-slider.controls-enabled .media-arrow-btn,
-    .portfolio-media-slider.controls-enabled .media-slide-indicator {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.18s;
+    .portfolio-title-bar {
+      width: 100%;
+      max-width: 404px;
+      margin: 0;
+      margin-bottom: 0;
     }
-    .portfolio-media-slider.controls-enabled:hover .media-arrow-btn,
-    .portfolio-media-slider.controls-enabled:hover .media-slide-indicator {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .portfolio-media-slider:not(.controls-enabled) .media-arrow-btn,
-    .portfolio-media-slider:not(.controls-enabled) .media-slide-indicator {
-      display: none !important;
-    }
-    .media-arrow-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 38px;
-      height: 38px;
+    .portfolio-title-button {
+      width: 100%;
       background: #000;
       color: #fff;
-      border: none;
-      border-radius: 0;
-      font-size: 2em;
-      font-weight: bold;
-      line-height: 1;
-      cursor: pointer;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0.85;
-      user-select: none;
-    }
-    .media-arrow-btn:hover {
-      background: #FFD600;
-      color: #000;
-    }
-    .media-arrow-left { left: 8px; }
-    .media-arrow-right { right: 8px; }
-    .media-slide-indicator {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255,255,255,0.85);
-      color: #222;
-      padding: 3px 14px;
-      border-radius: 0;
-      font-weight: 600;
-      font-size: 1em;
-      z-index: 3;
-      letter-spacing: 0.06em;
-    }
-    .portfolio-title {
-      width: 100%;
       padding: 10px 0;
-      margin-bottom: 10px;
-      background: #000000;
-      color: white;
+      font-size: 1.11em;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
       border: none;
       border-radius: 0;
-      font-size: 1.1em;
+      margin: 0;
       cursor: pointer;
-      transition: background 0.16s;
+      transition: background 0.17s;
+      letter-spacing: 0.04em;
+      outline: none;
+      box-shadow: none;
+      display: block;
     }
-    .portfolio-title:hover {
-      background: #333333;
+    .portfolio-title-button:hover {
+      background: #333;
+    }
+    .portfolio-desc-bar {
+      width: 100%;
+      max-width: 404px;
+      background: #fafafa;
+      margin: 0;
     }
     .portfolio-description {
-      margin-bottom: 6px;
+      width: 100%;
       color: #444;
       text-align: center;
+      margin: 0;
+      padding: 11px 0 15px 0;
+      font-size: 1em;
     }
+    /* Date styling, if wanted */
     .portfolio-date {
-      font-size: 0.96em;
       color: #999;
-      margin-bottom: 12px;
+      font-size: 0.96em;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 6px;
+      width: 100%;
+      max-width: 404px;
     }
     .logo-link {
       position: fixed;
@@ -259,12 +182,18 @@
       outline: 2px solid #fff;
     }
     @media (max-width: 500px) {
+      .portfolio-media iframe,
+      .portfolio-media img,
+      .portfolio-title-bar,
+      .portfolio-desc-bar,
+      .portfolio-date {
+        max-width: 100vw;
+        min-width: 0;
+      }
       .logo-link img { width: 40px; }
       .logo-link { bottom: 8px; left: 8px; }
       .social-bar { gap: 12px; bottom: 8px; }
       .social-link img { width: 36px; height: 36px; }
-      .portfolio-container { grid-template-columns: 1fr; }
-      .page-title { font-size: 1.3em; }
     }
   </style>
 </head>
@@ -274,29 +203,38 @@
     <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
   </div>
 
-  <!-- Custom Page Title -->
-  <h1 class="page-title" id="main-page-title"></h1>
-
   <!-- Portfolio container -->
   <div class="portfolio-container">
-    <!-- Portfolio items go here, same format as visuals.html -->
-    <!-- Example portfolio item with Behance embed -->
+    <!-- Portfolio item example -->
     <div class="portfolio-item">
       <div class="portfolio-media">
-        <iframe src="https://www.behance.net/embed/project/237465653?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/237465653?ilo0=1"
+          allowfullscreen
+          lazyload
+          frameborder="0"
+          allow="clipboard-write"
+          refererPolicy="strict-origin-when-cross-origin"></iframe>
       </div>
-      <button onclick="window.open('https://www.behance.net/gallery/237465653/Example-Behance-Project', '_blank')" class="portfolio-title">Example Behance Project</button>
-      <p class="portfolio-description">This is a description for your Behance visual.</p>
-      <p class="portfolio-date">Created: 2025-11-14</p>
+      <div class="portfolio-title-bar">
+        <button onclick="window.open('https://www.behance.net/gallery/237465653/Example-Behance-Project', '_blank')" class="portfolio-title-button">
+          Example Behance Project
+        </button>
+      </div>
+      <div class="portfolio-desc-bar">
+        <p class="portfolio-description">
+          This is a description for your visual.
+        </p>
+      </div>
+      <!-- <div class="portfolio-date">Created: 2025-11-14</div> -->
     </div>
-    <!-- More portfolio items as needed, copy and paste to add -->
+
+    <!-- Add more portfolio-item blocks as needed, copy-paste the structure above -->
   </div>
 
   <!-- Home button (bottom left) -->
   <a href="https://www.obssd.online" class="logo-link" title="Go to OBSSD">
     <img src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
   </a>
-
   <!-- Social icons bar (bottom middle) -->
   <div class="social-bar">
     <a href="https://www.youtube.com/@PRODOBSSD" class="social-link" target="_blank" title="Subscribe on YouTube">
@@ -309,56 +247,5 @@
       <img src="obssd_assets/OBSSD_SOUNDCLOUD.png" alt="SoundCloud">
     </a>
   </div>
-
-  <script>
-    // ----- Custom Title -----
-    // Change this variable to set your custom title
-    const pageTitle = "My Visual Portfolio"; // <--- Set your title here
-    document.title = pageTitle;
-    document.getElementById("main-page-title").textContent = pageTitle;
-
-    // -- Portfolio Media Slider Logic (copy from visuals.html) --
-    document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll('.portfolio-media-slider').forEach(function(slider) {
-        const slides = Array.from(slider.querySelectorAll('.media-slide'));
-        const leftBtn = slider.querySelector('.media-arrow-left');
-        const rightBtn = slider.querySelector('.media-arrow-right');
-        const indicator = slider.querySelector('.media-slide-indicator');
-        let currentSlide = 0;
-
-        if (slides.length > 1) {
-          slider.classList.add('controls-enabled');
-        } else {
-          slider.classList.remove('controls-enabled');
-        }
-
-        function updateSlider() {
-          slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === currentSlide);
-          });
-          indicator.textContent = (currentSlide + 1) + ' / ' + slides.length;
-          leftBtn.style.opacity = slides.length > 1 ? 0.85 : 0.3;
-          rightBtn.style.opacity = slides.length > 1 ? 0.85 : 0.3;
-          leftBtn.disabled = slides.length <= 1;
-          rightBtn.disabled = slides.length <= 1;
-        }
-        leftBtn && leftBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          if (slides.length > 1) {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            updateSlider();
-          }
-        });
-        rightBtn && rightBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          if (slides.length > 1) {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateSlider();
-          }
-        });
-        updateSlider();
-      });
-    });
-  </script>
 </body>
 </html>
