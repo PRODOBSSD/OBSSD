@@ -234,9 +234,10 @@
       font-weight: bold;
       margin-bottom: 0.3em;
     }
-    /* Updated: Make email input wider */
+    /* Updated: Make email input wider and always at least 220px */
     #loop-signup-banner input[type="email"] {
       width: 66%;
+      min-width: 220px;
       max-width: 340px;
       padding: 0.35em 0.5em;
       border: 1px solid #bbb;
@@ -320,6 +321,7 @@
     @media (max-width: 600px) {
       #loop-signup-banner input[type="email"] {
         width: 95%;
+        min-width: 220px;
         max-width: 220px;
         font-size: 0.95em;
       }
