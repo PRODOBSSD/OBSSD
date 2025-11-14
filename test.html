@@ -52,13 +52,14 @@
     }
     .portfolio-media {
       width: 100%;
+      max-width: 404px;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 0;
       overflow: hidden;
       position: relative;
-      margin: 0 0 0 0;
+      margin: 0;
     }
     .portfolio-media iframe,
     .portfolio-media img {
@@ -70,39 +71,38 @@
       display: block;
       background: #eee;
       margin: 0;
+      /* Hide scrollbars - works for most browsers */
+      overflow: hidden;
+      scrollbar-width: none; /* Firefox */
+    }
+    .portfolio-media iframe::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
+    }
+    .portfolio-media iframe {
+      scrolling: no;
+      overflow: hidden;
     }
     .portfolio-title-bar {
       width: 100%;
       max-width: 404px;
       margin: 0;
       margin-bottom: 0;
-    }
-    .portfolio-title-button {
-      width: 100%;
       background: #000;
       color: #fff;
-      padding: 10px 0;
       font-size: 1.11em;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      border: none;
       border-radius: 0;
-      margin: 0;
-      cursor: pointer;
-      transition: background 0.17s;
+      padding: 10px 0;
+      text-align: center;
       letter-spacing: 0.04em;
-      outline: none;
-      box-shadow: none;
-      display: block;
-    }
-    .portfolio-title-button:hover {
-      background: #333;
     }
     .portfolio-desc-bar {
       width: 100%;
       max-width: 404px;
       background: #fafafa;
       margin: 0;
+      text-align: center;
     }
     .portfolio-description {
       width: 100%;
@@ -112,7 +112,6 @@
       padding: 11px 0 15px 0;
       font-size: 1em;
     }
-    /* Date styling, if wanted */
     .portfolio-date {
       color: #999;
       font-size: 0.96em;
@@ -208,17 +207,20 @@
     <!-- Portfolio item example -->
     <div class="portfolio-item">
       <div class="portfolio-media">
-        <iframe src="https://www.behance.net/embed/project/237465653?ilo0=1"
-          allowfullscreen
-          lazyload
+        <iframe
+          src="https://www.behance.net/embed/project/237465653?ilo0=1"
+          height="316"
+          width="404"
           frameborder="0"
+          scrolling="no"
           allow="clipboard-write"
-          refererPolicy="strict-origin-when-cross-origin"></iframe>
+          refererPolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+          style="overflow:hidden;"
+        ></iframe>
       </div>
       <div class="portfolio-title-bar">
-        <button onclick="window.open('https://www.behance.net/gallery/237465653/Example-Behance-Project', '_blank')" class="portfolio-title-button">
-          Example Behance Project
-        </button>
+        Example Behance Project
       </div>
       <div class="portfolio-desc-bar">
         <p class="portfolio-description">
@@ -228,7 +230,7 @@
       <!-- <div class="portfolio-date">Created: 2025-11-14</div> -->
     </div>
 
-    <!-- Add more portfolio-item blocks as needed, copy-paste the structure above -->
+    <!-- Add more portfolio-item blocks as needed -->
   </div>
 
   <!-- Home button (bottom left) -->
