@@ -26,7 +26,7 @@
       margin-bottom: 32px;
     }
 
-    /* Updated logo styling */
+    /* Logo hover animation */
     .logo-img {
       max-width: 380px;
       height: auto;
@@ -39,7 +39,7 @@
       transform: scale(1.06);
     }
 
-    /* UPDATED GRID — allows 3 per row */
+    /* GRID */
     .portfolio-container {
       max-width: 1300px;
       margin: 0 auto;
@@ -72,21 +72,22 @@
       margin: 0;
     }
 
-    /* Sharp edges on iframe */
+    /* 🔥 Square 1:1 aspect ratio embeds */
     .portfolio-media iframe {
       width: 100%;
-      height: 316px;
+      aspect-ratio: 1 / 1; /* Perfect square */
       border: none;
       background: #eee;
       overflow: hidden;
       scrollbar-width: none;
-      border-radius: 0; /* Force sharp corners */
+      border-radius: 0;
     }
+
     .portfolio-media iframe::-webkit-scrollbar {
       display: none;
     }
 
-    /* Add margin above title bar */
+    /* Title bar with spacing */
     .portfolio-title-bar {
       width: 100%;
       background: #000;
@@ -96,7 +97,7 @@
       padding: 10px 0;
       text-align: center;
       letter-spacing: 0.04em;
-      margin-top: 10px; /* NEW SPACING */
+      margin-top: 10px; /* spacing from embed */
     }
 
     .portfolio-desc-bar {
@@ -139,7 +140,9 @@
       <div class="portfolio-media">
         <iframe
           src="https://www.behance.net/embed/project/237465653?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
+          frameborder="0" scrolling="no" allow="clipboard-write"
+          refererPolicy="strict-origin-when-cross-origin" allowfullscreen
+          style="overflow:hidden;"
         ></iframe>
       </div>
       <div class="portfolio-title-bar">
@@ -157,7 +160,9 @@
       <div class="portfolio-media">
         <iframe
           src="https://www.behance.net/embed/project/238543625?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
+          frameborder="0" scrolling="no" allow="clipboard-write"
+          refererPolicy="strict-origin-when-cross-origin" allowfullscreen
+          style="overflow:hidden;"
         ></iframe>
       </div>
       <div class="portfolio-title-bar">
