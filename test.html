@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>My Visual Portfolio</title>
+  <style>
+    body { font-family: sans-serif; background: #fafafa; padding: 2rem; }
+    h1 { text-align: center; }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .project-embed {
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+      padding: 1rem;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Visual Portfolio</h1>
+  <div class="portfolio-grid" id="portfolioGrid"></div>
 
+  <script>
+    // Add your Behance embed iframe HTML strings below
+    const embeds = [
+      `<iframe src="https://www.behance.net/embed/project/237465653?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin"></iframe>`,
+      // Add more embed strings here, like:
+      // `<iframe src="..." height="316" width="404" ...></iframe>`
+    ];
+
+    const grid = document.getElementById('portfolioGrid');
+    embeds.forEach(embed => {
+      const wrap = document.createElement('div');
+      wrap.className = 'project-embed';
+      wrap.innerHTML = embed;
+      grid.appendChild(wrap);
+    });
+  </script>
+</body>
+</html>
