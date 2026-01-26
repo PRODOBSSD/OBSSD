@@ -14,11 +14,12 @@
   <title>PRODUCERS</title>
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
   <link rel="stylesheet" href="obssd_shared/custom.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <!-- Switched from Montserrat to Cascadia Code -->
+  <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Montserrat';
+      font-family: 'Cascadia Code', monospace;
       background: #ffffff;
       margin: 0;
       padding: 30px 30px 0 30px; /* bottom padding will be added dynamically */
@@ -75,21 +76,26 @@
       background: #eee;
     }
 
+    /* BUTTON + TEXTURE styling (replaced solid black with image overlays; keep sizes) */
     .product-name-btn {
       width: 100%;
       padding: 10px 0;
       margin-bottom: 10px;
-      background: #000000;
-      color: white;
+      background-color: #000; /* fallback if images fail or JS disabled */
+      color: #3a3a3a; /* requested text color */
       border: none;
       border-radius: 0px;
       font-size: 1.1em;
       cursor: pointer;
-      transition: background 0.16s;
+      transition: filter 0.16s;
+      /* bg image handling */
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
     }
 
     .product-name-btn:hover {
-      background: #333333;
+      filter: brightness(0.95);
     }
 
     .product-footer {
@@ -107,17 +113,24 @@
 
     .demo-btn {
       padding: 7px 18px;
-      background: #000000;
-      color: white;
+      background-color: #000; /* fallback */
+      color: #3a3a3a;
       border: none;
       border-radius: 0px;
       font-size: 1em;
       cursor: pointer;
-      transition: background 0.16s;
+      transition: filter 0.16s;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.95),
+        0 0 16px rgba(255,255,255,0.75),
+        0 0 36px rgba(255,255,255,0.45);
     }
 
     .demo-btn:hover {
-      background: #333333;
+      filter: brightness(0.95);
     }
 
     /* Signup banner */
@@ -159,7 +172,7 @@
       background: #fff;
       color: #000;
       box-sizing: border-box;
-      font-family: 'Montserrat';
+      font-family: 'Cascadia Code', monospace;
     }
 
     #loop-signup-banner .subscribe-container form {
@@ -170,6 +183,13 @@
       margin-bottom: 0.7em;
     }
 
+    #loop-signup-banner .custom-description {
+      margin: 0.25em 0 0.5em 0;
+      color: #555;
+      font-size: 0.82em;
+    }
+
+    /* Keep subscribe button visual as-is (not black) */
     #loop-signup-banner .subscribe-btn {
       background: #cccecb;
       color: #ffffff;
@@ -186,20 +206,28 @@
       background: #ffe066;
     }
 
+    /* Unsubscribe button — was black; apply same texture approach */
     #loop-signup-banner .unsubscribe-btn {
-      background: #000;
-      color: #fff;
+      background-color: #000; /* fallback */
+      color: #3a3a3a;
       border: none;
       border-radius: 4px;
       padding: 0.35em 1.1em;
       font-size: 1em;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.15s;
+      transition: filter 0.15s;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.95),
+        0 0 16px rgba(255,255,255,0.75),
+        0 0 36px rgba(255,255,255,0.45);
     }
 
     #loop-signup-banner .unsubscribe-btn:hover {
-      background: #333;
+      filter: brightness(0.95);
     }
 
     #loop-signup-banner .success-message,
@@ -221,12 +249,6 @@
     #loop-signup-banner .divider {
       border-top: 1px solid #e3e3e3;
       margin: 0.35em 0;
-    }
-
-    #loop-signup-banner .custom-description {
-      margin: 0.25em 0 0.5em 0;
-      color: #555;
-      font-size: 0.82em;
     }
 
     @media (max-width: 600px) {
@@ -363,7 +385,27 @@
       document.body.style.paddingBottom = (height + 30) + "px"; // original 30px + banner
     }
 
-    window.addEventListener('load', updateBodyPadding);
+    window.addEventListener('load', () => {
+      updateBodyPadding();
+
+      // Randomly assign button textures on load (preserve size and padding)
+      const overlays = [
+        '/obssd_assets/BUTTON_OVERLAY_1.jpg',
+        '/obssd_assets/BUTTON_OVERLAY_2.jpg'
+      ];
+
+      // Target the buttons that were previously solid-black
+      const elems = document.querySelectorAll('.product-name-btn, .demo-btn, #loop-signup-banner .unsubscribe-btn');
+      elems.forEach(el => {
+        const img = overlays[Math.floor(Math.random() * overlays.length)];
+        el.style.backgroundImage = `url("${img}")`;
+        el.style.backgroundRepeat = 'no-repeat';
+        el.style.backgroundPosition = 'center';
+        el.style.backgroundSize = 'cover';
+        // Leave color and text-shadow alone (CSS handles the glow)
+      });
+    });
+
     window.addEventListener('resize', updateBodyPadding);
   </script>
 
