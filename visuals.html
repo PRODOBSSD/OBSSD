@@ -105,7 +105,7 @@
       width: 100%;
       /* Keep a fallback color if images fail or JS is disabled */
       background-color: #000;
-      /* Changed font color per request */
+      /* Keep requested font color */
       color: #3a3a3a;
       font-size: 1.11em;
       font-weight: 700;
@@ -118,6 +118,9 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
+
+      /* Subtle white drop shadow to lighten text over textured backgrounds */
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
     }
 
     .portfolio-desc-bar {
@@ -463,7 +466,7 @@
         el.style.backgroundRepeat = 'no-repeat';
         el.style.backgroundPosition = 'center';
         el.style.backgroundSize = 'cover';
-        // Do not modify text color or add shadow (per request)
+        // Do not modify text color or shadow here — CSS controls the white text shadow
       });
     })();
   </script>
