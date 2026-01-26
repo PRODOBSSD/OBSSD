@@ -7,11 +7,12 @@
   <title>VISUALS</title>
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
   <link rel="stylesheet" href="obssd_shared/custom.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <!-- Replaced Montserrat with Cascadia Code -->
+  <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Cascadia Code', monospace;
       background: #fff;
       margin: 0;
       padding: 30px;
@@ -102,7 +103,8 @@
     /* Add margin above title bar */
     .portfolio-title-bar {
       width: 100%;
-      background: #000;
+      /* Keep a fallback color if images fail or JS is disabled */
+      background-color: #000;
       color: #fff;
       font-size: 1.11em;
       font-weight: 700;
@@ -110,6 +112,12 @@
       text-align: center;
       letter-spacing: 0.04em;
       margin-top: 10px; /* NEW SPACING */
+
+      /* Ensure background image covers the button area without changing the button sizing */
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      /* preserve existing layout (padding determines height) */
     }
 
     .portfolio-desc-bar {
@@ -436,6 +444,32 @@
     </div>
 
   </div> <!-- end .portfolio-container -->
+
+  <!-- Script to randomly assign a texture overlay to each title bar while preserving size -->
+  <script>
+    (function() {
+      // Use leading slash so paths match other assets on the site
+      const overlays = [
+        '/obssd_assets/BUTTON_OVERLAY_1.jpg',
+        '/obssd_assets/BUTTON_OVERLAY_2.jpg'
+      ];
+
+      // For accessibility & progressive enhancement: keep fallback background-color already in CSS.
+      // This script only replaces the background with a randomly chosen image per button,
+      // preserving padding/height so sizes remain unchanged.
+      document.querySelectorAll('.portfolio-title-bar').forEach(el => {
+        // Randomly pick one image (uniform)
+        const img = overlays[Math.floor(Math.random() * overlays.length)];
+        el.style.backgroundImage = `url("${img}")`;
+        el.style.backgroundRepeat = 'no-repeat';
+        el.style.backgroundPosition = 'center';
+        el.style.backgroundSize = 'cover';
+        // Keep text readable over textures
+        el.style.color = '#fff';
+        el.style.textShadow = '0 1px 2px rgba(0,0,0,0.6)';
+      });
+    })();
+  </script>
 
 </body>
 </html>
