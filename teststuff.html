@@ -48,25 +48,44 @@ body {
 .item {
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* IMAGE WRAPPER */
+.item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
 .thumb {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  cursor: pointer;
+  cursor: zoom-in;
 }
 
 .thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: 0.3s;
+  transition: transform 0.4s ease, filter 0.3s ease;
 }
 
-/* HOVER OVERLAY */
+.thumb:hover img {
+  transform: scale(1.05);
+  filter: brightness(70%);
+}
+
+/* CLICK FEEDBACK */
+.thumb:active {
+  transform: scale(0.97);
+}
+
+/* OVERLAY */
 .overlay {
   position: absolute;
   inset: 0;
@@ -77,18 +96,16 @@ body {
   color: #fff;
   font-size: 0.9em;
   opacity: 0;
-  transition: 0.3s;
-}
-
-.thumb:hover img {
-  filter: brightness(70%);
+  transform: translateY(10px);
+  transition: all 0.3s ease;
 }
 
 .thumb:hover .overlay {
   opacity: 1;
+  transform: translateY(0);
 }
 
-/* META INFO */
+/* META */
 .meta {
   display: flex;
   justify-content: space-between;
@@ -96,11 +113,27 @@ body {
   margin-top: 6px;
 }
 
+.meta span {
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+/* TITLE */
 .title {
   font-family: 'Allegiance';
   font-size: 0.85em;
 }
 
+.title span {
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
+}
+
+/* ALIGNMENT */
 .date {
   text-align: center;
   flex: 1;
@@ -115,19 +148,38 @@ body {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.7);
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .lightbox img {
   max-width: 90%;
   max-height: 90%;
+  transform: scale(0.9);
+  transition: transform 0.25s ease;
 }
 
-.lightbox.active {
-  display: flex;
+.lightbox.active img {
+  transform: scale(1);
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 </head>
@@ -142,29 +194,29 @@ body {
 
 <div class="gallery">
 
-  <!-- ITEM (IMAGE ONLY) -->
+  <!-- IMAGE ITEM -->
   <div class="item">
     <div class="thumb" onclick="openLightbox('/obssd_work/work1.jpg')">
       <img src="/obssd_work/work1.jpg">
       <div class="overlay">click to view</div>
     </div>
     <div class="meta">
-      <div class="title">Mobeats Visualizer</div>
-      <div class="date">2025</div>
-      <div class="type">Animation</div>
+      <div class="title"><span>Mobeats Visualizer</span></div>
+      <div class="date"><span>2025</span></div>
+      <div class="type"><span>Animation</span></div>
     </div>
   </div>
 
-  <!-- ITEM (EXTERNAL LINK) -->
+  <!-- LINK ITEM -->
   <div class="item">
     <div class="thumb" onclick="openLink('https://youtube.com/')">
       <img src="/obssd_work/work2.jpg">
       <div class="overlay">click to view</div>
     </div>
     <div class="meta">
-      <div class="title">Afterlife Visualizer</div>
-      <div class="date">2025</div>
-      <div class="type">3D</div>
+      <div class="title"><span>Afterlife Visualizer</span></div>
+      <div class="date"><span>2025</span></div>
+      <div class="type"><span>3D</span></div>
     </div>
   </div>
 
@@ -190,6 +242,11 @@ function closeLightbox() {
 function openLink(url) {
   window.open(url, '_blank');
 }
+
+/* STAGGER LOAD */
+document.querySelectorAll('.item').forEach((el, i) => {
+  el.style.animationDelay = (i * 0.05) + 's';
+});
 </script>
 
 </body>
