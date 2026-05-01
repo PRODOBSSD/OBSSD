@@ -1,293 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-NLWC8KV66N');
-  </script>
-  <meta charset="UTF-8">
-  <meta name="description" content="Kits created by New Zealand based producer and visual artist OBSSD">
-  <title>STORE</title>
-  <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
-  <link rel="stylesheet" href="obssd_shared/custom.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    @font-face {
-      font-family: 'Allegiance';
-      src: url('/obssd_assets/allegiance.otf') format('opentype');
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STORE</title>
 
-    body {
-      font-family: 'Allegiance', 'Cascadia Code', monospace;
-      background: #ffffff;
-      margin: 0;
-      padding: 30px 30px 0 30px;
-      min-height: 100vh;
-      width: 100vw;
-      box-sizing: border-box;
-    }
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 32px;
-    }
-    .logo-img {
-      max-width: 380px;
-      height: auto;
-      display: block;
-      cursor: pointer;
-      transition: transform 0.22s cubic-bezier(0.25, 0.1, 0.25, 1.0);
-    }
-    .logo-img:hover { transform: scale(1.06); }
+<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 32px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .product-card {
-      background: #fff;
-      border-radius: 0px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .product-image {
-      width: 300px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 0px;
-      margin-bottom: 18px;
-      background: #eee;
-    }
+<style>
+@font-face {
+  font-family: 'Allegiance';
+  src: url('/obssd_assets/allegiance.otf') format('opentype');
+}
 
-    /* Enforce button aspect ratio 758:112 for .product-name-btn (approx 6.767:1) */
-    .product-name-btn {
-      width: 100%;
-      aspect-ratio: 758 / 112;
-      min-height: 32px;
-      margin-bottom: 12px;
-      background-image: url("obssd_assets/BUTTON_OVERLAY_OBSSD.jpg");
-      background-color: #000; /* fallback */
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      color: #000;
-      border: 0.5px solid #000;
-      border-radius: 0px;
-      font-size: 1.55em;
-      cursor: pointer;
-      transition: filter 0.16s;
-      font-family: 'Allegiance', 'Cascadia Code', monospace;
-      position: relative;
-      box-sizing: border-box;
-      outline: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      /* Remove padding so text centers vertically in aspect-ratio box */
-      padding: 0;
-    }
-    .product-name-btn:hover { filter: brightness(0.95); }
+body {
+  margin: 0;
+  background: #F8F5F5;
+  font-family: Arial, sans-serif;
+  color: #000;
+  padding: 30px 40px 0;
+}
 
-    .product-name-btn-text {
-      display: inline-block;
-      transform: scaleX(1.3);
-      transform-origin: center;
-      color: #000;
-      background-color: transparent;
-      background: none;
-    }
+/* LOGO */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
 
-    /* .demo-btn = preview: no fill, only black outline, same font */
-    .demo-btn {
-      padding: 7px 18px;
-      background: none !important;
-      color: #000;
-      border: 0.5px solid #000;
-      border-radius: 0px;
-      font-size: 1em;
-      cursor: pointer;
-      font-family: Arial, sans-serif;
-      transition: background 0.16s, filter 0.16s;
-      box-sizing: border-box;
-      outline: none;
-    }
-    .demo-btn:hover {
-      background: none;
-      filter: brightness(0.92);
-    }
+.logo-img {
+  max-width: 340px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.logo-img:hover {
+  transform: scale(1.05);
+}
 
-    .product-footer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-    .price {
-      font-size: 1.15em;
-      font-weight: bold;
-      color: #333;
-      font-family: Arial, sans-serif;
-    }
+/* CONTAINER (NEW — controls width) */
+.store-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
 
-    /* Signup banner and buttons remain unchanged for style */
-    #loop-signup-banner {
-      position: fixed; left: 0; bottom: 0;
-      width: 100vw; z-index: 1100; background: #fff;
-      color: #222; box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
-      text-align: center; padding: 0.5em 0;
-    }
-    #loop-signup-banner .subscribe-container { max-width: 420px; margin: 0 auto; }
-    #loop-signup-banner h2 { color: #222; margin-top: 0.7em; margin-bottom: 0.35em; font-size: 1.15em; font-weight: 700; }
-    #loop-signup-banner input[type="email"] {
-      width: 66%; min-width: 220px; max-width: 340px;
-      padding: 0.35em 0.5em;
-      border: 1px solid #bbb;
-      border-radius: 4px;
-      margin-bottom: 0.25em;
-      font-size: 1em;
-      background: #fff; color: #000;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    #loop-signup-banner .subscribe-container form {
-      display: flex; align-items: center; justify-content: center; gap: 0.5em; margin-bottom: 0.7em;
-    }
-    #loop-signup-banner .custom-description { margin: 0.25em 0 0.5em 0; color: #555; font-size: 0.82em; }
-    #loop-signup-banner .subscribe-btn {
-      background: #cccecb; color: #ffffff;
-      border: none; border-radius: 4px;
-      padding: 0.35em 1.1em; font-size: 1em; font-weight: bold; cursor: pointer;
-      transition: background 0.15s; font-family: Arial, sans-serif;
-    }
-    #loop-signup-banner .subscribe-btn:hover { background: #000; }
-    #loop-signup-banner .unsubscribe-btn {
-      background-color: #000; color: #3a3a3a;
-      border: none; border-radius: 4px;
-      padding: 0.35em 1.1em; font-size: 1em; font-weight: bold; cursor: pointer;
-      transition: filter 0.15s; background-repeat: no-repeat; background-position: center; background-size: cover;
-      font-family: Arial, sans-serif;
-    }
-    #loop-signup-banner .unsubscribe-btn:hover { filter: brightness(0.95); }
-    #loop-signup-banner .success-message, #loop-signup-banner .error-message { text-align: center; font-size: 0.95em; display: none; margin-top: 0.2em; }
-    #loop-signup-banner .success-message { color: #2da44e; }
-    #loop-signup-banner .error-message { color: #cf222e; }
-    #loop-signup-banner .divider { border-top: 1px solid #e3e3e3; margin: 0.35em 0; }
-    @media (max-width: 600px) {
-      #loop-signup-banner input[type="email"] { width: 95%; max-width: 220px; }
-    }
-  </style>
+/* GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 36px;
+}
+
+/* PRODUCT */
+.product-card {
+  display: flex;
+  flex-direction: column;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* IMAGE */
+.product-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+}
+
+/* TITLE BUTTON */
+.product-name-btn {
+  width: 100%;
+  aspect-ratio: 758 / 112;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  background-image: url("obssd_assets/BUTTON_OVERLAY_OBSSD.jpg");
+  background-size: cover;
+  background-position: center;
+
+  border: 0.5px solid #000;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.product-name-btn-text {
+  font-family: 'Allegiance';
+  font-size: 1.35em; /* INCREASED */
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
+}
+
+/* FOOTER */
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* PRICE */
+.price span {
+  display: inline-block;
+  transform: scaleY(1.3);
+  transform-origin: center;
+  font-size: 0.85em;
+}
+
+/* BUTTON */
+.demo-btn {
+  background: none;
+  border: 0.5px solid #000;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
 </head>
+
 <body>
-  <!-- CLICKABLE + HOVER ANIMATED LOGO -->
-  <div class="logo-container">
-    <a href="https://obssd.online/">
-      <img class="logo-img" src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
-    </a>
-  </div>
-  <!-- PRODUCT GRID -->
+
+<!-- LOGO -->
+<div class="logo-container">
+  <a href="https://obssd.online/">
+    <img src="obssd_assets/OBSSD_LOGO.png" class="logo-img">
+  </a>
+</div>
+
+<div class="store-container">
+
   <div class="product-grid">
-    <!-- Product Example 1 -->
+
     <div class="product-card">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1je101kbl1nso6nrlk6vfl18261a.jpg">
-      <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/eAOqc', '_blank')"><span class="product-name-btn-text">AFTERLIFE - Drum Kit</span></button>
+      <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/eAOqc', '_blank')">
+        <span class="product-name-btn-text">AFTERLIFE - Drum Kit</span>
+      </button>
       <div class="product-footer">
-        <span class="price">$29.99</span>
+        <div class="price"><span>$29.99</span></div>
         <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=ou7k948SDCk', '_blank')">PREVIEW</button>
       </div>
     </div>
-    <!-- Product Example 2 -->
+
     <div class="product-card">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1ip0g986k1dajkvbs4j6vo85110.jpg">
-      <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/wn5aG', '_blank')"><span class="product-name-btn-text">REBIRTH - Drum Kit</span></button>
+      <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/wn5aG', '_blank')">
+        <span class="product-name-btn-text">REBIRTH - Drum Kit</span>
+      </button>
       <div class="product-footer">
-        <span class="price">$24.99</span>
+        <div class="price"><span>$24.99</span></div>
         <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=2FOAM6TxeaU', '_blank')">PREVIEW</button>
       </div>
     </div>
-    <!-- Product Example 3 -->
+
     <div class="product-card">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ivup4icn16rr3a4if0gbu1up810.jpg">
-      <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DL_6Z46zVBd/', '_blank')"><span class="product-name-btn-text">TAKEOVER - Loop Kit</span></button>
+      <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DL_6Z46zVBd/', '_blank')">
+        <span class="product-name-btn-text">TAKEOVER - Loop Kit</span>
+      </button>
       <div class="product-footer">
-        <span class="price">FREE</span>
+        <div class="price"><span>FREE</span></div>
         <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=2GKE7hhT-94', '_blank')">PREVIEW</button>
       </div>
     </div>
-    <!-- Product Example 4 -->
+
     <div class="product-card">
       <img class="product-image" src="obssd_assets/5K @imobssd.png">
-      <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DQI0S1yEltV/', '_blank')"><span class="product-name-btn-text">5K - Drum Kit</span></button>
+      <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DQI0S1yEltV/', '_blank')">
+        <span class="product-name-btn-text">5K - Drum Kit</span>
+      </button>
       <div class="product-footer">
-        <span class="price">FREE</span>
+        <div class="price"><span>FREE</span></div>
         <button class="demo-btn" onclick="window.open('https://www.instagram.com/p/DQI0S1yEltV/', '_blank')">PREVIEW</button>
       </div>
     </div>
-  </div>
-  <!-- Loop Signup Banner -->
-  <div id="loop-signup-banner">
-    <div class="subscribe-container">
-      <h2>Join Weekly Loops List</h2>
-      <form id="subscribe-form" autocomplete="off">
-        <label for="email" style="font-weight: 600; color: #555;">Email Address</label>
-        <input type="email" id="email" required placeholder="you@example.com">
-        <button type="submit" class="subscribe-btn">Subscribe</button>
-        <button type="button" class="unsubscribe-btn" onclick="window.open('unsubscribe.html', '_blank')">Unsubscribe</button>
-      </form>
-      <hr class="divider">
-      <div class="success-message" id="success-message">Thank you! You have been added.</div>
-      <div class="error-message" id="error-message">There was a problem. Please try again.</div>
-      <div class="custom-description">Your information is secure and will not be shared.</div>
-    </div>
-  </div>
-  <script>
-    const SUBSCRIBE_URL = "https://script.google.com/macros/s/AKfycbx8foiTr9yDC1opGbhpSFdg2ZDjvgpgKx3OGN5dbVoIQ2gpUw42uIx2bEQLLx88is2d/exec";
-    function hideMessages() {
-      document.getElementById('success-message').style.display = 'none';
-      const errorMsg = document.getElementById('error-message');
-      errorMsg.style.display = 'none';
-      errorMsg.textContent = "There was a problem. Please try again.";
-    }
-    document.getElementById('subscribe-form').addEventListener('submit', async function(event) {
-      event.preventDefault(); hideMessages();
-      const email = document.getElementById('email').value;
-      const successMsg = document.getElementById('success-message');
-      const errorMsg = document.getElementById('error-message');
-      try {
-        const formData = new FormData();
-        formData.append('email', email);
-        const response = await fetch(SUBSCRIBE_URL, { method: 'POST', body: formData });
-        const text = await response.text();
-        if (response.ok && text.toLowerCase().includes("success")) {
-          successMsg.textContent = "Thank you for subscribing!";
-          successMsg.style.display = 'block';
-          document.getElementById('subscribe-form').reset();
-        } else if (text.toLowerCase().includes("already exists")) {
-          errorMsg.textContent = "This email is already subscribed.";
-          errorMsg.style.display = 'block';
-        } else { throw new Error('Failed to subscribe'); }
-      } catch (error) {
-        errorMsg.style.display = 'block';
-      }
-    });
 
-    // --- Dynamic bottom buffer ---
-    function updateBodyPadding() {
-      const banner = document.getElementById('loop-signup-banner');
-      const height = banner.offsetHeight;
-      document.body.style.paddingBottom = (height + 30) + "px";
-    }
-    window.addEventListener('load', updateBodyPadding);
-    window.addEventListener('resize', updateBodyPadding);
-  </script>
+  </div>
+
+</div>
+
+<script>
+document.querySelectorAll('.product-card').forEach((el, i) => {
+  el.style.animationDelay = (i * 0.05) + 's';
+});
+</script>
+
 </body>
 </html>
