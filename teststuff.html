@@ -40,7 +40,7 @@ body {
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  gap: 28px;
   padding: 0 40px 40px;
 }
 
@@ -51,12 +51,11 @@ body {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeUp 0.6s ease forwards;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s ease;
 }
 
 .item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
 }
 
 /* IMAGE */
@@ -72,18 +71,18 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block; /* removes gap under image */
-  transition: transform 0.4s ease, filter 0.3s ease;
+  display: block;
 }
 
+/* REMOVE ALL HOVER SCALING */
 .thumb:hover img {
-  transform: scale(1.05);
+  transform: none;
   filter: brightness(70%);
 }
 
 /* CLICK FEEDBACK */
 .thumb:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 /* OVERLAY */
@@ -95,35 +94,29 @@ body {
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 0.85em;
+  font-size: 0.8em;
   opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
 .thumb:hover .overlay {
   opacity: 1;
-  transform: translateY(0);
 }
 
-/* META */
+/* META ROW */
 .meta {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  margin-top: 6px;
   font-size: 0.75em;
-  margin-top: 4px;
+  gap: 8px;
 }
 
-/* FIXED ALIGNMENT SYSTEM */
-.title, .date, .type {
-  flex: 1;
-  overflow: hidden;
-}
-
+/* TEXT BLOCKS */
 .title {
-  text-align: left;
   font-family: 'Allegiance';
-  font-size: 1em; /* increased */
+  font-size: 1.05em;
 }
 
 .date {
@@ -134,13 +127,23 @@ body {
   text-align: right;
 }
 
-/* STRETCH TEXT WITHOUT BREAKING ALIGNMENT */
+/* STRETCH TEXT SAFELY */
 .title span,
 .meta span {
   display: inline-block;
   transform: scaleX(1.5);
-  transform-origin: center;
+  transform-origin: left;
   white-space: nowrap;
+}
+
+/* CENTER DATE PROPERLY */
+.date span {
+  transform-origin: center;
+}
+
+/* RIGHT ALIGN TYPE */
+.type span {
+  transform-origin: right;
 }
 
 /* ARIAL BOLD */
@@ -149,7 +152,7 @@ body {
   letter-spacing: 0.04em;
 }
 
-/* LIGHTBOX (no scale effect now) */
+/* LIGHTBOX */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -197,7 +200,7 @@ body {
   <!-- IMAGE ITEM -->
   <div class="item">
     <div class="thumb" onclick="openLightbox(this)">
-      <img src="/obssd_work/mobeats test.jpg">
+      <img src="/obssd_work/work1.jpg">
       <div class="overlay">VIEW</div>
     </div>
     <div class="meta">
@@ -210,7 +213,7 @@ body {
   <!-- LINK ITEM -->
   <div class="item">
     <div class="thumb" onclick="openLink('https://youtube.com/')">
-      <img src="/obssd_work/mobeats test.jpg">
+      <img src="/obssd_work/work2.jpg">
       <div class="overlay">VIEW</div>
     </div>
     <div class="meta">
@@ -233,7 +236,7 @@ function openLightbox(el) {
   const box = document.getElementById('lightbox');
   const lightImg = document.getElementById('lightbox-img');
 
-  lightImg.src = img.src; // uses same image automatically
+  lightImg.src = img.src;
   box.classList.add('active');
 }
 
