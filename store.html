@@ -37,23 +37,28 @@ body {
   transform: scale(1.05);
 }
 
-/* GRID (FULL WIDTH LIKE VISUALS) */
+/* GRID */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 28px;
+  gap: 48px;
 }
 
-/* PRODUCT ITEM */
+/* PRODUCT */
 .product-card {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 
   opacity: 0;
   transform: translateY(20px);
   animation: fadeUp 0.6s ease forwards;
+}
 
-  transition: transform 0.2s ease;
+/* IMAGE WRAPPER (for overlay) */
+.product-image-wrapper {
+  position: relative;
+  cursor: pointer;
 }
 
 /* IMAGE */
@@ -65,16 +70,39 @@ body {
   transition: filter 0.25s ease;
 }
 
-.product-card:hover .product-image {
-  filter: brightness(0.75);
+/* OVERLAY */
+.product-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+
+  font-size: clamp(0.9rem, 1vw, 1.2rem);
+  text-align: center;
+  padding: 10px;
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
-/* TITLE BUTTON (kept your style but cleaner) */
+/* HOVER EFFECT */
+.product-image-wrapper:hover .product-image {
+  filter: brightness(0.7);
+}
+
+.product-image-wrapper:hover .product-overlay {
+  opacity: 1;
+}
+
+/* TITLE BUTTON */
 .product-name-btn {
   width: 100%;
   aspect-ratio: 758 / 112;
   margin-top: 8px;
-  margin-bottom: 8px;
 
   background-image: url("obssd_assets/BUTTON_OVERLAY_OBSSD.jpg");
   background-size: cover;
@@ -98,29 +126,26 @@ body {
 
 /* FOOTER */
 .product-footer {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
   align-items: center;
-  margin-top: 4px;
 }
 
-/* PRICE (vertical stretch like visuals meta) */
+/* PRICE */
 .price span {
-  display: inline-block;
-  transform: scaleY(1.3);
-  transform-origin: center;
-  font-size: clamp(0.95rem, 1vw, 1.3rem);
+  font-size: clamp(1rem, 1.1vw, 1.4rem);
   font-weight: 700;
 }
 
 /* BUTTON */
 .demo-btn {
-  background: #fff; /* pure white */
+  width: 100%;
+  background: #fff;
   border: 0.5px solid #000;
-  padding: clamp(8px, 0.9vw, 12px) clamp(14px, 1.2vw, 20px);
+  padding: clamp(10px, 1vw, 14px);
   cursor: pointer;
-  font-size: clamp(0.85rem, 0.9vw, 1.1rem);
-  font-weight: normal;
+  font-size: clamp(0.9rem, 1vw, 1.2rem);
   transition: filter 0.15s ease;
 }
 
@@ -135,7 +160,6 @@ body {
     transform: translateY(0);
   }
 }
-
 </style>
 </head>
 
@@ -153,7 +177,10 @@ body {
 
   <!-- ITEM -->
   <div class="product-card">
-    <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1000/https://pe56d.s3.amazonaws.com/o_1je5o4t1ionnmnp1ir5oq11ics7.png">
+    <a href="https://mobworld.cc/b/thm3u" target="_blank" class="product-image-wrapper">
+      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1000/https://pe56d.s3.amazonaws.com/o_1je5o4t1ionnmnp1ir5oq11ics7.png">
+      <div class="product-overlay">Full MOB bundle — all kits included</div>
+    </a>
     <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/thm3u', '_blank')">
       <span class="product-name-btn-text">MOB - Bundle Kit</span>
     </button>
@@ -162,9 +189,12 @@ body {
       <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=ou7k948SDCk', '_blank')">PREVIEW</button>
     </div>
   </div>
-  
+
   <div class="product-card">
-    <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1je101kbl1nso6nrlk6vfl18261a.jpg">
+    <a href="https://mobworld.cc/b/eAOqc" target="_blank" class="product-image-wrapper">
+      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1je101kbl1nso6nrlk6vfl18261a.jpg">
+      <div class="product-overlay">⚡MOB presents “AFTERLIFE DRUM KIT”⚡300+ CUSTOM sounds 90+ CUSTOM presets</div>
+    </a>
     <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/eAOqc', '_blank')">
       <span class="product-name-btn-text">AFTERLIFE - Drum Kit</span>
     </button>
@@ -175,7 +205,10 @@ body {
   </div>
 
   <div class="product-card">
-    <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1ip0g986k1dajkvbs4j6vo85110.jpg">
+    <a href="https://mobworld.cc/b/wn5aG" target="_blank" class="product-image-wrapper">
+      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1ip0g986k1dajkvbs4j6vo85110.jpg">
+      <div class="product-overlay">🦋 MOB presents “REBIRTH DRUM KIT” 🦋 300+ CUSTOM sounds: Link in bio</div>
+    </a>
     <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/wn5aG', '_blank')">
       <span class="product-name-btn-text">REBIRTH - Drum Kit</span>
     </button>
@@ -186,7 +219,10 @@ body {
   </div>
 
   <div class="product-card">
-    <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ivup4icn16rr3a4if0gbu1up810.jpg">
+    <a href="https://www.instagram.com/p/DL_6Z46zVBd/" target="_blank" class="product-image-wrapper">
+      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ivup4icn16rr3a4if0gbu1up810.jpg">
+      <div class="product-overlay">FREE “TAKEOVER LOOP KIT” by @mobworld.cc ♫ 50 LOOPS in the style of #OSAMASON #NETTSPEND #KENCARSON +more ♫</div>
+    </a>
     <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DL_6Z46zVBd/', '_blank')">
       <span class="product-name-btn-text">TAKEOVER - Loop Kit</span>
     </button>
@@ -197,16 +233,19 @@ body {
   </div>
 
   <div class="product-card">
-    <img class="product-image" src="obssd_assets/5K @imobssd.png">
-    <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DQI0S1yEltV/', '_blank')">
-      <span class="product-name-btn-text">5K - Drum Kit</span>
+    <a href="https://www.instagram.com/p/DQI0S1yEltV/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="product-image-wrapper">
+      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ivup4icn16rr3a4if0gbu1up810.jpg">
+      <div class="product-overlay">FREE “5k kit” by @imobssd. This kit contains over 200 custom sounds I use everyday</div>
+    </a>
+    <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DL_6Z46zVBd/', '_blank')">
+      <span class="product-name-btn-text">5k - Drum Kit</span>
     </button>
     <div class="product-footer">
       <div class="price"><span>FREE</span></div>
-      <button class="demo-btn" onclick="window.open('https://www.instagram.com/p/DQI0S1yEltV/', '_blank')">PREVIEW</button>
+      <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=2GKE7hhT-94', '_blank')">PREVIEW</button>
     </div>
   </div>
-
+  
 </div>
 
 <script>
