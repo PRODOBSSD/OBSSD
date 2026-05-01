@@ -1,482 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Visual portfolio">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>VISUALS</title>
-  <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
-  <link rel="stylesheet" href="obssd_shared/custom.css">
-  <!-- Cascadia Code -->
-  <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBSSD NAV</title>
 
-  <style>
-    @font-face {
-      font-family: 'Allegiance';
-      src: url('/obssd_assets/allegiance.otf') format('opentype');
-    }
+<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
 
-    body {
-      font-family: 'Allegiance', 'Cascadia Code', monospace;
-      background: #fff;
-      margin: 0;
-      padding: 30px;
-      min-height: 100vh;
-      box-sizing: border-box;
-    }
-
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 32px;
-    }
-
-    .logo-img {
-      max-width: 380px;
-      height: auto;
-      display: block;
-      cursor: pointer;
-      transition: transform 0.22s cubic-bezier(0.25, 0.1, 0.25, 1.0);
-    }
-
-    .logo-img:hover {
-      transform: scale(1.06);
-    }
-
-    /* Responsive GRID — explicit breakpoints so we reliably get 4 across on wide screens */
-    .portfolio-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-    }
-    @media (max-width: 1100px) {
-      .portfolio-container {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    @media (max-width: 800px) {
-      .portfolio-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 500px) {
-      .portfolio-container {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .portfolio-item {
-      background: #fff;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-
-    .portfolio-media {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      margin: 0;
-    }
-    .portfolio-media iframe {
-      width: 100%;
-      height: 316px;
-      border: none;
-      background: #eee;
-      overflow: hidden;
-      scrollbar-width: none;
-      border-radius: 0;
-    }
-    .portfolio-media iframe::-webkit-scrollbar {
-      display: none;
-    }
-.portfolio-title-bar {
-  width: 100%;
-  aspect-ratio: 758 / 112;
-  min-height: 32px;
-  background-image: url("obssd_assets/BUTTON_OVERLAY_OBSSD.jpg");
-  background-color: #000;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  color: #000;
-  font-size: 1.55em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  letter-spacing: 0.04em;
-  margin-top: 10px;
-  margin-bottom: 12px; /* Gap below */
-  border: 0.5px solid #000;
-  border-radius: 0;
-  padding: 0;
-  box-sizing: border-box;
-  outline: none;
-  font-stretch: 150%;
-}
-
-.portfolio-title-bar-text {
-  display: inline-block;
-  transform: scaleX(1.3);
-  transform-origin: center;
-  color: #000;
-  background-color: transparent;
-  background: none;
-}
-
-.portfolio-description {
-  color: #000;
+<style>
+body {
   margin: 0;
-  padding: 2px 10px; /* Tighter padding in the stroke */
-  font-size: 1.05em;
+  background: #F8F5F5;
   font-family: Arial, sans-serif;
-  border: 0.5px solid #000;
-  border-radius: 0;
-  background: none !important;
-  box-sizing: border-box;
-  display: block;
-  width: 100%;      /* Expand stroke outline to full width */
-  text-align: center; /* Center-align the text */
-  font-stretch: 100%;
+  overflow-x: hidden;
 }
 
-    @media (max-width: 500px) {
-      .portfolio-media iframe,
-      .portfolio-title-bar,
-      .portfolio-desc-bar {
-        max-width: 100vw;
-      }
-      .portfolio-description {
-        width: 98%;
-        font-size: 1.12em;
-      }
-    }
-  </style>
+/* PAGE WRAPPER */
+.nav-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ROW ITEM */
+.nav-item {
+  position: relative;
+  width: 100%;
+  height: 33.33vh;
+  min-height: 220px;
+  overflow: hidden;
+  cursor: pointer;
+
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 0.7s ease forwards;
+}
+
+/* BACKGROUND IMAGE */
+.nav-item img.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* DARK OVERLAY FOR TEXT READABILITY */
+.nav-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+
+/* CENTER TEXT LOGO */
+.nav-item img.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 420px;
+  width: 60%;
+  z-index: 2;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* HOVER EFFECTS */
+.nav-item:hover img.bg {
+  transform: scale(1.05);
+  filter: brightness(0.8);
+}
+
+.nav-item:hover img.text {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* CLICK FEEDBACK */
+.nav-item:active {
+  transform: scale(0.99);
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* STAGGER DELAY */
+.nav-item:nth-child(1) { animation-delay: 0.05s; }
+.nav-item:nth-child(2) { animation-delay: 0.15s; }
+.nav-item:nth-child(3) { animation-delay: 0.25s; }
+
+/* MOBILE TWEAK */
+@media (max-width: 600px) {
+  .nav-item {
+    height: 30vh;
+  }
+
+  .nav-item img.text {
+    width: 75%;
+  }
+}
+</style>
 </head>
 
 <body>
-  <!-- Logo at the top -->
-  <div class="logo-container">
-    <a href="https://obssd.online/">
-      <img class="logo-img" src="/obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
-    </a>
+
+<div class="nav-container">
+
+  <!-- SOUNDTRACKS -->
+  <div class="nav-item" onclick="location.href='https://vgen.co/obssd/portfolio'">
+    <img class="bg" src="/obssd_assets/WEB_Soundtracks_Background.jpg">
+    <img class="text" src="/obssd_assets/WEB_Soundtracks_Text.png">
   </div>
 
-  <!-- Portfolio container -->
-  <div class="portfolio-container">
+  <!-- BEATS -->
+  <div class="nav-item" onclick="location.href='https://obssd.online/beats'">
+    <img class="bg" src="/obssd_assets/WEB_Beats_Background.jpg">
+    <img class="text" src="/obssd_assets/WEB_Beats_Text.png">
+  </div>
 
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/248161255?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Mobeats Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Collaboration with @karandip_tatra for Mobeats, created with After Effects, Photoshop
-        </p>
-      </div>
-    </div>
-    
-    <!-- ITEM 1 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/241857001?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Afterlife Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for MOB, created with Blender (EEVEE), UE5, Marvelous Designer, Substance Painter, After Effects,
-        </p>
-      </div>
-    </div>
+  <!-- SONGS -->
+  <div class="nav-item" onclick="window.open('https://soundcloud.com/imobssd', '_blank')">
+    <img class="bg" src="/obssd_assets/WEB_Songs_Background.jpg">
+    <img class="text" src="/obssd_assets/WEB_Songs_Text.png">
+  </div>
 
-    <!-- ITEM 2 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/241856719?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Conic Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Conic created with After Effects, Illustrator and Photoshop
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 3 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/241855803?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Social Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Pareidolia, created with Blender, After Effects, Illustrator and Photoshop
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 4 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/241854851?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Anhedonia Cover Art</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Monkayo, created with Illustrator and Photoshop
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 5 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238548353?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">5K Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo personal project, created with Blender, Marvelous Designer, After Effects, Illustrator and Photoshop. Rendered using Blender Eevee
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 6 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238548071?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Repentance Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Piet, Created with Illustrator and Photoshop
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 7 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238547711?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Conic Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Conic, created with After Effects, Photoshop, Touchdesigner
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 8 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238547537?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">LIH Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for 6astard, created with After Effects, Photoshop
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 9 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238547365?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">GON3 Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Kujo, created with After Effects, Photoshop
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 10 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238547117?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">S3XDEATH Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Ploo, created with After Effects, Touch Designer, Illustrator
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 11 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238546843?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Diamonds Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Glo6, created with After Effects, Photoshop, Illustrator
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 12 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238546541?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Takeover Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for MOB, created with Blender, After Effects, Photoshop, Illustrator
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 13 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238546245?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Laced Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Aub, created with After Effects, Blender
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 14 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/237465653?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Rebirth Visualizer</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for MOB, created with Blender, DAZ, After Effects, Illustrator
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 15 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238546009?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Restless Dreams Cover</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for Angelo Jackson, Created with Illustrator, Photoshop, After Effects
-        </p>
-      </div>
-    </div>
-
-    <!-- ITEM 16 -->
-    <div class="portfolio-item">
-      <div class="portfolio-media">
-        <iframe
-          src="https://www.behance.net/embed/project/238543625?ilo0=1"
-          height="316" width="404" frameborder="0" scrolling="no" allow="clipboard-write" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen style="overflow:hidden;"
-        ></iframe>
-      </div>
-      <div class="portfolio-title-bar">
-        <span class="portfolio-title-bar-text">Phantom Cover</span>
-      </div>
-      <div class="portfolio-desc-bar">
-        <p class="portfolio-description">
-          Solo project for @Monkayo, created with Illustrator, Photoshop
-        </p>
-      </div>
-    </div>
+</div>
 
 </body>
 </html>
