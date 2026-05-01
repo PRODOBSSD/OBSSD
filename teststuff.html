@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VISUALS</title>
+
+<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
+
+<style>
+@font-face {
+  font-family: 'Allegiance';
+  src: url('/obssd_assets/allegiance.otf') format('opentype');
+}
+
+body {
+  margin: 0;
+  background: #F8F5F5;
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+/* LOGO */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.logo-img {
+  max-width: 340px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* GRID */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  padding: 0 40px 40px;
+}
+
+/* ITEM */
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* IMAGE WRAPPER */
+.thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+/* HOVER OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.9em;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.thumb:hover img {
+  filter: brightness(70%);
+}
+
+.thumb:hover .overlay {
+  opacity: 1;
+}
+
+/* META INFO */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75em;
+  margin-top: 6px;
+}
+
+.title {
+  font-family: 'Allegiance';
+  font-size: 0.85em;
+}
+
+.date {
+  text-align: center;
+  flex: 1;
+}
+
+.type {
+  text-align: right;
+}
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.lightbox.active {
+  display: flex;
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo-container">
+  <a href="https://obssd.online/">
+    <img src="/obssd_assets/OBSSD_LOGO.png" class="logo-img">
+  </a>
+</div>
+
+<div class="gallery">
+
+  <!-- ITEM (IMAGE ONLY) -->
+  <div class="item">
+    <div class="thumb" onclick="openLightbox('/obssd_work/work1.jpg')">
+      <img src="/obssd_work/work1.jpg">
+      <div class="overlay">click to view</div>
+    </div>
+    <div class="meta">
+      <div class="title">Mobeats Visualizer</div>
+      <div class="date">2025</div>
+      <div class="type">Animation</div>
+    </div>
+  </div>
+
+  <!-- ITEM (EXTERNAL LINK) -->
+  <div class="item">
+    <div class="thumb" onclick="openLink('https://youtube.com/')">
+      <img src="/obssd_work/work2.jpg">
+      <div class="overlay">click to view</div>
+    </div>
+    <div class="meta">
+      <div class="title">Afterlife Visualizer</div>
+      <div class="date">2025</div>
+      <div class="type">3D</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img">
+</div>
+
+<script>
+function openLightbox(src) {
+  const box = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  box.classList.add('active');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+
+function openLink(url) {
+  window.open(url, '_blank');
+}
+</script>
+
+</body>
+</html>
