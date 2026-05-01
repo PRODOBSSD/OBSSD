@@ -3,83 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MUSIC</title>
+<title>STORE</title>
 
 <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
 
 <style>
+@font-face {
+  font-family: 'Allegiance';
+  src: url('/obssd_assets/allegiance.otf') format('opentype');
+}
+
 body {
   margin: 0;
   background: #F8F5F5;
   font-family: Arial, sans-serif;
-  overflow-x: hidden;
+  color: #000;
+  padding: 30px 40px 0;
 }
 
-/* PAGE WRAPPER */
-.nav-container {
-  width: 100%;
+/* LOGO */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.logo-img {
+  max-width: 340px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* GRID (FULL WIDTH LIKE VISUALS) */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+/* PRODUCT ITEM */
+.product-card {
   display: flex;
   flex-direction: column;
-}
-
-/* ROW ITEM */
-.nav-item {
-  position: relative;
-  width: 100%;
-  height: 33.33vh;
-  min-height: 220px;
-  overflow: hidden;
-  cursor: pointer;
 
   opacity: 0;
-  transform: translateY(25px);
-  animation: fadeUp 0.7s ease forwards;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+
+  transition: transform 0.2s ease;
 }
 
-/* BACKGROUND IMAGE */
-.nav-item img.bg {
-  position: absolute;
-  inset: 0;
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* IMAGE */
+.product-image {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  transition: transform 0.4s ease, filter 0.4s ease;
+  display: block;
+  cursor: pointer;
 }
 
-/* DARK OVERLAY FOR TEXT READABILITY */
-.nav-item::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0);
-  z-index: 1;
+/* TITLE BUTTON (kept your style but cleaner) */
+.product-name-btn {
+  width: 100%;
+  aspect-ratio: 758 / 112;
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  background-image: url("obssd_assets/BUTTON_OVERLAY_OBSSD.jpg");
+  background-size: cover;
+  background-position: center;
+
+  border: 0.5px solid #000;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
-/* CENTER TEXT LOGO */
-.nav-item img.text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 720px;
-  width: 60%;
-  z-index: 2;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+.product-name-btn-text {
+  font-family: 'Allegiance';
+  font-size: 1.1em;
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
 }
 
-/* HOVER EFFECTS */
-.nav-item:hover img.bg {
-  transform: scale(1.05);
-  filter: brightness(0.8);
+/* FOOTER */
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
 }
 
-.nav-item:hover img.text {
-  transform: translate(-50%, -50%) scale(1.05);
+/* PRICE (vertical stretch like visuals meta) */
+.price span {
+  display: inline-block;
+  transform: scaleY(1.3);
+  transform-origin: center;
+  font-size: 0.9em;
 }
 
-/* CLICK FEEDBACK */
-.nav-item:active {
-  transform: scale(0.99);
+/* BUTTON */
+.demo-btn {
+  background: none;
+  border: 0.5px solid #000;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 0.8em;
 }
 
 /* ANIMATION */
@@ -90,47 +130,81 @@ body {
   }
 }
 
-/* STAGGER DELAY */
-.nav-item:nth-child(1) { animation-delay: 0.05s; }
-.nav-item:nth-child(2) { animation-delay: 0.15s; }
-.nav-item:nth-child(3) { animation-delay: 0.25s; }
+/* STAGGER */
+.product-card:nth-child(1) { animation-delay: 0.05s; }
+.product-card:nth-child(2) { animation-delay: 0.1s; }
+.product-card:nth-child(3) { animation-delay: 0.15s; }
+.product-card:nth-child(4) { animation-delay: 0.2s; }
+.product-card:nth-child(5) { animation-delay: 0.25s; }
+.product-card:nth-child(6) { animation-delay: 0.3s; }
 
-/* MOBILE TWEAK */
-@media (max-width: 600px) {
-  .nav-item {
-    height: 30vh;
-  }
-
-  .nav-item img.text {
-    width: 75%;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<div class="nav-container">
+<!-- LOGO -->
+<div class="logo-container">
+  <a href="https://obssd.online/">
+    <img src="obssd_assets/OBSSD_LOGO.png" class="logo-img">
+  </a>
+</div>
 
-  <!-- SOUNDTRACKS -->
-  <div class="nav-item" onclick="location.href='https://vgen.co/obssd/portfolio'">
-    <img class="bg" src="/obssd_assets/WEB_Soundtracks_Background.jpg">
-    <img class="text" src="/obssd_assets/WEB_Soundtracks_Text.png">
+<!-- GRID -->
+<div class="product-grid">
+
+  <!-- ITEM -->
+  <div class="product-card">
+    <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1je101kbl1nso6nrlk6vfl18261a.jpg">
+    <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/eAOqc', '_blank')">
+      <span class="product-name-btn-text">AFTERLIFE - Drum Kit</span>
+    </button>
+    <div class="product-footer">
+      <div class="price"><span>$29.99</span></div>
+      <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=ou7k948SDCk', '_blank')">PREVIEW</button>
+    </div>
   </div>
 
-  <!-- BEATS -->
-  <div class="nav-item" onclick="location.href='https://obssd.online/beats'">
-    <img class="bg" src="/obssd_assets/WEB_Beats_Background.jpg">
-    <img class="text" src="/obssd_assets/WEB_Beats_Text.png">
+  <div class="product-card">
+    <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1ip0g986k1dajkvbs4j6vo85110.jpg">
+    <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/wn5aG', '_blank')">
+      <span class="product-name-btn-text">REBIRTH - Drum Kit</span>
+    </button>
+    <div class="product-footer">
+      <div class="price"><span>$24.99</span></div>
+      <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=2FOAM6TxeaU', '_blank')">PREVIEW</button>
+    </div>
   </div>
 
-  <!-- SONGS -->
-  <div class="nav-item" onclick="window.open('https://soundcloud.com/imobssd', '_blank')">
-    <img class="bg" src="/obssd_assets/WEB_Songs_Background.jpg">
-    <img class="text" src="/obssd_assets/WEB_Songs_Text.png">
+  <div class="product-card">
+    <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ivup4icn16rr3a4if0gbu1up810.jpg">
+    <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DL_6Z46zVBd/', '_blank')">
+      <span class="product-name-btn-text">TAKEOVER - Loop Kit</span>
+    </button>
+    <div class="product-footer">
+      <div class="price"><span>FREE</span></div>
+      <button class="demo-btn" onclick="window.open('https://www.youtube.com/watch?v=2GKE7hhT-94', '_blank')">PREVIEW</button>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img class="product-image" src="obssd_assets/5K @imobssd.png">
+    <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DQI0S1yEltV/', '_blank')">
+      <span class="product-name-btn-text">5K - Drum Kit</span>
+    </button>
+    <div class="product-footer">
+      <div class="price"><span>FREE</span></div>
+      <button class="demo-btn" onclick="window.open('https://www.instagram.com/p/DQI0S1yEltV/', '_blank')">PREVIEW</button>
+    </div>
   </div>
 
 </div>
+
+<script>
+document.querySelectorAll('.product-card').forEach((el, i) => {
+  el.style.animationDelay = (i * 0.05) + 's';
+});
+</script>
 
 </body>
 </html>
