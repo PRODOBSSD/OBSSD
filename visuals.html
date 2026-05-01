@@ -106,8 +106,8 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  color: #3a3a3a;
-  font-size: 1.11em;
+  color: #000;
+  font-size: 1.35em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,13 +120,14 @@
   padding: 0;
   box-sizing: border-box;
   outline: none;
+  font-stretch: 110%;
 }
 
 .portfolio-description {
-  color: #444;
+  color: #000;
   margin: 0;
   padding: 2px 10px; /* Tighter padding in the stroke */
-  font-size: 1em;
+  font-size: 1.15em;
   border: 0.5px solid #000;
   border-radius: 0;
   background: none !important;
@@ -134,6 +135,7 @@
   display: block;
   width: 100%;      /* Expand stroke outline to full width */
   text-align: center; /* Center-align the text */
+  font-stretch: 105%;
 }
 
     @media (max-width: 500px) {
@@ -144,7 +146,7 @@
       }
       .portfolio-description {
         width: 98%;
-        font-size: 0.98em;
+        font-size: 1.12em;
       }
     }
   </style>
