@@ -72,6 +72,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block; /* removes gap under image */
   transition: transform 0.4s ease, filter 0.3s ease;
 }
 
@@ -94,7 +95,7 @@ body {
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 0.9em;
+  font-size: 0.85em;
   opacity: 0;
   transform: translateY(10px);
   transition: all 0.3s ease;
@@ -108,42 +109,47 @@ body {
 /* META */
 .meta {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   font-size: 0.75em;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
-.meta span {
-  display: inline-block;
-  transform: scaleX(1.5);
-  transform-origin: center;
-  font-weight: bold;
-  letter-spacing: 0.05em;
+/* FIXED ALIGNMENT SYSTEM */
+.title, .date, .type {
+  flex: 1;
+  overflow: hidden;
 }
 
-/* TITLE */
 .title {
+  text-align: left;
   font-family: 'Allegiance';
-  font-size: 0.85em;
+  font-size: 1em; /* increased */
 }
 
-.title span {
-  display: inline-block;
-  transform: scaleX(1.5);
-  transform-origin: center;
-}
-
-/* ALIGNMENT */
 .date {
   text-align: center;
-  flex: 1;
 }
 
 .type {
   text-align: right;
 }
 
-/* LIGHTBOX */
+/* STRETCH TEXT WITHOUT BREAKING ALIGNMENT */
+.title span,
+.meta span {
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
+  white-space: nowrap;
+}
+
+/* ARIAL BOLD */
+.meta span {
+  font-weight: bold;
+  letter-spacing: 0.04em;
+}
+
+/* LIGHTBOX (no scale effect now) */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -166,12 +172,6 @@ body {
 .lightbox img {
   max-width: 90%;
   max-height: 90%;
-  transform: scale(0.9);
-  transition: transform 0.25s ease;
-}
-
-.lightbox.active img {
-  transform: scale(1);
 }
 
 /* ANIMATION */
@@ -196,9 +196,9 @@ body {
 
   <!-- IMAGE ITEM -->
   <div class="item">
-    <div class="thumb" onclick="openLightbox('/obssd_work/work1.jpg')">
-      <img src="/obssd_work/mobeats test.jpg">
-      <div class="overlay">click to view</div>
+    <div class="thumb" onclick="openLightbox(this)">
+      <img src="/obssd_work/work1.jpg">
+      <div class="overlay">VIEW</div>
     </div>
     <div class="meta">
       <div class="title"><span>Mobeats Visualizer</span></div>
@@ -209,9 +209,9 @@ body {
 
   <!-- LINK ITEM -->
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=lieJZmy6R0I')">
-      <img src="/obssd_work/mobeats test.jpg">
-      <div class="overlay">click to view</div>
+    <div class="thumb" onclick="openLink('https://youtube.com/')">
+      <img src="/obssd_work/work2.jpg">
+      <div class="overlay">VIEW</div>
     </div>
     <div class="meta">
       <div class="title"><span>Afterlife Visualizer</span></div>
@@ -228,10 +228,12 @@ body {
 </div>
 
 <script>
-function openLightbox(src) {
+function openLightbox(el) {
+  const img = el.querySelector('img');
   const box = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  img.src = src;
+  const lightImg = document.getElementById('lightbox-img');
+
+  lightImg.src = img.src; // uses same image automatically
   box.classList.add('active');
 }
 
