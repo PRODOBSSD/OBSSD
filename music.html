@@ -1,105 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSIC</title>
 
-  gtag('config', 'G-NLWC8KV66N');
-</script>
-  <meta charset="UTF-8">
-  <meta name="description" content="Beats created by New Zealand based producer and visual artist OBSSD">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MUSIC</title>
-  <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
-  <link rel="stylesheet" href="obssd_shared/custom.css">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background: #181818;
-      overflow: hidden;
-    }
-    body {
-      width: 100vw;
-      height: 100vh;
-      min-height: 100vh;
-      min-width: 100vw;
-      box-sizing: border-box;
-    }
-    .beatstars-embed {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #222;
-      z-index: 1;
-    }
-    .beatstars-embed iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      margin: 0;
-      padding: 0;
-      display: block;
-    }
-    /* Homepage Link styling */
-    .logo-link {
-      position: fixed;
-      bottom: 16px;
-      left: 16px;
-      z-index: 1000;
-      display: block;
-      background: none;
-      border: none;
-      padding: 0;
-      margin: 0;
-      cursor: pointer;
-    }
-    .logo-link img {
-      width: 56px;
-      height: auto;
-      display: block;
-      border-radius: 6px;
-      box-shadow: none;               /* Remove drop shadow */
-      transition: transform 0.2s;     /* Animate scaling */
-      background: #fff;
-    }
-    .logo-link:hover img, 
-    .logo-link:focus img {
-      transform: scale(1.15);         /* Scale up image on hover/focus */
-      outline: 2px solid #fff;
-    }
-    @media (max-width: 500px) {
-      .logo-link img {
-        width: 40px;
-      }
-      .logo-link {
-        bottom: 8px;
-        left: 8px;
-        top: auto;
-      }
-    }
-  </style>
+<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
+
+<style>
+body {
+  margin: 0;
+  background: #F8F5F5;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* PAGE WRAPPER */
+.nav-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ROW ITEM */
+.nav-item {
+  position: relative;
+  width: 100%;
+  height: 33.33vh;
+  min-height: 220px;
+  overflow: hidden;
+  cursor: pointer;
+
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 0.7s ease forwards;
+}
+
+/* BACKGROUND IMAGE */
+.nav-item img.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* DARK OVERLAY FOR TEXT READABILITY */
+.nav-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  z-index: 1;
+}
+
+/* CENTER TEXT LOGO */
+.nav-item img.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 720px;
+  width: 60%;
+  z-index: 2;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* HOVER EFFECTS */
+.nav-item:hover img.bg {
+  transform: scale(1.05);
+  filter: brightness(0.8);
+}
+
+.nav-item:hover img.text {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* CLICK FEEDBACK */
+.nav-item:active {
+  transform: scale(0.99);
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* STAGGER DELAY */
+.nav-item:nth-child(1) { animation-delay: 0.05s; }
+.nav-item:nth-child(2) { animation-delay: 0.15s; }
+.nav-item:nth-child(3) { animation-delay: 0.25s; }
+
+/* MOBILE TWEAK */
+@media (max-width: 600px) {
+  .nav-item {
+    height: 30vh;
+  }
+
+  .nav-item img.text {
+    width: 75%;
+  }
+}
+</style>
 </head>
+
 <body>
-  <a href="https://www.obssd.online" class="logo-link" title="Go to OBSSD">
-    <img src="obssd_assets/OBSSD_LOGO.png" alt="OBSSD Logo">
-  </a>
-  <div class="beatstars-embed">
-    <iframe 
-      src="https://player.beatstars.com/?storeId=150661"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-    </iframe>
+
+<div class="nav-container">
+
+  <!-- SOUNDTRACKS -->
+  <div class="nav-item" onclick="location.href='https://vgen.co/obssd/portfolio'">
+    <img class="bg" src="/obssd_assets/WEB_Soundtracks_Background.jpg">
+    <img class="text" src="/obssd_assets/WEB_Soundtracks_Text.png">
   </div>
+
+  <!-- BEATS -->
+  <div class="nav-item" onclick="location.href='https://obssd.online/beats'">
+    <img class="bg" src="/obssd_assets/WEB_Beats_Background.jpg">
+    <img class="text" src="/obssd_assets/WEB_Beats_Text.png">
+  </div>
+
+  <!-- SONGS -->
+  <div class="nav-item" onclick="window.open('https://soundcloud.com/imobssd', '_blank')">
+    <img class="bg" src="/obssd_assets/WEB_Songs_Background.jpg">
+    <img class="text" src="/obssd_assets/WEB_Songs_Text.png">
+  </div>
+
+</div>
+
 </body>
+</html>
 </html>
