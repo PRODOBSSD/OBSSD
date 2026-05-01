@@ -74,9 +74,8 @@ body {
   display: block;
 }
 
-/* REMOVE ALL HOVER SCALING */
+/* NO SCALING */
 .thumb:hover img {
-  transform: none;
   filter: brightness(70%);
 }
 
@@ -113,43 +112,33 @@ body {
   gap: 8px;
 }
 
-/* TEXT BLOCKS */
+/* TITLE */
 .title {
   font-family: 'Allegiance';
-  font-size: 1.05em;
+  font-size: 1.25em; /* increased for balance */
 }
 
-.date {
-  text-align: center;
-}
+/* TEXT ALIGNMENT */
+.title { text-align: left; }
+.date { text-align: center; }
+.type { text-align: right; }
 
-.type {
-  text-align: right;
-}
+/* STRETCH SYSTEM */
 
-/* STRETCH TEXT SAFELY */
-.title span,
-.meta span {
+/* Allegiance = horizontal stretch */
+.title span {
   display: inline-block;
   transform: scaleX(1.5);
   transform-origin: left;
   white-space: nowrap;
 }
 
-/* CENTER DATE PROPERLY */
-.date span {
-  transform-origin: center;
-}
-
-/* RIGHT ALIGN TYPE */
-.type span {
-  transform-origin: right;
-}
-
-/* ARIAL BOLD */
+/* Arial = vertical stretch */
 .meta span {
-  font-weight: bold;
-  letter-spacing: 0.04em;
+  display: inline-block;
+  transform: scaleY(1.3);
+  transform-origin: center;
+  white-space: nowrap;
 }
 
 /* LIGHTBOX */
