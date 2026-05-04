@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
+<!-- Google tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-NLWC8KV66N');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-NLWC8KV66N');
 </script>
 
 <meta charset="UTF-8">
 <meta name="description" content="OBSSD is a New Zealand based producer and visual artist.">
 <title>OBSSD</title>
 
-<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
 <link rel="stylesheet" href="obssd_shared/custom.css">
 <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
 
@@ -23,19 +23,25 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   background: none !important;
 }
 body {
+  min-height: 100vh;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
 }
 spline-viewer {
+  flex: 1;
   width: 100vw;
   height: 100vh;
   display: block;
 }
+
+/* TITLE */
 .obssd-title {
   position: fixed;
   top: 20px;
@@ -48,32 +54,55 @@ spline-viewer {
 @media (max-width: 1500px) {
   .obssd-title { display: none !important; }
 }
+
+/* ✅ RESTORED CONTACT SECTION (your original) */
 .contact-section {
   position: fixed;
   right: 16px;
   bottom: 0;
   z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
 }
 .contact-image-container {
   position: relative;
+  display: block;
   width: 320px;
+  pointer-events: auto;
+}
+.contact-image {
+  width: 100%;
+  display: block;
 }
 .contact-links {
   font-family: 'Cascadia Code', monospace;
+  color: #3a3a3a;
   font-size: 1rem;
+  font-weight: 400;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 2%;
+  width: 100%;
   text-align: center;
+  bottom: 2%;
+  pointer-events: auto;
+  line-height: 2.1;
 }
 .contact-links a {
   color: #3a3a3a;
   text-decoration: none;
+  margin: 0 1px;
   font-weight: 700;
 }
 .contact-links a:hover {
   color: #000;
+}
+@media (max-width: 500px) {
+  .contact-section { right: 4px; }
+  .contact-image-container { width: 200px; }
+  .contact-links { bottom: 8%; }
 }
 </style>
 
@@ -83,12 +112,12 @@ spline-viewer {
 <body>
 
 <div class="obssd-title">
-  <img src="obssd_assets/OBSSD_TITLE.png" alt="OBSSD Title">
+  <img src="obssd_assets/OBSSD_TITLE.png">
 </div>
 
 <div class="contact-section">
   <div class="contact-image-container">
-    <img src="obssd_assets/CONTACT_TITLE.png">
+    <img src="obssd_assets/CONTACT_TITLE.png" class="contact-image">
     <div class="contact-links">
       <div>
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=prodobssd@gmail.com&su=To OBSSD" target="_blank">email</a>
@@ -103,21 +132,26 @@ spline-viewer {
   </div>
 </div>
 
-<!-- Spline -->
+<!-- SPLINE -->
 <spline-viewer id="splineScene" url="https://prod.spline.design/85d942QVoJTXmM1Y/scene.splinecode"></spline-viewer>
 
-<!-- Remove Spline logo -->
+<!-- ✅ reusable logo removal -->
 <script>
-const interval = setInterval(() => {
-  const viewer = document.querySelector('spline-viewer');
-  if (viewer && viewer.shadowRoot) {
-    const logo = viewer.shadowRoot.querySelector('#logo');
-    if (logo) {
-      logo.remove();
-      clearInterval(interval);
+function removeSplineLogo() {
+  const interval = setInterval(() => {
+    const viewer = document.querySelector('spline-viewer');
+    if (viewer && viewer.shadowRoot) {
+      const logo = viewer.shadowRoot.querySelector('#logo');
+      if (logo) {
+        logo.remove();
+        clearInterval(interval);
+      }
     }
-  }
-}, 500);
+  }, 500);
+}
+
+// run on first load
+removeSplineLogo();
 </script>
 
 <!-- ✅ FINAL FIX -->
@@ -133,15 +167,15 @@ function restartSpline() {
   newViewer.setAttribute('url', oldViewer.getAttribute('url'));
 
   parent.replaceChild(newViewer, oldViewer);
+
+  // 🔑 re-run logo removal for new instance
+  removeSplineLogo();
 }
 
 window.addEventListener("pageshow", (event) => {
   const navEntry = performance.getEntriesByType("navigation")[0];
 
-  if (
-    event.persisted ||
-    navEntry?.type === "back_forward"
-  ) {
+  if (event.persisted || navEntry?.type === "back_forward") {
     restartSpline();
   }
 });
