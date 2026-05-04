@@ -34,11 +34,18 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+/* ✅ Fade setup */
 spline-viewer {
   flex: 1;
   width: 100vw;
   height: 100vh;
   display: block;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+spline-viewer.loaded {
+  opacity: 1;
 }
 
 /* TITLE */
@@ -55,7 +62,7 @@ spline-viewer {
   .obssd-title { display: none !important; }
 }
 
-/* ✅ RESTORED CONTACT SECTION (your original) */
+/* CONTACT (restored) */
 .contact-section {
   position: fixed;
   right: 16px;
@@ -80,7 +87,6 @@ spline-viewer {
   font-family: 'Cascadia Code', monospace;
   color: #3a3a3a;
   font-size: 1rem;
-  font-weight: 400;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -135,7 +141,7 @@ spline-viewer {
 <!-- SPLINE -->
 <spline-viewer id="splineScene" url="https://prod.spline.design/85d942QVoJTXmM1Y/scene.splinecode"></spline-viewer>
 
-<!-- ✅ reusable logo removal -->
+<!-- Logo removal -->
 <script>
 function removeSplineLogo() {
   const interval = setInterval(() => {
@@ -149,12 +155,25 @@ function removeSplineLogo() {
     }
   }, 500);
 }
-
-// run on first load
 removeSplineLogo();
 </script>
 
-<!-- ✅ FINAL FIX -->
+<!-- Fade-in handler -->
+<script>
+function handleFadeIn(viewer) {
+  // wait a moment for scene to render
+  setTimeout(() => {
+    viewer.classList.add('loaded');
+  }, 300);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const viewer = document.getElementById("splineScene");
+  handleFadeIn(viewer);
+});
+</script>
+
+<!-- Restart logic -->
 <script>
 function restartSpline() {
   const oldViewer = document.getElementById('splineScene');
@@ -168,8 +187,12 @@ function restartSpline() {
 
   parent.replaceChild(newViewer, oldViewer);
 
-  // 🔑 re-run logo removal for new instance
+  // reset fade
+  newViewer.classList.remove('loaded');
+
+  // reapply behaviors
   removeSplineLogo();
+  handleFadeIn(newViewer);
 }
 
 window.addEventListener("pageshow", (event) => {
