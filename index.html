@@ -15,8 +15,8 @@
   <title>OBSSD</title>
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
   <link rel="stylesheet" href="obssd_shared/custom.css">
-  <!-- Load Cascadia Code font from CDN -->
   <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     html, body {
       height: 100%;
@@ -46,34 +46,21 @@
       padding: 0;
       background: none !important;
     }
-    /* Title element styling */
     .obssd-title {
       position: fixed;
       top: 20px;
       left: 0;
       z-index: 1002;
-      margin: 0;
-      padding: 0;
-      background: none !important;
-      border: none;
-      display: block;
     }
     .obssd-title img {
-      display: block;
       width: 380px;
       height: auto;
-      margin: 0;
-      border-radius: 0;
-      box-shadow: none;
-      background: none !important;
     }
     @media (max-width: 1500px) {
       .obssd-title {
         display: none !important;
       }
     }
-
-    /* Contact section styling (new) */
     .contact-section {
       position: fixed;
       right: 16px;
@@ -82,98 +69,51 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: none !important;
-      margin: 0;
-      padding: 0;
       pointer-events: none;
     }
     .contact-image-container {
       position: relative;
-      display: block;
       width: 320px;
-      background: none !important;
       pointer-events: auto;
     }
     .contact-image {
       width: 100%;
-      display: block;
-      margin: 0;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-      background: transparent !important;
-      pointer-events: auto;
     }
     .contact-links {
       font-family: 'Cascadia Code', monospace;
       color: #3a3a3a;
-      font-size: 1.0rem;
-      font-weight: 400;
+      font-size: 1rem;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
       text-align: center;
-      /* move further down, towards lower third (use bottom: 14% for more space) */
       bottom: 2%;
       pointer-events: auto;
-      background: none !important;
-      margin: 0;
-      padding: 0;
       line-height: 2.1;
-      user-select: text;
-    }
-    .contact-links div {
-      background: none !important;
     }
     .contact-links a {
       color: #3a3a3a;
       text-decoration: none;
-      margin: 0 1px;
-      transition: color 0.2s;
-      cursor: pointer;
       font-weight: 700;
-      font-family: 'Cascadia Code', monospace;
-      font-size: 1.0rem;
-      background: none !important;
-      pointer-events: auto;
     }
-    .contact-links a:hover,
-    .contact-links a:focus {
-      color: #000000;
-      outline: none;
-      background: none !important;
-    }
-    @media (max-width: 500px) {
-      .contact-section {
-        right: 4px;
-      }
-      .contact-image-container {
-        width: 200px;
-      }
-      .contact-links a {
-        font-size: 1rem;
-        margin: 0 6px;
-      }
-      .contact-links {
-        font-size: 1rem;
-        bottom: 8%;
-      }
+    .contact-links a:hover {
+      color: #000;
     }
   </style>
+
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.2/build/spline-viewer.js"></script>
 </head>
+
 <body>
 
-  <!-- Title element in top left (replaces old home button) -->
   <div class="obssd-title">
     <img src="obssd_assets/OBSSD_TITLE.png" alt="OBSSD Title">
   </div>
-  
-  <!-- Contact section bottom right -->
+
   <div class="contact-section">
     <div class="contact-image-container">
-      <img src="obssd_assets/CONTACT_TITLE.png" alt="Contact" class="contact-image">
+      <img src="obssd_assets/CONTACT_TITLE.png" class="contact-image">
       <div class="contact-links">
         <div>
           <a href="https://mail.google.com/mail/?view=cm&fs=1&to=prodobssd@gmail.com&su=To OBSSD" target="_blank">email</a>
@@ -188,10 +128,10 @@
     </div>
   </div>
 
-  <!-- 3D Spline model -->
-  <spline-viewer url="https://prod.spline.design/85d942QVoJTXmM1Y/scene.splinecode"loading='eager'></spline-viewer>
+  <!-- Spline viewer -->
+  <spline-viewer id="splineScene" url="https://prod.spline.design/85d942QVoJTXmM1Y/scene.splinecode"></spline-viewer>
 
-  <!-- Theoretical watermark removal script -->
+  <!-- Remove Spline logo -->
   <script>
     const interval = setInterval(() => {
       const viewer = document.querySelector('spline-viewer');
@@ -203,6 +143,26 @@
         }
       }
     }, 500);
+  </script>
+
+  <!-- ✅ FIX: Restart animation on back navigation -->
+  <script>
+    function restartSpline() {
+      const viewer = document.getElementById('splineScene');
+      if (viewer) {
+        const currentURL = viewer.getAttribute('url');
+        viewer.setAttribute('url', ''); // clear
+        setTimeout(() => {
+          viewer.setAttribute('url', currentURL); // reload scene
+        }, 50);
+      }
+    }
+
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted) {
+        restartSpline();
+      }
+    });
   </script>
 
 </body>
