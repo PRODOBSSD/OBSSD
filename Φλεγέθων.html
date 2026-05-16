@@ -16,3 +16,91 @@ gtag('config', 'G-NLWC8KV66N');
 <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
 <link rel="stylesheet" href="obssd_shared/custom.css">
 <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ✅ Fade setup */
+spline-viewer {
+  flex: 1;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+spline-viewer.loaded {
+  opacity: 1;
+}
+</style>
+  
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.2/build/spline-viewer.js"></script>
+</head>
+
+<body>
+<!-- SPLINE -->
+<spline-viewer id="splineScene" url="https://prod.spline.design/OZmIiiTAh2CeM1bU/scene.splinecode"></spline-viewer>
+
+<!-- Logo removal -->
+<script>
+function removeSplineLogo() {
+  const interval = setInterval(() => {
+    const viewer = document.querySelector('spline-viewer');
+    if (viewer && viewer.shadowRoot) {
+      const logo = viewer.shadowRoot.querySelector('#logo');
+      if (logo) {
+        logo.remove();
+        clearInterval(interval);
+      }
+    }
+  }, 500);
+}
+removeSplineLogo();
+</script>
+
+<!-- Fade-in handler -->
+<script>
+function handleFadeIn(viewer) {
+  // wait a moment for scene to render
+  setTimeout(() => {
+    viewer.classList.add('loaded');
+  }, 300);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const viewer = document.getElementById("splineScene");
+  handleFadeIn(viewer);
+});
+</script>
+
+<!-- Restart logic -->
+<script>
+function restartSpline() {
+  const oldViewer = document.getElementById('splineScene');
+  if (!oldViewer) return;
+
+  const parent = oldViewer.parentNode;
+  const newViewer = document.createElement('spline-viewer');
+
+  newViewer.setAttribute('id', 'splineScene');
+  newViewer.setAttribute('url', oldViewer.getAttribute('url'));
+
+  parent.replaceChild(newViewer, oldViewer);
+
+  // reset fade
+  newViewer.classList.remove('loaded');
+
+  // reapply behaviors
+  removeSplineLogo();
+  handleFadeIn(newViewer);
+}
+
+window.addEventListener("pageshow", (event) => {
+  const navEntry = performance.getEntriesByType("navigation")[0];
+
+  if (event.persisted || navEntry?.type === "back_forward") {
+    restartSpline();
+  }
+});
+</script>
+
+</body>
+</html>
