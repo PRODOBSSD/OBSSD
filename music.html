@@ -2,107 +2,161 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Music portfolio">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>MUSIC</title>
 
-<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
+<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
 
 <style>
+@font-face {
+  font-family: 'Allegiance';
+  src: url('/obssd_assets/allegiance.otf') format('opentype');
+}
+
 body {
   margin: 0;
   background: #fdfdfd;
   font-family: Arial, sans-serif;
-  overflow-x: hidden;
+  color: #000;
 }
 
-/* PAGE WRAPPER */
-.nav-container {
-  width: 100%;
+/* LOGO */
+.logo-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  padding: 30px 0;
 }
 
-/* ROW ITEM */
-.nav-item {
-  position: relative;
+.logo-img {
+  max-width: 340px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* SECTION TITLE */
+.section-title {
+  padding: 10px 40px 0;
+  font-family: 'Allegiance';
+  font-size: 1.6em;
+}
+
+.section-title span {
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: left;
+  white-space: nowrap;
+}
+
+/* =========================
+   RESPONSIVE GRID (FIXED)
+========================= */
+
+.carousel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  padding: 20px 40px 40px;
+}
+
+/* CARD */
+.card {
   width: 100%;
-  height: 33.33vh;
-  min-height: 220px;
+  aspect-ratio: 1 / 1;
+  position: relative;
   overflow: hidden;
+  background: #000;
   cursor: pointer;
 
+  /* fade-up animation base */
   opacity: 0;
-  transform: translateY(25px);
-  animation: fadeUp 0.7s ease forwards;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+  transition: transform 0.2s ease;
 }
 
-/* BACKGROUND IMAGE */
-.nav-item img.bg {
-  position: absolute;
-  inset: 0;
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* iframe */
+.card iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease, filter 0.4s ease;
+  border: none;
+  display: block;
 }
 
-/* DARK OVERLAY FOR TEXT READABILITY */
-.nav-item::before {
-  content: "";
+/* overlay (optional future use) */
+.overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0);
-  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  font-size: 0.8em;
+  opacity: 0;
+  transition: 0.2s;
 }
 
-/* CENTER TEXT LOGO */
-.nav-item img.text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 720px;
-  width: 60%;
-  z-index: 2;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+.card:hover .overlay {
+  opacity: 1;
 }
 
-/* HOVER EFFECTS */
-.nav-item:hover img.bg {
-  transform: scale(1.05);
-  filter: brightness(0.8);
+/* BEATSTARS */
+.beatstars-section {
+  padding: 20px 40px 70px;
 }
 
-.nav-item:hover img.text {
-  transform: translate(-50%, -50%) scale(1.05);
+.beatstars-embed {
+  width: 100%;
+  height: 72vh;
+  min-height: 520px;
+  max-height: 780px;
 }
 
-/* CLICK FEEDBACK */
-.nav-item:active {
-  transform: scale(0.99);
+.beatstars-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
-/* ANIMATION */
+/* SOCIALS */
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 40px 0 60px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.socials a {
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  transform: scaleY(1.25);
+  transition: 0.2s;
+}
+
+.socials a:hover {
+  opacity: 0.5;
+}
+
+/* =========================
+   ANIMATION (MATCH VISUALS PAGE)
+========================= */
+
 @keyframes fadeUp {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* STAGGER DELAY */
-.nav-item:nth-child(1) { animation-delay: 0.05s; }
-.nav-item:nth-child(2) { animation-delay: 0.15s; }
-.nav-item:nth-child(3) { animation-delay: 0.25s; }
-
-/* MOBILE TWEAK */
-@media (max-width: 600px) {
-  .nav-item {
-    height: 30vh;
-  }
-
-  .nav-item img.text {
-    width: 75%;
   }
 }
 </style>
@@ -110,27 +164,65 @@ body {
 
 <body>
 
-<div class="nav-container">
+<!-- LOGO -->
+<div class="logo-container">
+  <a href="https://obssd.online/">
+    <img src="/obssd_assets/OBSSD_LOGO.png" class="logo-img">
+  </a>
+</div>
 
-  <!-- SOUNDTRACKS -->
-  <div class="nav-item" onclick="window.open('https://vgen.co/obssd/portfolio', '_blank')">
-    <img class="bg" src="/obssd_assets/WEB_Soundtracks_Background.jpg">
-    <img class="text" src="/obssd_assets/WEB_Soundtracks_Text.png">
-  </div>
+<!-- COMMISSIONS -->
+<div class="section-title"><span>MUSIC COMMISSIONS</span></div>
 
-  <!-- BEATS -->
-  <div class="nav-item" onclick="location.href='https://obssd.online/beats'">
-    <img class="bg" src="/obssd_assets/WEB_Beats_Background.jpg">
-    <img class="text" src="/obssd_assets/WEB_Beats_Text.png">
-  </div>
+<div class="carousel">
 
-  <!-- SONGS -->
-  <div class="nav-item" onclick="window.open('https://soundcloud.com/imobssd', '_blank')">
-    <img class="bg" src="/obssd_assets/WEB_Songs_Background.jpg">
-    <img class="text" src="/obssd_assets/WEB_Songs_Text.png">
-  </div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/pgJQw0UT2oo?si=sgGayW7p-Ds0SHlY" allowfullscreen></iframe>
+</div>
+
+<div class="card">
+<iframe src="https://www.youtube.com/embed/hvbJdreAlu4?si=cGBX7mVOyzdfwnAe" allowfullscreen></iframe>
+</div>
+
+<div class="card">
+<iframe src="https://www.youtube.com/embed/CGVWFii0uJY?si=Gp3rqeGfJYKbgPmu" allowfullscreen></iframe>
+</div>
+
+<div class="card">
+<iframe src="https://www.youtube.com/embed/CwgNxq1GEng?rel=0" allowfullscreen></iframe>
+</div>
+
+<div class="card">
+<iframe src="https://www.youtube.com/embed/49euGyoaeMw?si=K-9ksIwy5ZVaT--1" allowfullscreen></iframe>
+</div>
 
 </div>
+
+<!-- BEAT STORE -->
+<div class="section-title"><span>BEAT STORE</span></div>
+
+<div class="beatstars-section">
+  <div class="beatstars-embed">
+    <iframe 
+      src="https://player.beatstars.com/?storeId=150661"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
+  </div>
+</div>
+
+<!-- SOCIALS -->
+<div class="socials">
+  <a href="https://open.spotify.com/playlist/6cWZXi335BhWjRNyJPgFmn?si=00937e0127194d4c" target="_blank">SPOTIFY</a>
+  <a href="https://soundcloud.com/imobssd" target="_blank">SOUNDCLOUD</a>
+  <a href="https://vgen.co/obssd" target="_blank">VGEN</a>
+</div>
+
+<script>
+/* STAGGER FADE-UP (like VISUALS page) */
+document.querySelectorAll('.card').forEach((el, i) => {
+  el.style.animationDelay = (i * 0.08) + 's';
+});
+</script>
 
 </body>
 </html>
