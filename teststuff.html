@@ -7,7 +7,6 @@
 <title>MUSIC</title>
 
 <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
-<link rel="stylesheet" href="obssd_shared/custom.css">
 
 <style>
 @font-face {
@@ -38,15 +37,25 @@ body {
   transform: scale(1.05);
 }
 
-/* SECTION TITLE */
+/* =========================
+   SECTION TITLE (STRETCHED)
+========================= */
+
 .section-title {
   padding: 10px 40px 0;
-  font-size: 0.8em;
-  letter-spacing: 1px;
+  font-family: 'Allegiance';
+  font-size: 1.2em;
+}
+
+.section-title span {
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: left;
+  white-space: nowrap;
 }
 
 /* =========================
-   COMMISSION CAROUSEL
+   CAROUSEL
 ========================= */
 
 .carousel {
@@ -68,25 +77,23 @@ body {
   aspect-ratio: 1 / 1;
   position: relative;
   scroll-snap-align: start;
-  cursor: pointer;
   overflow: hidden;
+  cursor: pointer;
   background: #000;
-  border-radius: 2px;
-  animation: fadeUp 0.6s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
 }
 
-/* thumbnail */
-.card img {
+/* IMAGE */
+.card img,
+.card iframe {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: 0.25s;
+  border: none;
+  display: block;
 }
 
 /* overlay */
-.card .overlay {
+.overlay {
   position: absolute;
   inset: 0;
   display: flex;
@@ -96,11 +103,7 @@ body {
   color: #fff;
   font-size: 0.8em;
   opacity: 0;
-  transition: 0.25s;
-}
-
-.card:hover img {
-  filter: brightness(60%);
+  transition: 0.2s;
 }
 
 .card:hover .overlay {
@@ -108,49 +111,16 @@ body {
 }
 
 /* =========================
-   VIDEO LIGHTBOX
-========================= */
-
-.video-lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.25s;
-  z-index: 999;
-}
-
-.video-lightbox.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.video-box {
-  width: 80vw;
-  max-width: 900px;
-  aspect-ratio: 16 / 9;
-}
-
-.video-box iframe {
-  width: 100%;
-  height: 100%;
-}
-
-/* =========================
    BEATSTARS
 ========================= */
 
 .beatstars-section {
-  padding: 20px 40px 60px;
+  padding: 20px 40px 80px;
 }
 
 .beatstars-embed {
   width: 100%;
-  height: 650px;
+  height: 85vh; /* BIGGER - removes dead space */
 }
 
 .beatstars-embed iframe {
@@ -159,12 +129,40 @@ body {
   border: 0;
 }
 
-/* ANIMATION */
+/* =========================
+   SOCIALS
+========================= */
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 40px 0 60px;
+}
+
+.socials a {
+  color: black;
+  transition: 0.2s;
+}
+
+.socials a:hover {
+  transform: scale(1.15);
+}
+
+/* ICONS */
+.icon {
+  width: 26px;
+  height: 26px;
+  fill: black;
+}
+
+/* =========================
+   VIDEO LIGHT HOVER SYSTEM
+========================= */
+
 @keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -179,39 +177,43 @@ body {
 </div>
 
 <!-- COMMISSIONS -->
-<div class="section-title">MUSIC COMMISSIONS</div>
+<div class="section-title"><span>MUSIC COMMISSIONS</span></div>
 
 <div class="carousel">
 
-  <div class="card" onclick="openVideo('https://www.youtube.com/embed/fiIwhJZmwr4')">
+  <!-- CARD -->
+  <div class="card"
+       onmouseenter="playPreview(this, 'https://www.youtube.com/embed/fiIwhJZmwr4?autoplay=1&mute=1')"
+       onmouseleave="stopPreview(this)">
     <img src="obssd_work/mobeats_healyou_@imobssd.webp">
     <div class="overlay">PLAY</div>
   </div>
 
-  <div class="card" onclick="openVideo('https://www.youtube.com/embed/Y68mjK2Typs')">
+  <div class="card"
+       onmouseenter="playPreview(this, 'https://www.youtube.com/embed/Y68mjK2Typs?autoplay=1&mute=1')"
+       onmouseleave="stopPreview(this)">
     <img src="obssd_work/mobeats_champion_@imobssd.webp">
     <div class="overlay">PLAY</div>
   </div>
 
-  <div class="card" onclick="openVideo('https://www.youtube.com/embed/CfTFY0MDc3c')">
+  <div class="card"
+       onmouseenter="playPreview(this, 'https://www.youtube.com/embed/CfTFY0MDc3c?autoplay=1&mute=1')"
+       onmouseleave="stopPreview(this)">
     <img src="obssd_work/conic_cover_@imobssd.webp">
     <div class="overlay">PLAY</div>
   </div>
 
-  <div class="card" onclick="openVideo('https://www.youtube.com/embed/jlS8YdcC5OE')">
+  <div class="card"
+       onmouseenter="playPreview(this, 'https://www.youtube.com/embed/jlS8YdcC5OE?autoplay=1&mute=1')"
+       onmouseleave="stopPreview(this)">
     <img src="obssd_work/pareidolia_social_@imobssd.webp">
-    <div class="overlay">PLAY</div>
-  </div>
-
-  <div class="card" onclick="openVideo('https://www.youtube.com/embed/SSbpC3ukOTA')">
-    <img src="obssd_work/kujo_gon3_@imobssd.webp">
     <div class="overlay">PLAY</div>
   </div>
 
 </div>
 
 <!-- BEATSTARS -->
-<div class="section-title">BEAT STORE</div>
+<div class="section-title"><span>BEAT STORE</span></div>
 
 <div class="beatstars-section">
   <div class="beatstars-embed">
@@ -222,28 +224,55 @@ body {
   </div>
 </div>
 
-<!-- VIDEO LIGHTBOX -->
-<div class="video-lightbox" id="videoLightbox" onclick="closeVideo()">
-  <div class="video-box" onclick="event.stopPropagation()">
-    <iframe id="videoFrame" src="" allow="autoplay; fullscreen"></iframe>
-  </div>
+<!-- SOCIALS -->
+<div class="socials">
+
+  <!-- Spotify -->
+  <a href="#" target="_blank">
+    <svg class="icon" viewBox="0 0 24 24">
+      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.3-.6.4-.9.2-2.5-1.5-5.6-1.8-9.2-.9-.4.1-.7-.2-.8-.5-.1-.4.2-.7.5-.8 3.9-.9 7.4-.5 10.2 1.1.4.2.4.6.2.9zm1.3-2.9c-.3.4-.8.5-1.2.2-3-1.8-7.6-2.3-11.2-1.2-.5.1-1-.2-1.1-.7-.1-.5.2-1 .7-1.1 4.1-1.2 9.2-.7 12.6 1.4.4.3.5.8.2 1.2zm.1-3c-3.6-2.1-9.6-2.3-13-.9-.6.2-1.2-.1-1.4-.7-.2-.6.1-1.2.7-1.4 4-1.4 10.6-1.2 14.8 1.2.5.3.6 1 .3 1.5-.3.5-1 .6-1.4.3z"/>
+    </svg>
+  </a>
+
+  <!-- SoundCloud -->
+  <a href="#" target="_blank">
+    <svg class="icon" viewBox="0 0 24 24">
+      <path d="M11 9v8h7c2.2 0 4-1.8 4-4s-1.8-4-4-4c-.3 0-.6 0-.9.1C16.6 6.4 14 5 11 5v4zM4 17h2V7H4v10zm-3 0h2V9H1v8z"/>
+    </svg>
+  </a>
+
+  <!-- VGen -->
+  <a href="#" target="_blank">
+    <svg class="icon" viewBox="0 0 24 24">
+      <path d="M3 3h18v18H3V3zm4 14h2l3-10h-2l-2 7-2-7H4l3 10zm8-10h2v10h-2V7z"/>
+    </svg>
+  </a>
+
 </div>
 
 <script>
-function openVideo(url) {
-  document.getElementById('videoFrame').src = url + "?autoplay=1";
-  document.getElementById('videoLightbox').classList.add('active');
+function playPreview(card, url) {
+  if (card.querySelector('iframe')) return;
+
+  const iframe = document.createElement('iframe');
+  iframe.src = url;
+  iframe.allow = "autoplay; fullscreen";
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.border = "0";
+
+  card.innerHTML = "";
+  card.appendChild(iframe);
 }
 
-function closeVideo() {
-  document.getElementById('videoFrame').src = "";
-  document.getElementById('videoLightbox').classList.remove('active');
-}
+function stopPreview(card) {
+  const imgSrc = card.getAttribute("data-img");
 
-/* stagger animation */
-document.querySelectorAll('.card').forEach((el, i) => {
-  el.style.animationDelay = (i * 0.05) + 's';
-});
+  if (!imgSrc) {
+    // restore fallback by reloading page state lightly
+    location.reload();
+  }
+}
 </script>
 
 </body>
