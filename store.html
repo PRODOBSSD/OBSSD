@@ -117,6 +117,7 @@ body {
 /* TITLE BUTTON */
 .product-name-btn {
   width: 100%;
+  height: 100%;
   aspect-ratio: 755 / 220;
 
   background-size: 100% 100%;
@@ -142,16 +143,22 @@ body {
 .product-name-btn-text {
   font-family: 'Allegiance';
 
+  /* Resizes naturally like price text */
   font-size: clamp(1.4rem, 1.7vw, 2.4rem);
+
+  display: inline-block;
+
+  transform: scaleX(1.45);
 
   color: #000;
   text-align: center;
 
+  /* Slightly lower positioning */
+  position: relative;
+  top: 5%;
+
   line-height: 1;
   white-space: nowrap;
-
-  position: relative;
-  top: 3%;
 }
 
 /* FOOTER */
@@ -210,6 +217,7 @@ body {
 <!-- GRID -->
 <div class="product-grid">
 
+  <!-- ITEM -->
   <div class="product-card">
     <a href="https://mobworld.cc/b/thm3u" target="_blank" class="product-image-wrapper">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1000/https://pe56d.s3.amazonaws.com/o_1je5o4t1ionnmnp1ir5oq11ics7.png">
@@ -227,10 +235,11 @@ body {
     </div>
   </div>
 
+  <!-- ITEM -->
   <div class="product-card">
     <a href="https://mobworld.cc/b/eAOqc" target="_blank" class="product-image-wrapper">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1je101kbl1nso6nrlk6vfl18261a.jpg">
-      <div class="product-overlay">AFTERLIFE DRUM KIT</div>
+      <div class="product-overlay">⚡MOB presents "AFTERLIFE DRUM KIT"⚡300+ CUSTOM sounds 90+ CUSTOM presets</div>
     </a>
 
     <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/eAOqc', '_blank')">
@@ -244,10 +253,11 @@ body {
     </div>
   </div>
 
+  <!-- ITEM -->
   <div class="product-card">
     <a href="https://mobworld.cc/b/wn5aG" target="_blank" class="product-image-wrapper">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1ip0g986k1dajkvbs4j6vo85110.jpg">
-      <div class="product-overlay">REBIRTH DRUM KIT</div>
+      <div class="product-overlay">🦋 MOB presents "REBIRTH DRUM KIT" 🦋 300+ CUSTOM sounds</div>
     </a>
 
     <button class="product-name-btn" onclick="window.open('https://mobworld.cc/b/wn5aG', '_blank')">
@@ -261,10 +271,11 @@ body {
     </div>
   </div>
 
+  <!-- ITEM -->
   <div class="product-card">
     <a href="https://www.instagram.com/p/DL_6Z46zVBd/" target="_blank" class="product-image-wrapper">
       <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ivup4icn16rr3a4if0gbu1up810.jpg">
-      <div class="product-overlay">TAKEOVER LOOP KIT</div>
+      <div class="product-overlay">MOB presents "Takeover Loop Kit" ♫ 50 LOOPS in the style of #OSAMASON #NETTSPEND #KENCARSON +more ♫</div>
     </a>
 
     <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DL_6Z46zVBd/', '_blank')">
@@ -278,10 +289,11 @@ body {
     </div>
   </div>
 
+  <!-- ITEM -->
   <div class="product-card">
-    <a href="https://www.instagram.com/p/DQI0S1yEltV/" target="_blank" class="product-image-wrapper">
+    <a href="https://www.instagram.com/p/DQI0S1yEltV/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="product-image-wrapper">
       <img class="product-image" src="obssd_assets/5K @imobssd.png">
-      <div class="product-overlay">5K DRUM KIT</div>
+      <div class="product-overlay">OBSSD presents "5k Drum Kit" This kit contains over 200 custom sounds I use everyday</div>
     </a>
 
     <button class="product-name-btn" onclick="window.open('https://www.instagram.com/p/DQI0S1yEltV/', '_blank')">
@@ -298,20 +310,24 @@ body {
 </div>
 
 <script>
+// Array of button overlay images
 const buttonOverlays = [
   'obssd_assets/BUTTON_OVERLAY_1.png',
   'obssd_assets/BUTTON_OVERLAY_2.png',
   'obssd_assets/BUTTON_OVERLAY_3.png'
 ];
 
+// Random overlay picker
 function getRandomButtonOverlay() {
   return buttonOverlays[Math.floor(Math.random() * buttonOverlays.length)];
 }
 
+// Apply animation delay + overlays
 document.querySelectorAll('.product-card').forEach((el, i) => {
   el.style.animationDelay = (i * 0.05) + 's';
 
   const button = el.querySelector('.product-name-btn');
+
   if (button) {
     button.style.backgroundImage = `url("${getRandomButtonOverlay()}")`;
   }
