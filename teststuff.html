@@ -47,6 +47,7 @@ body {
   font-size: 1.6em;
 }
 
+/* horizontal stretch (Allegiance style) */
 .section-title span {
   display: inline-block;
   transform: scaleX(1.5);
@@ -82,11 +83,12 @@ body {
   background: #000;
 }
 
-/* IMAGE */
+/* FIXED THUMBNAIL FIT (NO BORDERS) */
 .card img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;   /* KEY FIX */
+  object-position: center;
   display: block;
 }
 
@@ -130,7 +132,7 @@ body {
 }
 
 /* =========================
-   SOCIAL LINKS (TEXT)
+   SOCIAL LINKS
 ========================= */
 
 .socials {
@@ -143,17 +145,19 @@ body {
   letter-spacing: 1px;
 }
 
+/* slight vertical stretch (VISUALS reference style) */
 .socials a {
   color: black;
   text-decoration: none;
+  display: inline-block;
+  transform: scaleY(1.25);  /* KEY ADDITION */
+  transform-origin: center;
   transition: 0.2s;
 }
 
 .socials a:hover {
   opacity: 0.5;
 }
-
-/* ANIMATION (optional future use) */
 </style>
 </head>
 
