@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,25 +144,22 @@ body {
 .product-name-btn-text {
   font-family: 'Allegiance';
 
-  /* Larger responsive scaling */
-  font-size: clamp(1.6rem, 2vw, 3rem);
+  /* Resizes naturally like price text */
+  font-size: clamp(1.4rem, 1.7vw, 2.4rem);
 
   display: inline-block;
 
-  /* Wider text style */
   transform: scaleX(1.45);
 
   color: #000;
   text-align: center;
 
-  /* Better vertical centering */
+  /* Slightly lower positioning */
   position: relative;
   top: 8%;
 
   line-height: 1;
   white-space: nowrap;
-
-  transition: 0.2s ease;
 }
 
 /* FOOTER */
@@ -199,12 +197,6 @@ body {
 
   .product-grid {
     gap: 36px;
-  }
-
-  .product-name-btn-text {
-    font-size: clamp(1.3rem, 5vw, 2rem);
-    transform: scaleX(1.3);
-    top: 6%;
   }
 
   .price span {
@@ -345,3 +337,4 @@ document.querySelectorAll('.product-card').forEach((el, i) => {
 
 </body>
 </html>
+```
