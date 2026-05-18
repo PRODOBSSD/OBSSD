@@ -38,13 +38,13 @@ body {
 }
 
 /* =========================
-   SECTION TITLE (LARGER)
+   SECTION TITLE
 ========================= */
 
 .section-title {
   padding: 10px 40px 0;
   font-family: 'Allegiance';
-  font-size: 1.6em; /* increased */
+  font-size: 1.6em;
 }
 
 .section-title span {
@@ -82,16 +82,12 @@ body {
   background: #000;
 }
 
+/* IMAGE */
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: 0.2s;
-}
-
-.card:hover img {
-  filter: brightness(70%);
 }
 
 /* overlay */
@@ -113,7 +109,7 @@ body {
 }
 
 /* =========================
-   BEATSTARS (BALANCED SIZE)
+   BEATSTARS
 ========================= */
 
 .beatstars-section {
@@ -122,7 +118,7 @@ body {
 
 .beatstars-embed {
   width: 100%;
-  height: 72vh; /* balanced (between old + new) */
+  height: 72vh;
   min-height: 520px;
   max-height: 780px;
 }
@@ -134,7 +130,7 @@ body {
 }
 
 /* =========================
-   SOCIALS
+   SOCIAL LINKS (TEXT)
 ========================= */
 
 .socials {
@@ -142,22 +138,22 @@ body {
   justify-content: center;
   gap: 25px;
   padding: 40px 0 60px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
 }
 
 .socials a {
   color: black;
+  text-decoration: none;
   transition: 0.2s;
 }
 
 .socials a:hover {
-  transform: scale(1.15);
+  opacity: 0.5;
 }
 
-.icon {
-  width: 26px;
-  height: 26px;
-  fill: black;
-}
+/* ANIMATION (optional future use) */
 </style>
 </head>
 
@@ -176,22 +172,22 @@ body {
 <div class="carousel">
 
   <div class="card" onclick="openLink('https://www.youtube.com/watch?v=fiIwhJZmwr4')">
-    <img src="obssd_work/mobeats_healyou_@imobssd.webp">
+    <img src="https://img.youtube.com/vi/fiIwhJZmwr4/hqdefault.jpg">
     <div class="overlay">VIEW</div>
   </div>
 
   <div class="card" onclick="openLink('https://www.youtube.com/watch?v=Y68mjK2Typs')">
-    <img src="obssd_work/mobeats_champion_@imobssd.webp">
+    <img src="https://img.youtube.com/vi/Y68mjK2Typs/hqdefault.jpg">
     <div class="overlay">VIEW</div>
   </div>
 
   <div class="card" onclick="openLink('https://www.youtube.com/watch?v=CfTFY0MDc3c')">
-    <img src="obssd_work/conic_cover_@imobssd.webp">
+    <img src="https://img.youtube.com/vi/CfTFY0MDc3c/hqdefault.jpg">
     <div class="overlay">VIEW</div>
   </div>
 
   <div class="card" onclick="openLink('https://www.youtube.com/watch?v=jlS8YdcC5OE')">
-    <img src="obssd_work/pareidolia_social_@imobssd.webp">
+    <img src="https://img.youtube.com/vi/jlS8YdcC5OE/hqdefault.jpg">
     <div class="overlay">VIEW</div>
   </div>
 
@@ -211,28 +207,9 @@ body {
 
 <!-- SOCIALS -->
 <div class="socials">
-
-  <!-- Spotify -->
-  <a href="#" target="_blank">
-    <svg class="icon" viewBox="0 0 24 24">
-      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.3-.6.4-.9.2-2.5-1.5-5.6-1.8-9.2-.9-.4.1-.7-.2-.8-.5-.1-.4.2-.7.5-.8 3.9-.9 7.4-.5 10.2 1.1.4.2.4.6.2.9zm1.3-2.9c-.3.4-.8.5-1.2.2-3-1.8-7.6-2.3-11.2-1.2-.5.1-1-.2-1.1-.7-.1-.5.2-1 .7-1.1 4.1-1.2 9.2-.7 12.6 1.4.4.3.5.8.2 1.2zm.1-3c-3.6-2.1-9.6-2.3-13-.9-.6.2-1.2-.1-1.4-.7-.2-.6.1-1.2.7-1.4 4-1.4 10.6-1.2 14.8 1.2.5.3.6 1 .3 1.5-.3.5-1 .6-1.4.3z"/>
-    </svg>
-  </a>
-
-  <!-- SoundCloud -->
-  <a href="#" target="_blank">
-    <svg class="icon" viewBox="0 0 24 24">
-      <path d="M11 9v8h7c2.2 0 4-1.8 4-4s-1.8-4-4-4c-.3 0-.6 0-.9.1C16.6 6.4 14 5 11 5v4zM4 17h2V7H4v10zm-3 0h2V9H1v8z"/>
-    </svg>
-  </a>
-
-  <!-- VGen -->
-  <a href="#" target="_blank">
-    <svg class="icon" viewBox="0 0 24 24">
-      <path d="M3 3h18v18H3V3zm4 14h2l3-10h-2l-2 7-2-7H4l3 10zm8-10h2v10h-2V7z"/>
-    </svg>
-  </a>
-
+  <a href="https://spotify.com" target="_blank">SPOTIFY</a>
+  <a href="https://soundcloud.com" target="_blank">SOUNDCLOUD</a>
+  <a href="https://vgen.co" target="_blank">VGEN</a>
 </div>
 
 <script>
