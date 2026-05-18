@@ -33,6 +33,7 @@ body {
   cursor: pointer;
   transition: 0.25s;
 }
+
 .logo-img:hover {
   transform: scale(1.05);
 }
@@ -51,34 +52,38 @@ body {
   white-space: nowrap;
 }
 
-/* CAROUSEL */
+/* =========================
+   RESPONSIVE GRID (FIXED)
+========================= */
+
 .carousel {
-  display: flex;
-  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 18px;
   padding: 20px 40px 40px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
 }
 
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-/* RESPONSIVE CARD (FIX IS HERE) */
+/* CARD */
 .card {
-  flex: 0 0 auto;
-  width: clamp(240px, 28vw, 340px);
+  width: 100%;
   aspect-ratio: 1 / 1;
   position: relative;
-  scroll-snap-align: start;
   overflow: hidden;
   background: #000;
   cursor: pointer;
-  border-radius: 0;
+
+  /* fade-up animation base */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+  transition: transform 0.2s ease;
 }
 
-/* iframe now properly fills card */
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* iframe */
 .card iframe {
   width: 100%;
   height: 100%;
@@ -86,7 +91,7 @@ body {
   display: block;
 }
 
-/* overlay */
+/* overlay (optional future use) */
 .overlay {
   position: absolute;
   inset: 0;
@@ -143,6 +148,17 @@ body {
 .socials a:hover {
   opacity: 0.5;
 }
+
+/* =========================
+   ANIMATION (MATCH VISUALS PAGE)
+========================= */
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 </style>
 </head>
 
@@ -160,25 +176,25 @@ body {
 
 <div class="carousel">
 
-  <div class="card">
-    <iframe src="https://www.youtube.com/embed/pgJQw0UT2oo?si=sgGayW7p-Ds0SHlY" allowfullscreen></iframe>
-  </div>
-  
-  <div class="card">
-    <iframe src="https://www.youtube.com/embed/hvbJdreAlu4?si=cGBX7mVOyzdfwnAe" allowfullscreen></iframe>
-  </div>
-  
-  <div class="card">
-    <iframe src="https://www.youtube.com/embed/CGVWFii0uJY?si=Gp3rqeGfJYKbgPmu" allowfullscreen></iframe>
-  </div>
-  
-  <div class="card">
-    <iframe src="https://www.youtube.com/embed/CwgNxq1GEng?rel=0" allowfullscreen></iframe>
-  </div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/pgJQw0UT2oo?si=sgGayW7p-Ds0SHlY" allowfullscreen></iframe>
+</div>
 
-  <div class="card">
-    <iframe src="https://www.youtube.com/embed/49euGyoaeMw?si=K-9ksIwy5ZVaT--1" allowfullscreen></iframe>
-  </div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/hvbJdreAlu4?si=cGBX7mVOyzdfwnAe" allowfullscreen></iframe>
+</div>
+
+<div class="card">
+<iframe src="https://www.youtube.com/embed/CGVWFii0uJY?si=Gp3rqeGfJYKbgPmu" allowfullscreen></iframe>
+</div>
+
+<div class="card">
+<iframe src="https://www.youtube.com/embed/CwgNxq1GEng?rel=0" allowfullscreen></iframe>
+</div>
+
+<div class="card">
+<iframe src="https://www.youtube.com/embed/49euGyoaeMw?si=K-9ksIwy5ZVaT--1" allowfullscreen></iframe>
+</div>
 
 </div>
 
@@ -200,6 +216,13 @@ body {
   <a href="https://soundcloud.com" target="_blank">SOUNDCLOUD</a>
   <a href="https://vgen.co" target="_blank">VGEN</a>
 </div>
+
+<script>
+/* STAGGER FADE-UP (like VISUALS page) */
+document.querySelectorAll('.card').forEach((el, i) => {
+  el.style.animationDelay = (i * 0.08) + 's';
+});
+</script>
 
 </body>
 </html>
