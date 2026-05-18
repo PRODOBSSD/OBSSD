@@ -71,46 +71,22 @@ body {
   display: none;
 }
 
-/* SQUARE CARD */
+/* FIXED SQUARE CARD */
 .card {
   flex: 0 0 auto;
   width: 320px;
-  aspect-ratio: 1 / 1;
+  height: 320px;
   position: relative;
   overflow: hidden;
-  background: #000;
-  cursor: pointer;
   scroll-snap-align: start;
+  background: #000;
 }
 
-/* =========================
-   YOUTUBE COVER FIX (STRONG VERSION)
-========================= */
-
-.video-wrapper {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-/* 🔥 KEY FIX: heavier zoom + centering */
-.video-wrapper iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
-  width: 180%;
-  height: 180%;
-
-  transform: translate(-50%, -50%);
-  border: none;
-}
-
-/* fallback thumbnail */
-.card img {
+/* YOUTUBE EMBED FILLS CARD */
+.card iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border: 0;
   display: block;
 }
 
@@ -126,7 +102,7 @@ body {
   font-size: 0.8em;
   opacity: 0;
   transition: 0.2s;
-  z-index: 2;
+  pointer-events: none;
 }
 
 .card:hover .overlay {
@@ -155,7 +131,7 @@ body {
 }
 
 /* =========================
-   SOCIALS
+   SOCIAL LINKS
 ========================= */
 
 .socials {
@@ -196,24 +172,32 @@ body {
 
 <div class="carousel">
 
-  <div class="card" onclick="loadVideo(this, 'fiIwhJZmwr4')">
-    <img src="https://img.youtube.com/vi/fiIwhJZmwr4/hqdefault.jpg">
-    <div class="overlay">PLAY</div>
+  <div class="card">
+    <iframe src="https://www.youtube.com/embed/fiIwhJZmwr4?rel=0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+    <div class="overlay">VIEW</div>
   </div>
 
-  <div class="card" onclick="loadVideo(this, 'Y68mjK2Typs')">
-    <img src="https://img.youtube.com/vi/Y68mjK2Typs/hqdefault.jpg">
-    <div class="overlay">PLAY</div>
+  <div class="card">
+    <iframe src="https://www.youtube.com/embed/Y68mjK2Typs?rel=0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+    <div class="overlay">VIEW</div>
   </div>
 
-  <div class="card" onclick="loadVideo(this, 'CfTFY0MDc3c')">
-    <img src="https://img.youtube.com/vi/CfTFY0MDc3c/hqdefault.jpg">
-    <div class="overlay">PLAY</div>
+  <div class="card">
+    <iframe src="https://www.youtube.com/embed/CfTFY0MDc3c?rel=0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+    <div class="overlay">VIEW</div>
   </div>
 
-  <div class="card" onclick="loadVideo(this, 'jlS8YdcC5OE')">
-    <img src="https://img.youtube.com/vi/jlS8YdcC5OE/hqdefault.jpg">
-    <div class="overlay">PLAY</div>
+  <div class="card">
+    <iframe src="https://www.youtube.com/embed/jlS8YdcC5OE?rel=0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+    <div class="overlay">VIEW</div>
   </div>
 
 </div>
@@ -236,24 +220,6 @@ body {
   <a href="https://soundcloud.com" target="_blank">SOUNDCLOUD</a>
   <a href="https://vgen.co" target="_blank">VGEN</a>
 </div>
-
-<script>
-function loadVideo(card, id) {
-  if (card.querySelector('iframe')) return;
-
-  const wrapper = document.createElement('div');
-  wrapper.className = "video-wrapper";
-
-  const iframe = document.createElement('iframe');
-  iframe.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1";
-  iframe.allow = "autoplay; fullscreen";
-
-  wrapper.appendChild(iframe);
-
-  card.innerHTML = "";
-  card.appendChild(wrapper);
-}
-</script>
 
 </body>
 </html>
