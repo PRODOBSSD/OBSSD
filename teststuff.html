@@ -38,13 +38,13 @@ body {
 }
 
 /* =========================
-   SECTION TITLE (STRETCHED)
+   SECTION TITLE (LARGER)
 ========================= */
 
 .section-title {
   padding: 10px 40px 0;
   font-family: 'Allegiance';
-  font-size: 1.2em;
+  font-size: 1.6em; /* increased */
 }
 
 .section-title span {
@@ -82,14 +82,16 @@ body {
   background: #000;
 }
 
-/* IMAGE */
-.card img,
-.card iframe {
+.card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: none;
   display: block;
+  transition: 0.2s;
+}
+
+.card:hover img {
+  filter: brightness(70%);
 }
 
 /* overlay */
@@ -111,16 +113,18 @@ body {
 }
 
 /* =========================
-   BEATSTARS
+   BEATSTARS (BALANCED SIZE)
 ========================= */
 
 .beatstars-section {
-  padding: 20px 40px 80px;
+  padding: 20px 40px 70px;
 }
 
 .beatstars-embed {
   width: 100%;
-  height: 85vh; /* BIGGER - removes dead space */
+  height: 72vh; /* balanced (between old + new) */
+  min-height: 520px;
+  max-height: 780px;
 }
 
 .beatstars-embed iframe {
@@ -149,20 +153,10 @@ body {
   transform: scale(1.15);
 }
 
-/* ICONS */
 .icon {
   width: 26px;
   height: 26px;
   fill: black;
-}
-
-/* =========================
-   VIDEO LIGHT HOVER SYSTEM
-========================= */
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -181,38 +175,29 @@ body {
 
 <div class="carousel">
 
-  <!-- CARD -->
-  <div class="card"
-       onmouseenter="playPreview(this, 'https://www.youtube.com/embed/fiIwhJZmwr4?autoplay=1&mute=1')"
-       onmouseleave="stopPreview(this)">
+  <div class="card" onclick="openLink('https://www.youtube.com/watch?v=fiIwhJZmwr4')">
     <img src="obssd_work/mobeats_healyou_@imobssd.webp">
-    <div class="overlay">PLAY</div>
+    <div class="overlay">VIEW</div>
   </div>
 
-  <div class="card"
-       onmouseenter="playPreview(this, 'https://www.youtube.com/embed/Y68mjK2Typs?autoplay=1&mute=1')"
-       onmouseleave="stopPreview(this)">
+  <div class="card" onclick="openLink('https://www.youtube.com/watch?v=Y68mjK2Typs')">
     <img src="obssd_work/mobeats_champion_@imobssd.webp">
-    <div class="overlay">PLAY</div>
+    <div class="overlay">VIEW</div>
   </div>
 
-  <div class="card"
-       onmouseenter="playPreview(this, 'https://www.youtube.com/embed/CfTFY0MDc3c?autoplay=1&mute=1')"
-       onmouseleave="stopPreview(this)">
+  <div class="card" onclick="openLink('https://www.youtube.com/watch?v=CfTFY0MDc3c')">
     <img src="obssd_work/conic_cover_@imobssd.webp">
-    <div class="overlay">PLAY</div>
+    <div class="overlay">VIEW</div>
   </div>
 
-  <div class="card"
-       onmouseenter="playPreview(this, 'https://www.youtube.com/embed/jlS8YdcC5OE?autoplay=1&mute=1')"
-       onmouseleave="stopPreview(this)">
+  <div class="card" onclick="openLink('https://www.youtube.com/watch?v=jlS8YdcC5OE')">
     <img src="obssd_work/pareidolia_social_@imobssd.webp">
-    <div class="overlay">PLAY</div>
+    <div class="overlay">VIEW</div>
   </div>
 
 </div>
 
-<!-- BEATSTARS -->
+<!-- BEAT STORE -->
 <div class="section-title"><span>BEAT STORE</span></div>
 
 <div class="beatstars-section">
@@ -251,27 +236,8 @@ body {
 </div>
 
 <script>
-function playPreview(card, url) {
-  if (card.querySelector('iframe')) return;
-
-  const iframe = document.createElement('iframe');
-  iframe.src = url;
-  iframe.allow = "autoplay; fullscreen";
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.border = "0";
-
-  card.innerHTML = "";
-  card.appendChild(iframe);
-}
-
-function stopPreview(card) {
-  const imgSrc = card.getAttribute("data-img");
-
-  if (!imgSrc) {
-    // restore fallback by reloading page state lightly
-    location.reload();
-  }
+function openLink(url) {
+  window.open(url, '_blank');
 }
 </script>
 
