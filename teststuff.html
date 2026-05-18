@@ -47,7 +47,6 @@ body {
   font-size: 1.6em;
 }
 
-/* horizontal stretch (Allegiance style) */
 .section-title span {
   display: inline-block;
   transform: scaleX(1.5);
@@ -72,23 +71,25 @@ body {
   display: none;
 }
 
+/* VIDEO CARD */
 .card {
   flex: 0 0 auto;
-  width: 260px;
+  width: 320px;
   aspect-ratio: 1 / 1;
   position: relative;
   scroll-snap-align: start;
   overflow: hidden;
-  cursor: pointer;
   background: #000;
+  cursor: pointer;
 }
 
-/* FIXED THUMBNAIL FIT (NO BORDERS) */
-.card img {
+/* thumbnail preview */
+.card img,
+.card iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* KEY FIX */
-  object-position: center;
+  object-fit: cover;
+  border: none;
   display: block;
 }
 
@@ -145,13 +146,11 @@ body {
   letter-spacing: 1px;
 }
 
-/* slight vertical stretch (VISUALS reference style) */
 .socials a {
   color: black;
   text-decoration: none;
   display: inline-block;
-  transform: scaleY(1.25);  /* KEY ADDITION */
-  transform-origin: center;
+  transform: scaleY(1.25);
   transition: 0.2s;
 }
 
@@ -175,24 +174,24 @@ body {
 
 <div class="carousel">
 
-  <div class="card" onclick="openLink('https://www.youtube.com/watch?v=fiIwhJZmwr4')">
+  <div class="card" onclick="loadVideo(this, 'fiIwhJZmwr4')">
     <img src="https://img.youtube.com/vi/fiIwhJZmwr4/hqdefault.jpg">
-    <div class="overlay">VIEW</div>
+    <div class="overlay">PLAY</div>
   </div>
 
-  <div class="card" onclick="openLink('https://www.youtube.com/watch?v=Y68mjK2Typs')">
+  <div class="card" onclick="loadVideo(this, 'Y68mjK2Typs')">
     <img src="https://img.youtube.com/vi/Y68mjK2Typs/hqdefault.jpg">
-    <div class="overlay">VIEW</div>
+    <div class="overlay">PLAY</div>
   </div>
 
-  <div class="card" onclick="openLink('https://www.youtube.com/watch?v=CfTFY0MDc3c')">
+  <div class="card" onclick="loadVideo(this, 'CfTFY0MDc3c')">
     <img src="https://img.youtube.com/vi/CfTFY0MDc3c/hqdefault.jpg">
-    <div class="overlay">VIEW</div>
+    <div class="overlay">PLAY</div>
   </div>
 
-  <div class="card" onclick="openLink('https://www.youtube.com/watch?v=CwgNxq1GEng')">
-    <img src="https://img.youtube.com/watch?v=CwgNxq1GEng/hqdefault.jpg">
-    <div class="overlay">VIEW</div>
+  <div class="card" onclick="loadVideo(this, 'jlS8YdcC5OE')">
+    <img src="https://img.youtube.com/vi/jlS8YdcC5OE/hqdefault.jpg">
+    <div class="overlay">PLAY</div>
   </div>
 
 </div>
@@ -217,8 +216,15 @@ body {
 </div>
 
 <script>
-function openLink(url) {
-  window.open(url, '_blank');
+function loadVideo(card, id) {
+  if (card.querySelector('iframe')) return;
+
+  const iframe = document.createElement('iframe');
+  iframe.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
+  iframe.allow = "autoplay; fullscreen";
+
+  card.innerHTML = "";
+  card.appendChild(iframe);
 }
 </script>
 
