@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Music portfolio">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>MUSIC</title>
 
-<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
 
 <style>
 @font-face {
@@ -18,31 +17,11 @@ body {
   margin: 0;
   background: #fdfdfd;
   font-family: Arial, sans-serif;
-  color: #000;
 }
 
-/* LOGO */
-.logo-container {
-  display: flex;
-  justify-content: center;
-  padding: 30px 0;
-}
-
-.logo-img {
-  max-width: 340px;
-  cursor: pointer;
-  transition: 0.25s;
-}
-.logo-img:hover {
-  transform: scale(1.05);
-}
-
-/* =========================
-   SECTION TITLE
-========================= */
-
+/* TITLE */
 .section-title {
-  padding: 10px 40px 0;
+  padding: 10px 40px;
   font-family: 'Allegiance';
   font-size: 1.6em;
 }
@@ -51,43 +30,51 @@ body {
   display: inline-block;
   transform: scaleX(1.5);
   transform-origin: left;
-  white-space: nowrap;
 }
 
-/* =========================
-   CAROUSEL
-========================= */
-
+/* CAROUSEL */
 .carousel {
   display: flex;
   overflow-x: auto;
   gap: 18px;
-  padding: 20px 40px 40px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+  padding: 20px 40px;
 }
 
 .carousel::-webkit-scrollbar {
   display: none;
 }
 
-/* FIXED SQUARE CARD */
+/* SQUARE CARD */
 .card {
-  flex: 0 0 auto;
   width: 320px;
   height: 320px;
+  flex: 0 0 auto;
   position: relative;
   overflow: hidden;
-  scroll-snap-align: start;
-  background: #000;
+  background: black;
 }
 
-/* YOUTUBE EMBED FILLS CARD */
-.card iframe {
+/* =========================
+   FIXED YOUTUBE SYSTEM
+========================= */
+
+/* wrapper keeps 16:9 correct */
+.video-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+  height: 180%; /* forces vertical crop */
+
+  transform: translate(-50%, -50%);
+}
+
+/* iframe stays native */
+.video-frame iframe {
   width: 100%;
   height: 100%;
   border: 0;
-  display: block;
 }
 
 /* overlay */
@@ -98,7 +85,7 @@ body {
   align-items: center;
   justify-content: center;
   background: rgba(0,0,0,0.35);
-  color: #fff;
+  color: white;
   font-size: 0.8em;
   opacity: 0;
   transition: 0.2s;
@@ -109,19 +96,14 @@ body {
   opacity: 1;
 }
 
-/* =========================
-   BEATSTARS
-========================= */
-
+/* BEATSTARS */
 .beatstars-section {
   padding: 20px 40px 70px;
 }
 
 .beatstars-embed {
-  width: 100%;
   height: 72vh;
   min-height: 520px;
-  max-height: 780px;
 }
 
 .beatstars-embed iframe {
@@ -130,95 +112,68 @@ body {
   border: 0;
 }
 
-/* =========================
-   SOCIAL LINKS
-========================= */
-
+/* SOCIALS */
 .socials {
   display: flex;
   justify-content: center;
   gap: 25px;
-  padding: 40px 0 60px;
-  font-family: Arial, sans-serif;
   font-size: 12px;
-  letter-spacing: 1px;
+  padding: 40px 0 60px;
 }
 
 .socials a {
   color: black;
   text-decoration: none;
-  display: inline-block;
   transform: scaleY(1.25);
-  transition: 0.2s;
-}
-
-.socials a:hover {
-  opacity: 0.5;
+  display: inline-block;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGO -->
-<div class="logo-container">
-  <a href="https://obssd.online/">
-    <img src="/obssd_assets/OBSSD_LOGO.png" class="logo-img">
-  </a>
-</div>
-
-<!-- COMMISSIONS -->
 <div class="section-title"><span>MUSIC COMMISSIONS</span></div>
 
 <div class="carousel">
 
   <div class="card">
-    <iframe src="https://www.youtube.com/embed/fiIwhJZmwr4?rel=0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen></iframe>
+    <div class="video-frame">
+      <iframe src="https://www.youtube.com/embed/CwgNxq1GEng?rel=0"
+        allowfullscreen></iframe>
+    </div>
     <div class="overlay">VIEW</div>
   </div>
 
   <div class="card">
-    <iframe src="https://www.youtube.com/embed/Y68mjK2Typs?rel=0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen></iframe>
+    <div class="video-frame">
+      <iframe src="https://www.youtube.com/embed/Y68mjK2Typs?rel=0"
+        allowfullscreen></iframe>
+    </div>
     <div class="overlay">VIEW</div>
   </div>
 
   <div class="card">
-    <iframe src="https://www.youtube.com/embed/CfTFY0MDc3c?rel=0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen></iframe>
-    <div class="overlay">VIEW</div>
-  </div>
-
-  <div class="card">
-    <iframe src="https://www.youtube.com/embed/CwgNxq1GEng?si=-y07_5OA5aJcuCux"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen></iframe>
+    <div class="video-frame">
+      <iframe src="https://www.youtube.com/embed/CfTFY0MDc3c?rel=0"
+        allowfullscreen></iframe>
+    </div>
     <div class="overlay">VIEW</div>
   </div>
 
 </div>
 
-<!-- BEAT STORE -->
 <div class="section-title"><span>BEAT STORE</span></div>
 
 <div class="beatstars-section">
   <div class="beatstars-embed">
-    <iframe 
-      src="https://player.beatstars.com/?storeId=150661"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-    </iframe>
+    <iframe src="https://player.beatstars.com/?storeId=150661"></iframe>
   </div>
 </div>
 
-<!-- SOCIALS -->
 <div class="socials">
-  <a href="https://spotify.com" target="_blank">SPOTIFY</a>
-  <a href="https://soundcloud.com" target="_blank">SOUNDCLOUD</a>
-  <a href="https://vgen.co" target="_blank">VGEN</a>
+  <a href="#">SPOTIFY</a>
+  <a href="#">SOUNDCLOUD</a>
+  <a href="#">VGEN</a>
 </div>
 
 </body>
