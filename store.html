@@ -112,7 +112,6 @@ body {
   aspect-ratio: 758 / 112;
   margin-top: 8px;
 
-  background-image: url("obssd_assets/BUTTON_OVERLAY_OBSSD.jpg");
   background-size: cover;
   background-position: center;
 
@@ -259,8 +258,27 @@ body {
 </div>
 
 <script>
+// Array of button overlay images
+const buttonOverlays = [
+  'obssd_assets/BUTTON_OVERLAY_1.jpg',
+  'obssd_assets/BUTTON_OVERLAY_2.jpg',
+  'obssd_assets/BUTTON_OVERLAY_3.jpg'
+];
+
+// Function to get a random button overlay
+function getRandomButtonOverlay() {
+  return buttonOverlays[Math.floor(Math.random() * buttonOverlays.length)];
+}
+
+// Apply animation delay and random button overlay to each product card
 document.querySelectorAll('.product-card').forEach((el, i) => {
   el.style.animationDelay = (i * 0.05) + 's';
+  
+  // Set random button overlay for each product
+  const button = el.querySelector('.product-name-btn');
+  if (button) {
+    button.style.backgroundImage = `url("${getRandomButtonOverlay()}")`;
+  }
 });
 </script>
 
