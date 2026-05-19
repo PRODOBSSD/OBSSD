@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Contact & Commissions">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>CONTACT</title>
+  <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
+  <link rel="stylesheet" href="obssd_shared/custom.css">
 
+<style>
+body {
+  margin: 0;
+  background: #fdfdfd;
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+/* LOGO */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.logo-img {
+  max-width: 340px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* FORM CONTAINER */
+.form-container {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px 60px 20px;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.form-container iframe {
+  max-width: 700px;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 0 15px 40px 15px;
+  }
+  
+  .form-container iframe {
+    max-width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo-container">
+  <a href="https://obssd.online/">
+    <img src="/obssd_assets/OBSSD_LOGO.png" class="logo-img">
+  </a>
+</div>
+
+<div class="form-container">
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfBw-lqVBAzSqbkk5_UYONDkz7Z53eiNQPJI15KOQdmQxZAVg/viewform?embedded=true" width="700" height="1395" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+</div>
+
+<script>
+// Logo click navigation (same as other pages)
+document.querySelector('.logo-img').addEventListener('click', function(e) {
+  e.preventDefault();
+  window.location.href = 'https://obssd.online/';
+});
+</script>
+
+</body>
+</html>
