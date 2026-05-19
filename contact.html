@@ -84,7 +84,7 @@ body {
 </div>
 
 <div class="form-container">
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfBw-lqVBAzSqbkk5_UYONDkz7Z53eiNQPJI15KOQdmQxZAVg/viewform?embedded=true" width="700" height="1395" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfBw-lqVBAzSqbkk5_UYONDkz7Z53eiNQPJI15KOQdmQxZAVg/viewform?embedded=true" width="700" frameborder="0" marginheight="0" marginwidth="0"></iframe>
 </div>
 
 <script>
@@ -94,29 +94,41 @@ document.querySelector('.logo-img').addEventListener('click', function(e) {
   window.location.href = 'https://obssd.online/';
 });
 
-// Prevent iframe scroll wheel from affecting page scroll
+// Dynamically adjust iframe height to fit all content
 const iframe = document.querySelector('.form-container iframe');
-iframe.addEventListener('mouseenter', function() {
-  document.body.style.overflow = 'hidden';
-});
 
-iframe.addEventListener('mouseleave', function() {
-  document.body.style.overflow = 'auto';
-});
+// Set initial larger height to allow content to load
+iframe.setAttribute('height', '2000');
 
-// Also prevent touch scroll on mobile
-let isScrollingIframe = false;
-iframe.addEventListener('touchstart', function() {
-  isScrollingIframe = true;
-  document.body.style.overflow = 'hidden';
-});
-
-document.addEventListener('touchend', function() {
-  if (isScrollingIframe) {
-    isScrollingIframe = false;
-    document.body.style.overflow = 'auto';
+// Listen for messages from iframe (Google Forms sends resize events)
+window.addEventListener('message', function(event) {
+  if (event.origin !== 'https://docs.google.com') return;
+  
+  if (event.data.type === 'embed_size') {
+    iframe.setAttribute('height', event.data.height);
   }
 });
+
+// Fallback: Try to access iframe content after load and adjust
+iframe.addEventListener('load', function() {
+  try {
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    const height = iframeDoc.body.scrollHeight;
+    if (height) {
+      iframe.setAttribute('height', height + 50);
+    }
+  } catch(e) {
+    // Cross-origin restriction - use larger default
+    console.log('Unable to access iframe content (cross-origin)');
+  }
+});
+
+// Also set a reasonable fallback height
+setTimeout(function() {
+  if (!iframe.getAttribute('height') || iframe.getAttribute('height') === '1395') {
+    iframe.setAttribute('height', '2000');
+  }
+}, 2000);
 </script>
 
 </body>
