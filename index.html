@@ -78,6 +78,7 @@ spline-viewer.loaded {
   display: block;
   width: 320px;
   pointer-events: auto;
+  cursor: pointer;
 }
 .contact-image {
   width: 100%;
@@ -122,7 +123,7 @@ spline-viewer.loaded {
 </div>
 
 <div class="contact-section">
-  <div class="contact-image-container">
+  <div class="contact-image-container" id="contactImageContainer">
     <img src="obssd_assets/CONTACT_TITLE.png" class="contact-image">
     <div class="contact-links">
       <div>
@@ -170,6 +171,18 @@ function handleFadeIn(viewer) {
 document.addEventListener("DOMContentLoaded", () => {
   const viewer = document.getElementById("splineScene");
   handleFadeIn(viewer);
+});
+</script>
+
+<!-- Contact image click handler -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const contactImageContainer = document.getElementById("contactImageContainer");
+  if (contactImageContainer) {
+    contactImageContainer.addEventListener("click", () => {
+      window.location.href = "https://obssd.online/contact";
+    });
+  }
 });
 </script>
 
