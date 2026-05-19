@@ -49,6 +49,30 @@ body {
   overflow: hidden;
 }
 
+/* SOCIAL LINKS CONTAINER */
+.social-links-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px 60px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.social-link {
+  font-family: Arial, sans-serif;
+  font-stretch: expanded;
+  font-size: 16px;
+  text-decoration: none;
+  color: #000;
+  transition: 0.25s;
+  letter-spacing: 0.05em;
+}
+
+.social-link:hover {
+  transform: scale(1.05);
+  color: #333;
+}
+
 /* ANIMATION */
 @keyframes fadeUp {
   from {
@@ -70,6 +94,16 @@ body {
   .form-container iframe {
     max-width: 100%;
   }
+
+  .social-links-container {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 30px 15px 40px 15px;
+  }
+
+  .social-link {
+    font-size: 14px;
+  }
 }
 </style>
 </head>
@@ -84,6 +118,14 @@ body {
 
 <div class="form-container">
   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfBw-lqVBAzSqbkk5_UYONDkz7Z53eiNQPJI15KOQdmQxZAVg/viewform?embedded=true" width="700" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+</div>
+
+<div class="social-links-container">
+  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=prodobssd@gmail.com&su=To OBSSD" class="social-link" target="_blank">email</a>
+  <a href="https://www.instagram.com/imobssd/" class="social-link" target="_blank">instagram</a>
+  <a href="https://www.youtube.com/@PRODOBSSD" class="social-link" target="_blank">youtube</a>
+  <a href="https://soundcloud.com/imobssd" class="social-link" target="_blank">soundcloud</a>
+  <a href="https://vgen.co/obssd" class="social-link" target="_blank">vgen</a>
 </div>
 
 <script>
