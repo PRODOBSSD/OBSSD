@@ -37,7 +37,30 @@ body {
 .logo-img:hover {
   transform: scale(1.05);
 }
+  
+/* CONTACT FOOTER */
+.contact-footer {
+  display: flex;
+  justify-content: center;
+  padding: 120px 0 40px;
+}
 
+.contact-button {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.contact-button:hover {
+  transform: scale(1.1);
+}
+
+.contact-button img {
+  display: block;
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+}
+  
 /* GRID */
 .gallery {
   display: grid;
@@ -372,6 +395,13 @@ body {
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <img id="lightbox-img">
+</div>
+
+<!-- CONTACT FOOTER -->
+<div class="contact-footer">
+  <a href="https://obssd.online/contact" class="contact-button">
+    <img src="/obssd_assets/CONTACT_FOOTER.png" alt="Contact">
+  </a>
 </div>
 
 <script>
