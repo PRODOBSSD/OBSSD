@@ -35,6 +35,31 @@ body {
   flex-direction: column;
 }
 
+/* ✅ Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.loading-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.loading-image {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
 /* ✅ Fade setup */
 spline-viewer {
   flex: 1;
@@ -99,6 +124,11 @@ spline-viewer.loaded {
 
 <body>
 
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <img src="obssd_assets/LOADING_GIF.gif" class="loading-image" alt="Loading...">
+</div>
+
 <div class="obssd-title">
   <img src="obssd_assets/OBSSD_TITLE.png">
 </div>
@@ -135,6 +165,11 @@ function handleFadeIn(viewer) {
   // wait a moment for scene to render
   setTimeout(() => {
     viewer.classList.add('loaded');
+    // Hide loading overlay once scene is visible
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay) {
+      loadingOverlay.classList.add('hidden');
+    }
   }, 300);
 }
 
@@ -172,6 +207,12 @@ function restartSpline() {
 
   // reset fade
   newViewer.classList.remove('loaded');
+
+  // Show loading overlay again
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  if (loadingOverlay) {
+    loadingOverlay.classList.remove('hidden');
+  }
 
   // reapply behaviors
   removeSplineLogo();
