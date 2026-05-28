@@ -205,14 +205,33 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Restart logic - no longer restarts spline on back button -->
+<!-- Restart logic -->
 <script>
+function restartSpline() {
+  const oldViewer = document.getElementById('splineScene');
+  if (!oldViewer) return;
+
+  const parent = oldViewer.parentNode;
+  const newViewer = document.createElement('spline-viewer');
+
+  newViewer.setAttribute('id', 'splineScene');
+  newViewer.setAttribute('url', oldViewer.getAttribute('url'));
+
+  parent.replaceChild(newViewer, oldViewer);
+
+  // reset fade
+  newViewer.classList.remove('loaded');
+
+  // reapply behaviors without showing loading overlay again
+  removeSplineLogo();
+  handleFadeIn(newViewer);
+}
+
 window.addEventListener("pageshow", (event) => {
   const navEntry = performance.getEntriesByType("navigation")[0];
 
   if (event.persisted || navEntry?.type === "back_forward") {
-    // Page was restored from cache, do nothing to preserve state
-    // The page will remain as it was
+    restartSpline();
   }
 });
 </script>
