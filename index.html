@@ -170,12 +170,26 @@ function handleFadeIn(viewer) {
     if (loadingOverlay) {
       loadingOverlay.classList.add('hidden');
     }
+    // Mark that page has loaded
+    sessionStorage.setItem('pageLoaded', 'true');
   }, 300);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const viewer = document.getElementById("splineScene");
-  handleFadeIn(viewer);
+  // Check if page has already loaded in this session
+  if (sessionStorage.getItem('pageLoaded')) {
+    // Page already loaded, hide overlay immediately
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay) {
+      loadingOverlay.classList.add('hidden');
+    }
+    const viewer = document.getElementById("splineScene");
+    viewer.classList.add('loaded');
+  } else {
+    // First load, show overlay and fade in normally
+    const viewer = document.getElementById("splineScene");
+    handleFadeIn(viewer);
+  }
 });
 </script>
 
@@ -191,39 +205,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Restart logic -->
+<!-- Restart logic - no longer restarts spline on back button -->
 <script>
-function restartSpline() {
-  const oldViewer = document.getElementById('splineScene');
-  if (!oldViewer) return;
-
-  const parent = oldViewer.parentNode;
-  const newViewer = document.createElement('spline-viewer');
-
-  newViewer.setAttribute('id', 'splineScene');
-  newViewer.setAttribute('url', oldViewer.getAttribute('url'));
-
-  parent.replaceChild(newViewer, oldViewer);
-
-  // reset fade
-  newViewer.classList.remove('loaded');
-
-  // Show loading overlay again
-  const loadingOverlay = document.getElementById('loadingOverlay');
-  if (loadingOverlay) {
-    loadingOverlay.classList.remove('hidden');
-  }
-
-  // reapply behaviors
-  removeSplineLogo();
-  handleFadeIn(newViewer);
-}
-
 window.addEventListener("pageshow", (event) => {
   const navEntry = performance.getEntriesByType("navigation")[0];
 
   if (event.persisted || navEntry?.type === "back_forward") {
-    restartSpline();
+    // Page was restored from cache, do nothing to preserve state
+    // The page will remain as it was
   }
 });
 </script>
