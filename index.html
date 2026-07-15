@@ -24,7 +24,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: none !important;
+  background: #1a1919 !important;
 }
 body {
   min-height: 100vh;
@@ -92,9 +92,66 @@ spline-viewer.loaded {
   .contact-section { right: 4px; }
   .contact-image-container { width: 200px; }
 }
+
+/* NAVIGATION BUTTONS */
+.nav-buttons-section {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% - 15vw), -50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  pointer-events: none;
+}
+.nav-button-container {
+  position: relative;
+  display: block;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  width: 20vw;
+}
+.nav-button-container:hover {
+  transform: scale(1.05);
+}
+.nav-button-image {
+  width: 100%;
+  display: block;
+}
+
+/* Staggered alignment for nav buttons - desktop only */
+#visualsButton {
+  margin-left: 80px;
+}
+#musicButton {
+  margin-right: 0;
+}
+#storeButton {
+  margin-right: 80px;
+}
+
+@media (max-width: 768px) {
+  .nav-buttons-section {
+    gap: 16px;
+    transform: translate(-50%, -50%);
+  }
+  .nav-button-container {
+    width: 180px;
+  }
+  /* Remove stagger on mobile */
+  #visualsButton {
+    margin-right: 0;
+  }
+  #storeButton {
+    margin-left: 0;
+  }
+}
 </style>
 
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.2/build/spline-viewer.js"></script>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.98/build/spline-viewer.js"></script>
 </head>
 
 <body>
@@ -109,19 +166,38 @@ spline-viewer.loaded {
   </div>
 </div>
 
+<!-- NAVIGATION BUTTONS -->
+<div class="nav-buttons-section">
+  <div class="nav-button-container" id="visualsButton">
+    <img src="obssd_assets/WEB_VISUALS.png" class="nav-button-image">
+  </div>
+  <div class="nav-button-container" id="musicButton">
+    <img src="obssd_assets/WEB_MUSIC.png" class="nav-button-image">
+  </div>
+  <div class="nav-button-container" id="storeButton">
+    <img src="obssd_assets/WEB_STORE.png" class="nav-button-image">
+  </div>
+</div>
+
 <!-- SPLINE -->
-<spline-viewer id="splineScene" url="https://prod.spline.design/85d942QVoJTXmM1Y/scene.splinecode"></spline-viewer>
+<spline-viewer id="splineScene" url="https://prod.spline.design/XUtY9akmauuTzbzz/scene.splinecode"></spline-viewer>
 
 <!-- Logo removal -->
 <script>
+let logoRemovalInterval = null;
+
 function removeSplineLogo() {
-  const interval = setInterval(() => {
+  // Clear any existing interval to prevent multiple concurrent checks
+  if (logoRemovalInterval) clearInterval(logoRemovalInterval);
+  
+  logoRemovalInterval = setInterval(() => {
     const viewer = document.querySelector('spline-viewer');
     if (viewer && viewer.shadowRoot) {
       const logo = viewer.shadowRoot.querySelector('#logo');
       if (logo) {
         logo.remove();
-        clearInterval(interval);
+        clearInterval(logoRemovalInterval);
+        logoRemovalInterval = null;
       }
     }
   }, 500);
@@ -156,26 +232,51 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<!-- Navigation buttons click handlers -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const visualsButton = document.getElementById("visualsButton");
+  const musicButton = document.getElementById("musicButton");
+  const storeButton = document.getElementById("storeButton");
+  
+  if (visualsButton) {
+    visualsButton.addEventListener("click", () => {
+      window.location.href = "https://obssd.online/visuals";
+    });
+  }
+  
+  if (musicButton) {
+    musicButton.addEventListener("click", () => {
+      window.location.href = "https://obssd.online/music";
+    });
+  }
+  
+  if (storeButton) {
+    storeButton.addEventListener("click", () => {
+      window.location.href = "https://obssd.online/store";
+    });
+  }
+});
+</script>
+
 <!-- Restart logic -->
 <script>
 function restartSpline() {
-  const oldViewer = document.getElementById('splineScene');
-  if (!oldViewer) return;
+  // Clear logo removal interval to prevent interference with Spline initialization
+  if (logoRemovalInterval) {
+    clearInterval(logoRemovalInterval);
+    logoRemovalInterval = null;
+  }
+  
+  const viewer = document.getElementById('splineScene');
+  if (!viewer) return;
 
-  const parent = oldViewer.parentNode;
-  const newViewer = document.createElement('spline-viewer');
+  // Reset fade class without replacing DOM element (preserves event listeners)
+  viewer.classList.remove('loaded');
 
-  newViewer.setAttribute('id', 'splineScene');
-  newViewer.setAttribute('url', oldViewer.getAttribute('url'));
-
-  parent.replaceChild(newViewer, oldViewer);
-
-  // reset fade
-  newViewer.classList.remove('loaded');
-
-  // reapply behaviors
+  // Reapply behaviors
   removeSplineLogo();
-  handleFadeIn(newViewer);
+  handleFadeIn(viewer);
 }
 
 window.addEventListener("pageshow", (event) => {
