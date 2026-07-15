@@ -114,14 +114,20 @@ spline-viewer.loaded {
 
 <!-- Logo removal -->
 <script>
+let logoRemovalInterval = null;
+
 function removeSplineLogo() {
-  const interval = setInterval(() => {
+  // Clear any existing interval to prevent multiple concurrent checks
+  if (logoRemovalInterval) clearInterval(logoRemovalInterval);
+  
+  logoRemovalInterval = setInterval(() => {
     const viewer = document.querySelector('spline-viewer');
     if (viewer && viewer.shadowRoot) {
       const logo = viewer.shadowRoot.querySelector('#logo');
       if (logo) {
         logo.remove();
-        clearInterval(interval);
+        clearInterval(logoRemovalInterval);
+        logoRemovalInterval = null;
       }
     }
   }, 500);
@@ -159,23 +165,21 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- Restart logic -->
 <script>
 function restartSpline() {
-  const oldViewer = document.getElementById('splineScene');
-  if (!oldViewer) return;
+  // Clear logo removal interval to prevent interference with Spline initialization
+  if (logoRemovalInterval) {
+    clearInterval(logoRemovalInterval);
+    logoRemovalInterval = null;
+  }
+  
+  const viewer = document.getElementById('splineScene');
+  if (!viewer) return;
 
-  const parent = oldViewer.parentNode;
-  const newViewer = document.createElement('spline-viewer');
+  // Reset fade class without replacing DOM element (preserves event listeners)
+  viewer.classList.remove('loaded');
 
-  newViewer.setAttribute('id', 'splineScene');
-  newViewer.setAttribute('url', oldViewer.getAttribute('url'));
-
-  parent.replaceChild(newViewer, oldViewer);
-
-  // reset fade
-  newViewer.classList.remove('loaded');
-
-  // reapply behaviors
+  // Reapply behaviors
   removeSplineLogo();
-  handleFadeIn(newViewer);
+  handleFadeIn(viewer);
 }
 
 window.addEventListener("pageshow", (event) => {
