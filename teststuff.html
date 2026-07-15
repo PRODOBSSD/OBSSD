@@ -1,71 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="Music portfolio">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>test</title>
+<!-- Google tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-NLWC8KV66N');
+</script>
 
-<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
+<meta charset="UTF-8">
+<meta name="description" content="OBSSD is a New Zealand based producer and visual artist.">
+<title>OBSSD</title>
+
+<link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
+<link rel="stylesheet" href="obssd_shared/custom.css">
+<link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-@font-face {
-  font-family: 'Allegiance';
-  src: url('/obssd_assets/allegiance.otf') format('opentype');
-}
-
-body {
+html, body {
+  height: 100%;
   margin: 0;
-  background: #fdfdfd;
-  font-family: Arial, sans-serif;
-  color: #000;
+  padding: 0;
+  box-sizing: border-box;
+  background: none !important;
 }
-
-/* LOGO */
-.logo-container {
+body {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
-  padding: 30px 0;
+  flex-direction: column;
 }
 
-.logo-img {
-  max-width: 340px;
-  cursor: pointer;
-  transition: 0.25s;
-}
-
-.logo-img:hover {
-  transform: scale(1.05);
-}
-
-/* SECTION TITLE */
-.section-title {
-  padding: 10px 40px 0;
-  font-family: 'Allegiance';
-  font-size: 1.6em;
-}
-
-.section-title span {
-  display: inline-block;
-  transform: scaleX(1.5);
-  transform-origin: left;
-  white-space: nowrap;
-}
-
-/* SPLINE VIEWER */
+/* ✅ Fade setup */
 spline-viewer {
-  width: 100%;
+  flex: 1;
+  width: 100vw;
   height: 100vh;
   display: block;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+spline-viewer.loaded {
+  opacity: 1;
+}
+
+/* TITLE */
+.obssd-title {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  z-index: 1002;
+}
+.obssd-title img {
+  width: 380px;
+}
+@media (max-width: 1500px) {
+  .obssd-title { display: none !important; }
+}
+
+/* CONTACT (restored) */
+.contact-section {
+  position: fixed;
+  right: 16px;
+  bottom: 0;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+.contact-image-container {
+  position: relative;
+  display: block;
+  width: 320px;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.contact-image-container:hover {
+  transform: scale(1.05);
+}
+.contact-image {
+  width: 100%;
+  display: block;
+}
+@media (max-width: 500px) {
+  .contact-section { right: 4px; }
+  .contact-image-container { width: 200px; }
 }
 </style>
 
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.98/build/spline-viewer.js"></script>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.2/build/spline-viewer.js"></script>
 </head>
 
 <body>
 
-<spline-viewer url="https://prod.spline.design/XUtY9akmauuTzbzz/scene.splinecode"></spline-viewer>
+<div class="obssd-title">
+  <img src="obssd_assets/OBSSD_TITLE.png">
+</div>
+
+<div class="contact-section">
+  <div class="contact-image-container" id="contactImageContainer">
+    <img src="obssd_assets/CONTACT_TITLE.png" class="contact-image">
+  </div>
+</div>
+
+<!-- SPLINE -->
+<spline-viewer id="splineScene" url="https://prod.spline.design/85d942QVoJTXmM1Y/scene.splinecode"></spline-viewer>
+
+<!-- Logo removal -->
+<script>
+function removeSplineLogo() {
+  const interval = setInterval(() => {
+    const viewer = document.querySelector('spline-viewer');
+    if (viewer && viewer.shadowRoot) {
+      const logo = viewer.shadowRoot.querySelector('#logo');
+      if (logo) {
+        logo.remove();
+        clearInterval(interval);
+      }
+    }
+  }, 500);
+}
+removeSplineLogo();
+</script>
+
+<!-- Fade-in handler -->
+<script>
+function handleFadeIn(viewer) {
+  // wait a moment for scene to render
+  setTimeout(() => {
+    viewer.classList.add('loaded');
+  }, 300);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const viewer = document.getElementById("splineScene");
+  handleFadeIn(viewer);
+});
+</script>
+
+<!-- Contact image click handler -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const contactImageContainer = document.getElementById("contactImageContainer");
+  if (contactImageContainer) {
+    contactImageContainer.addEventListener("click", () => {
+      window.location.href = "https://obssd.online/contact";
+    });
+  }
+});
+</script>
+
+<!-- Restart logic -->
+<script>
+function restartSpline() {
+  const oldViewer = document.getElementById('splineScene');
+  if (!oldViewer) return;
+
+  const parent = oldViewer.parentNode;
+  const newViewer = document.createElement('spline-viewer');
+
+  newViewer.setAttribute('id', 'splineScene');
+  newViewer.setAttribute('url', oldViewer.getAttribute('url'));
+
+  parent.replaceChild(newViewer, oldViewer);
+
+  // reset fade
+  newViewer.classList.remove('loaded');
+
+  // reapply behaviors
+  removeSplineLogo();
+  handleFadeIn(newViewer);
+}
+
+window.addEventListener("pageshow", (event) => {
+  const navEntry = performance.getEntriesByType("navigation")[0];
+
+  if (event.persisted || navEntry?.type === "back_forward") {
+    restartSpline();
+  }
+});
+</script>
 
 </body>
 </html>
