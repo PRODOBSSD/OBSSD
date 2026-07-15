@@ -102,8 +102,8 @@ spline-viewer.loaded {
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
+  align-items: center;
+  gap: 24px;
   pointer-events: none;
 }
 .nav-button-container {
@@ -120,28 +120,13 @@ spline-viewer.loaded {
   width: 100%;
   display: block;
 }
-#visualsButton {
-  width: 200px;
-}
-#musicButton {
-  width: 160px;
-}
-#storeButton {
-  width: 140px;
-}
 @media (max-width: 768px) {
   .nav-buttons-section {
-    gap: 12px;
+    gap: 16px;
     transform: translate(calc(-50% - 10vw), -50%);
   }
-  #visualsButton {
-    width: 150px;
-  }
-  #musicButton {
-    width: 120px;
-  }
-  #storeButton {
-    width: 105px;
+  .nav-button-container {
+    width: 180px;
   }
 }
 </style>
