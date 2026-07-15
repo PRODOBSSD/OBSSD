@@ -112,6 +112,7 @@ spline-viewer.loaded {
   pointer-events: auto;
   cursor: pointer;
   transition: transform 0.3s ease;
+  width: 280px;
 }
 .nav-button-container:hover {
   transform: scale(1.05);
@@ -120,6 +121,18 @@ spline-viewer.loaded {
   width: 100%;
   display: block;
 }
+
+/* Staggered alignment for nav buttons */
+#visualsButton {
+  margin-right: 40px;
+}
+#musicButton {
+  margin-right: 0;
+}
+#storeButton {
+  margin-left: 40px;
+}
+
 @media (max-width: 768px) {
   .nav-buttons-section {
     gap: 16px;
@@ -127,6 +140,12 @@ spline-viewer.loaded {
   }
   .nav-button-container {
     width: 180px;
+  }
+  #visualsButton {
+    margin-right: 25px;
+  }
+  #storeButton {
+    margin-left: 25px;
   }
 }
 </style>
