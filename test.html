@@ -92,6 +92,43 @@ spline-viewer.loaded {
   .contact-section { right: 4px; }
   .contact-image-container { width: 200px; }
 }
+
+/* NAVIGATION BUTTONS */
+.nav-buttons-section {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% - 15vw), -50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  pointer-events: none;
+}
+.nav-button-container {
+  position: relative;
+  display: block;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.nav-button-container:hover {
+  transform: scale(1.05);
+}
+.nav-button-image {
+  width: 100%;
+  display: block;
+}
+@media (max-width: 768px) {
+  .nav-buttons-section {
+    gap: 16px;
+    transform: translate(calc(-50% - 10vw), -50%);
+  }
+  .nav-button-container {
+    width: 180px;
+  }
+}
 </style>
 
 <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.98/build/spline-viewer.js"></script>
@@ -106,6 +143,19 @@ spline-viewer.loaded {
 <div class="contact-section">
   <div class="contact-image-container" id="contactImageContainer">
     <img src="obssd_assets/CONTACT_TITLE.png" class="contact-image">
+  </div>
+</div>
+
+<!-- NAVIGATION BUTTONS -->
+<div class="nav-buttons-section">
+  <div class="nav-button-container" id="visualsButton">
+    <img src="obssd_assets/WEB_VISUALS.png" class="nav-button-image">
+  </div>
+  <div class="nav-button-container" id="musicButton">
+    <img src="obssd_assets/WEB_MUSIC.png" class="nav-button-image">
+  </div>
+  <div class="nav-button-container" id="storeButton">
+    <img src="obssd_assets/WEB_STORE.png" class="nav-button-image">
   </div>
 </div>
 
@@ -157,6 +207,33 @@ document.addEventListener("DOMContentLoaded", () => {
   if (contactImageContainer) {
     contactImageContainer.addEventListener("click", () => {
       window.location.href = "https://obssd.online/contact";
+    });
+  }
+});
+</script>
+
+<!-- Navigation buttons click handlers -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const visualsButton = document.getElementById("visualsButton");
+  const musicButton = document.getElementById("musicButton");
+  const storeButton = document.getElementById("storeButton");
+  
+  if (visualsButton) {
+    visualsButton.addEventListener("click", () => {
+      window.location.href = "https://obssd.online/visuals";
+    });
+  }
+  
+  if (musicButton) {
+    musicButton.addEventListener("click", () => {
+      window.location.href = "https://obssd.online/music";
+    });
+  }
+  
+  if (storeButton) {
+    storeButton.addEventListener("click", () => {
+      window.location.href = "https://obssd.online/store";
     });
   }
 });
