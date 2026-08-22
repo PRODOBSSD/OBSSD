@@ -82,7 +82,7 @@ spline-viewer.loaded {
   transition: transform 0.06s ease-out, filter 0.24s ease-out;
 }
 .contact-image-container:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 .contact-image-container.flash {
   filter: brightness(1.16);
@@ -119,7 +119,7 @@ spline-viewer.loaded {
   width: 20vw;
 }
 .nav-button-container:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 .nav-button-image {
   width: 100%;
@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (contactImageContainer) {
     contactImageContainer.addEventListener("pointerenter", () => {
       contactImageContainer.classList.add("flash");
-      window.requestAnimationFrame(() => contactImageContainer.classList.remove("flash"));
+      window.setTimeout(() => contactImageContainer.classList.remove("flash"), 30);
     });
     contactImageContainer.addEventListener("click", () => {
       window.location.href = "https://obssd.online/contact";

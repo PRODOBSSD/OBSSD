@@ -34,7 +34,7 @@ body {
   transition: transform 0.06s ease-out, filter 0.24s ease-out;
 }
 .logo-img:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 .logo-img.flash {
   filter: brightness(1.16);
@@ -54,7 +54,7 @@ body {
 }
 
 .contact-button:hover {
-  transform: scale(1.1);
+  transform: scale(1.03);
 }
 .contact-button.flash {
   filter: brightness(1.16);
@@ -487,7 +487,7 @@ document.querySelectorAll('.item').forEach((el, i) => {
 document.querySelectorAll('.contact-button, .logo-img').forEach((element) => {
   element.addEventListener('pointerenter', () => {
     element.classList.add('flash');
-    window.requestAnimationFrame(() => element.classList.remove('flash'));
+    window.setTimeout(() => element.classList.remove('flash'), 30);
   });
 });
 </script>
