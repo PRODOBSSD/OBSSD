@@ -46,6 +46,8 @@ const pointerRay = new THREE.Raycaster();
 let headBone;
 let headRestWorldRotation;
 let headRestWorldForward;
+let idleMixer;
+let lastFrameTime = performance.now();
 const eyeBones = [];
 const eyeRestWorldRotations = new Map();
 const eyeLookInfluence = 0.55;
@@ -86,6 +88,13 @@ new GLTFLoader().load(
     '../obssd_assets/3d_models/OBSSD_WEBSITE_VERSION.glb',
     (gltf) => {
         const model = gltf.scene;
+        idleMixer = new THREE.AnimationMixer(model);
+        const idleClip = THREE.AnimationClip.findByName(gltf.animations, 'OBSSD_IDLE');
+        if (idleClip) {
+            idleMixer.clipAction(idleClip).setLoop(THREE.LoopRepeat, Infinity).play();
+        } else {
+            console.warn('OBSSD_IDLE animation not found in OBSSD_WEBSITE_VERSION.glb.');
+        }
         const bounds = new THREE.Box3().setFromObject(model);
         const size = bounds.getSize(new THREE.Vector3());
         const center = bounds.getCenter(new THREE.Vector3());
@@ -217,6 +226,11 @@ function updatePointerTarget() {
 }
 
 function animate() {
+    const currentTime = performance.now();
+    if (idleMixer) {
+        idleMixer.update((currentTime - lastFrameTime) / 1000);
+    }
+    lastFrameTime = currentTime;
     updatePointerTarget();
     updateBlink();
     renderer.render(scene, camera);
