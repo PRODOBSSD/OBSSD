@@ -35,19 +35,6 @@ body {
   flex-direction: column;
 }
 
-/* ✅ Fade setup */
-spline-viewer {
-  flex: 1;
-  width: 100vw;
-  height: 100vh;
-  display: block;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-spline-viewer.loaded {
-  opacity: 1;
-}
-
 /* TITLE */
 .obssd-title {
   position: fixed;
@@ -156,7 +143,14 @@ spline-viewer.loaded {
 }
 </style>
 
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.98/build/spline-viewer.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+  }
+}
+</script>
 </head>
 
 <body>
@@ -183,47 +177,6 @@ spline-viewer.loaded {
     <img src="obssd_assets/WEB_STORE.png" class="nav-button-image">
   </div>
 </div>
-
-<!-- SPLINE -->
-<spline-viewer id="splineScene" url="https://prod.spline.design/XUtY9akmauuTzbzz/scene.splinecode"></spline-viewer>
-
-<!-- Logo removal -->
-<script>
-let logoRemovalInterval = null;
-
-function removeSplineLogo() {
-  // Clear any existing interval to prevent multiple concurrent checks
-  if (logoRemovalInterval) clearInterval(logoRemovalInterval);
-  
-  logoRemovalInterval = setInterval(() => {
-    const viewer = document.querySelector('spline-viewer');
-    if (viewer && viewer.shadowRoot) {
-      const logo = viewer.shadowRoot.querySelector('#logo');
-      if (logo) {
-        logo.remove();
-        clearInterval(logoRemovalInterval);
-        logoRemovalInterval = null;
-      }
-    }
-  }, 500);
-}
-removeSplineLogo();
-</script>
-
-<!-- Fade-in handler -->
-<script>
-function handleFadeIn(viewer) {
-  // wait a moment for scene to render
-  setTimeout(() => {
-    viewer.classList.add('loaded');
-  }, 300);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const viewer = document.getElementById("splineScene");
-  handleFadeIn(viewer);
-});
-</script>
 
 <!-- Contact image click handler -->
 <script>
@@ -264,34 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Restart logic -->
-<script>
-function restartSpline() {
-  // Clear logo removal interval to prevent interference with Spline initialization
-  if (logoRemovalInterval) {
-    clearInterval(logoRemovalInterval);
-    logoRemovalInterval = null;
-  }
-  
-  const viewer = document.getElementById('splineScene');
-  if (!viewer) return;
-
-  // Reset fade class without replacing DOM element (preserves event listeners)
-  viewer.classList.remove('loaded');
-
-  // Reapply behaviors
-  removeSplineLogo();
-  handleFadeIn(viewer);
-}
-
-window.addEventListener("pageshow", (event) => {
-  const navEntry = performance.getEntriesByType("navigation")[0];
-
-  if (event.persisted || navEntry?.type === "back_forward") {
-    restartSpline();
-  }
-});
-</script>
+<script type="module" src="obssd_shared/three.js?v=31"></script>
 
 </body>
 </html>
