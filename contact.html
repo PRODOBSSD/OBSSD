@@ -26,11 +26,15 @@ body {
 .logo-img {
   max-width: 340px;
   cursor: pointer;
-  transition: 0.25s;
+  transition: transform 0.06s ease-out, filter 0.24s ease-out;
 }
 
 .logo-img:hover {
   transform: scale(1.05);
+}
+.logo-img.flash {
+  filter: brightness(1.16);
+  transition-duration: 0.06s, 0s;
 }
 
 /* FORM CONTAINER */
@@ -171,6 +175,15 @@ setTimeout(function() {
     iframe.setAttribute('height', '2000');
   }
 }, 2000);
+</script>
+
+<script>
+document.querySelectorAll('.logo-img').forEach((element) => {
+  element.addEventListener('pointerenter', () => {
+    element.classList.add('flash');
+    window.requestAnimationFrame(() => element.classList.remove('flash'));
+  });
+});
 </script>
 
 </body>

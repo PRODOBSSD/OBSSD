@@ -31,11 +31,15 @@ body {
 .logo-img {
   max-width: 340px;
   cursor: pointer;
-  transition: 0.25s;
+  transition: transform 0.06s ease-out, filter 0.24s ease-out;
 }
 
 .logo-img:hover {
   transform: scale(1.05);
+}
+.logo-img.flash {
+  filter: brightness(1.16);
+  transition-duration: 0.06s, 0s;
 }
 
 /* SECTION TITLE */
@@ -159,11 +163,15 @@ body {
 
 .contact-button {
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.06s ease-out, filter 0.24s ease-out;
 }
 
 .contact-button:hover {
   transform: scale(1.1);
+}
+.contact-button.flash {
+  filter: brightness(1.16);
+  transition-duration: 0.06s, 0s;
 }
 
 .contact-button img {
@@ -258,6 +266,15 @@ body {
 /* STAGGER FADE-UP (like VISUALS page) */
 document.querySelectorAll('.card').forEach((el, i) => {
   el.style.animationDelay = (i * 0.08) + 's';
+});
+</script>
+
+<script>
+document.querySelectorAll('.contact-button, .logo-img').forEach((element) => {
+  element.addEventListener('pointerenter', () => {
+    element.classList.add('flash');
+    window.requestAnimationFrame(() => element.classList.remove('flash'));
+  });
 });
 </script>
 

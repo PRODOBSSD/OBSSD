@@ -66,10 +66,14 @@ body {
   width: 320px;
   pointer-events: auto;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.06s ease-out, filter 0.24s ease-out;
 }
 .contact-image-container:hover {
   transform: scale(1.05);
+}
+.contact-image-container.flash {
+  filter: brightness(1.16);
+  transition-duration: 0.06s, 0s;
 }
 .contact-image {
   width: 100%;
@@ -98,11 +102,15 @@ body {
   display: block;
   pointer-events: auto;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.06s ease-out, filter 0.24s ease-out;
   width: 20vw;
 }
 .nav-button-container:hover {
   transform: scale(1.05);
+}
+.nav-button-container.flash {
+  filter: brightness(1.16);
+  transition-duration: 0.06s, 0s;
 }
 .nav-button-image {
   width: 100%;
@@ -183,6 +191,10 @@ body {
 document.addEventListener("DOMContentLoaded", () => {
   const contactImageContainer = document.getElementById("contactImageContainer");
   if (contactImageContainer) {
+    contactImageContainer.addEventListener("pointerenter", () => {
+      contactImageContainer.classList.add("flash");
+      window.requestAnimationFrame(() => contactImageContainer.classList.remove("flash"));
+    });
     contactImageContainer.addEventListener("click", () => {
       window.location.href = "https://obssd.online/contact";
     });
@@ -196,6 +208,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const visualsButton = document.getElementById("visualsButton");
   const musicButton = document.getElementById("musicButton");
   const storeButton = document.getElementById("storeButton");
+  const navButtons = [visualsButton, musicButton, storeButton];
+
+  navButtons.forEach((button) => {
+    if (button) {
+      button.addEventListener("pointerenter", () => {
+        button.classList.add("flash");
+        window.requestAnimationFrame(() => button.classList.remove("flash"));
+      }, { once: false });
+    }
+  });
   
   if (visualsButton) {
     visualsButton.addEventListener("click", () => {
