@@ -50,7 +50,7 @@ const eyeBones = [];
 const eyeRestWorldRotations = new Map();
 const eyeLookInfluence = 0.55;
 const blinkMeshes = [];
-const blinkDuration = 240;
+const blinkOpenDuration = 150;
 let blinkStartedAt = -Infinity;
 const modelRoot = new THREE.Group();
 scene.add(modelRoot);
@@ -224,10 +224,7 @@ function animate() {
 
 function updateBlink() {
     const elapsed = performance.now() - blinkStartedAt;
-    const progress = Math.min(Math.max(elapsed / blinkDuration, 0), 1);
-    const blinkAmount = progress < 0.5
-        ? progress * 2
-        : (1 - progress) * 2;
+    const blinkAmount = Math.max(1 - (elapsed / blinkOpenDuration), 0);
 
     blinkMeshes.forEach(({ node, index }) => {
         node.morphTargetInfluences[index] = blinkAmount;
@@ -242,6 +239,9 @@ window.addEventListener('pointermove', (event) => {
 window.addEventListener('click', () => {
     if (blinkMeshes.length > 0) {
         blinkStartedAt = performance.now();
+        blinkMeshes.forEach(({ node, index }) => {
+            node.morphTargetInfluences[index] = 1;
+        });
     }
 });
 
