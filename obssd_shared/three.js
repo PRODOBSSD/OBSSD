@@ -3,6 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#1a1919');
+const isMobileDevice = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
 
 let camera = new THREE.PerspectiveCamera(
     35,
@@ -14,12 +15,13 @@ camera.position.set(0, 1.45, 7);
 camera.lookAt(0, 1.25, 0);
 
 const renderer = new THREE.WebGLRenderer({
-    antialias: true,
-    alpha: false
+    antialias: !isMobileDevice,
+    alpha: false,
+    powerPreference: isMobileDevice ? 'low-power' : 'high-performance'
 });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(isMobileDevice ? 1 : Math.min(window.devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled = !isMobileDevice;
 renderer.shadowMap.type = THREE.PCFShadowMap;
 renderer.setAnimationLoop(animate);
 renderer.domElement.style.display = 'block';
@@ -43,6 +45,9 @@ let headRestWorldForward;
 const eyeBones = [];
 const eyeRestWorldRotations = new Map();
 const eyeLookInfluence = 0.55;
+const blinkMeshes = [];
+const blinkDuration = 240;
+let blinkStartedAt = -Infinity;
 const modelRoot = new THREE.Group();
 scene.add(modelRoot);
 
@@ -97,7 +102,7 @@ new GLTFLoader().load(
         }
 
         const cameraLight = new THREE.PointLight(0xfff4e8, 28, 0, 2);
-        cameraLight.castShadow = true;
+        cameraLight.castShadow = !isMobileDevice;
         cameraLight.shadow.mapSize.set(1024, 1024);
         cameraLight.shadow.bias = -0.0005;
         camera.add(cameraLight);
@@ -109,6 +114,10 @@ new GLTFLoader().load(
             if (node.isMesh || node.isSkinnedMesh) {
                 node.castShadow = true;
                 node.receiveShadow = true;
+                const blinkIndex = node.morphTargetDictionary?.BLINK;
+                if (blinkIndex !== undefined && node.morphTargetInfluences) {
+                    blinkMeshes.push({ node, index: blinkIndex });
+                }
                 node.material = Array.isArray(node.material)
                     ? node.material.map(toStandardMaterial)
                     : toStandardMaterial(node.material);
@@ -205,12 +214,31 @@ function updatePointerTarget() {
 
 function animate() {
     updatePointerTarget();
+    updateBlink();
     renderer.render(scene, camera);
+}
+
+function updateBlink() {
+    const elapsed = performance.now() - blinkStartedAt;
+    const progress = Math.min(Math.max(elapsed / blinkDuration, 0), 1);
+    const blinkAmount = progress < 0.5
+        ? progress * 2
+        : (1 - progress) * 2;
+
+    blinkMeshes.forEach(({ node, index }) => {
+        node.morphTargetInfluences[index] = blinkAmount;
+    });
 }
 
 window.addEventListener('pointermove', (event) => {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+});
+
+window.addEventListener('click', () => {
+    if (blinkMeshes.length > 0) {
+        blinkStartedAt = performance.now();
+    }
 });
 
 window.addEventListener('resize', () => {
