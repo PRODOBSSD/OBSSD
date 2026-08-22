@@ -37,7 +37,7 @@
     addVolumeControl();
     setAudioVolume();
 
-    document.querySelectorAll('.nav-button-container, .contact-button, #contactImageContainer').forEach((element) => {
+    document.querySelectorAll('.nav-button-container, .contact-button, #contactImageContainer, .logo-img').forEach((element) => {
       element.addEventListener('pointerenter', playHoverSound);
     });
 
