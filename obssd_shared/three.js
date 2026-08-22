@@ -1,9 +1,13 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+const isMobileDevice = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+
+if (isMobileDevice) {
+    document.body.classList.add('mobile-no-webgl');
+} else {
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#1a1919');
-const isMobileDevice = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
 
 let camera = new THREE.PerspectiveCamera(
     35,
@@ -249,3 +253,4 @@ window.addEventListener('resize', () => {
 });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
+}

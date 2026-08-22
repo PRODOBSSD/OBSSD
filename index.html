@@ -217,7 +217,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<script type="module" src="obssd_shared/three.js?v=31"></script>
+<script type="module">
+  const isMobileDevice = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+  if (!isMobileDevice) {
+    import('./obssd_shared/three.js?v=31');
+  }
+</script>
 
 </body>
 </html>
