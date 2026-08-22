@@ -1,3 +1,52 @@
 html, body, spline-viewer, * {
   cursor: url('/obssd_assets/OBSSD_CURSOR.png') 12 12, auto !important;
 }
+
+#obssd-volume-control {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 6px 8px;
+  color: #e8e4d9;
+  background: rgba(26, 25, 25, 0.78);
+  font: 11px/1 Arial, sans-serif;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(232, 228, 217, 0.35);
+  border-radius: 3px;
+  backdrop-filter: blur(4px);
+}
+
+#obssd-volume-control input {
+  width: 0;
+  max-width: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  accent-color: #e8e4d9;
+  cursor: pointer !important;
+  transition: width 0.2s ease, max-width 0.2s ease, opacity 0.2s ease, margin-left 0.2s ease;
+}
+
+#obssd-volume-control:hover,
+#obssd-volume-control:focus-within {
+  gap: 7px;
+}
+
+#obssd-volume-control:hover input,
+#obssd-volume-control:focus-within input {
+  width: 82px;
+  max-width: 82px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 480px) {
+  #obssd-volume-control {
+    top: 8px;
+    right: 8px;
+  }
+}
