@@ -40,21 +40,16 @@ const pointerRay = new THREE.Raycaster();
 let headBone;
 let headRestWorldRotation;
 let headRestWorldForward;
+const eyeBones = [];
+const eyeRestWorldRotations = new Map();
+const eyeLookInfluence = 0.55;
 const modelRoot = new THREE.Group();
 scene.add(modelRoot);
 
 function toStandardMaterial(material) {
-    if (material.isMeshStandardMaterial) {
-        return material;
-    }
-
-    const standardMaterial = new THREE.MeshStandardMaterial({
+    const toonMaterial = new THREE.MeshToonMaterial({
         color: material.color ? material.color.clone() : 0xffffff,
         map: material.map || null,
-        roughness: material.roughness ?? 1,
-        metalness: material.metalness ?? 0,
-        roughnessMap: material.roughnessMap || null,
-        metalnessMap: material.metalnessMap || null,
         normalMap: material.normalMap || null,
         normalScale: material.normalScale ? material.normalScale.clone() : undefined,
         aoMap: material.aoMap || null,
@@ -71,8 +66,11 @@ function toStandardMaterial(material) {
         vertexColors: material.vertexColors
     });
 
-    standardMaterial.name = material.name;
-    return standardMaterial;
+    toonMaterial.name = material.name;
+    toonMaterial.side = THREE.FrontSide;
+    toonMaterial.depthTest = true;
+    toonMaterial.depthWrite = true;
+    return toonMaterial;
 }
 
 new GLTFLoader().load(
@@ -98,11 +96,14 @@ new GLTFLoader().load(
             camera.updateProjectionMatrix();
         }
 
-        const cameraLight = new THREE.PointLight(0xb8c7ff, 18, 0, 2);
+        const cameraLight = new THREE.PointLight(0xfff4e8, 28, 0, 2);
         cameraLight.castShadow = true;
         cameraLight.shadow.mapSize.set(1024, 1024);
         cameraLight.shadow.bias = -0.0005;
         camera.add(cameraLight);
+
+        const fillLight = new THREE.HemisphereLight(0xfff8ef, 0x6b6258, 0.35);
+        scene.add(fillLight);
 
         model.traverse((node) => {
             if (node.isMesh || node.isSkinnedMesh) {
@@ -116,6 +117,9 @@ new GLTFLoader().load(
             const normalizedName = node.name.toLowerCase().replace(/[^a-z0-9]/g, '');
             if (normalizedName === 'defspine006') {
                 headBone = node;
+            }
+            if (normalizedName === 'defeyel' || normalizedName === 'defeyer') {
+                eyeBones.push(node);
             }
         });
 
@@ -132,6 +136,12 @@ new GLTFLoader().load(
         if (headBone) {
             headRestWorldRotation = headBone.getWorldQuaternion(new THREE.Quaternion());
             headRestWorldForward = new THREE.Vector3(0, 0, 1);
+            eyeBones.forEach((eyeBone) => {
+                eyeRestWorldRotations.set(
+                    eyeBone,
+                    eyeBone.getWorldQuaternion(new THREE.Quaternion())
+                );
+            });
         } else {
             console.warn('No head bone found in OBSSD_WEBSITE_VERSION.glb.');
         }
@@ -162,6 +172,35 @@ function updatePointerTarget() {
 
     const desiredLocalRotation = parentRotation.multiply(desiredWorldRotation);
     headBone.quaternion.slerp(desiredLocalRotation, 0.18);
+
+    headBone.updateMatrixWorld(true);
+    const currentHeadWorldRotation = headBone.getWorldQuaternion(new THREE.Quaternion());
+    const headRotationDelta = currentHeadWorldRotation
+        .multiply(headRestWorldRotation.clone().invert());
+
+    eyeBones.forEach((eyeBone) => {
+        const inheritedEyeWorldRotation = headRotationDelta
+            .clone()
+            .multiply(eyeRestWorldRotations.get(eyeBone));
+        const eyeDirection = pointerTarget.clone().sub(headPosition).normalize();
+        const eyeForward = new THREE.Vector3(0, 1, 0)
+            .applyQuaternion(inheritedEyeWorldRotation);
+        const eyeLookRotation = new THREE.Quaternion().setFromUnitVectors(
+            eyeForward,
+            eyeDirection
+        );
+        const subtleEyeLookRotation = new THREE.Quaternion().slerp(
+            eyeLookRotation,
+            eyeLookInfluence
+        );
+        const desiredEyeWorldRotation = subtleEyeLookRotation
+            .multiply(inheritedEyeWorldRotation);
+        const eyeParentWorldRotation = eyeBone.parent
+            ? eyeBone.parent.getWorldQuaternion(new THREE.Quaternion()).invert()
+            : new THREE.Quaternion();
+        const desiredEyeLocalRotation = eyeParentWorldRotation.multiply(desiredEyeWorldRotation);
+        eyeBone.quaternion.slerp(desiredEyeLocalRotation, 0.18);
+    });
 }
 
 function animate() {
