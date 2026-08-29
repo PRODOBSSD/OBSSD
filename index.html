@@ -97,16 +97,16 @@ body {
   #contact3DContainer { width: 220px; height: 220px; }
 }
 
-/* Mobile: ensure correct viewport scaling and center the contact button */
+/* Mobile: position contact lower on the screen to avoid overlapping nav */
 @media (max-width: 768px) {
   .contact-section,
   #contact3DContainer {
     position: fixed;
     left: 50%;
-    top: 50%;
+    bottom: 24px; /* placed lower to avoid nav overlap */
+    top: auto;
     right: auto;
-    bottom: auto;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     width: min(76vw, 360px);
     height: min(76vw, 360px);
     pointer-events: auto;
