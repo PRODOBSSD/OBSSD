@@ -112,11 +112,19 @@ body {
     pointer-events: auto;
     cursor: pointer;
     z-index: 1003; /* ensure it's on top of other content */
+    touch-action: manipulation; /* reduce default touch gestures */
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* keep transition behavior */
   #contact3DContainer {
     transition: transform 0.06s ease-out, filter 0.24s ease-out;
+  }
+
+  /* Prevent jump on touch: include translateX in the scaled transform for mobile */
+  #contact3DContainer:hover,
+  #contact3DContainer:active {
+    transform: translateX(-50%) scale(1.03);
   }
 }
 
