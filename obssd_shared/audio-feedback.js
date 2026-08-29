@@ -74,12 +74,20 @@
     event.stopImmediatePropagation();
     flash(element);
     playClickSound();
+
+    element.classList.add('is-loading');
+    element.style.pointerEvents = 'none';
+
     let pendingWindow = null;
     const inlineClick = element.getAttribute('onclick') || '';
     if (inlineClick.includes("window.open(") && inlineClick.includes("'_blank'")) {
       pendingWindow = window.open('', '_blank');
     }
-    window.setTimeout(() => continueClick(element, event, pendingWindow), 80);
+    window.setTimeout(() => {
+      element.classList.remove('is-loading');
+      element.style.pointerEvents = '';
+      continueClick(element, event, pendingWindow);
+    }, 150);
   }
 
   function addVolumeControl() {

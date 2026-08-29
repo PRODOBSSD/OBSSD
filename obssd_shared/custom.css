@@ -44,6 +44,18 @@ html, body, spline-viewer, * {
   pointer-events: auto;
 }
 
+.nav-button-container.is-loading,
+.contact-button.is-loading,
+#contactImageContainer.is-loading,
+.logo-img.is-loading,
+button.is-loading {
+  opacity: 0.42;
+  filter: brightness(0.72) saturate(0.7);
+  transform: scale(0.985);
+  transition: opacity 0.18s ease, filter 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+
 @media (max-width: 480px) {
   #obssd-volume-control {
     top: 8px;
