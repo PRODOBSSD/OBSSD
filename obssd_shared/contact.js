@@ -53,6 +53,14 @@ if (canvas && container) {
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+
+    if (window.matchMedia('(max-width: 768px), (pointer: coarse)').matches) {
+      camera.position.set(0, 0.15, 4.2);
+      camera.lookAt(0, -0.15, 0);
+    } else {
+      camera.position.set(0, 0.25, 4.6);
+      camera.lookAt(0, -0.1, 0);
+    }
   }
 
   function setModelScale(model) {

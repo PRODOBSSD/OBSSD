@@ -91,8 +91,22 @@ body {
   transition-duration: 0.06s, 0s;
 }
 @media (max-width: 1200px) {
-  .contact-section { right: 4px; }
-  #contact3DContainer { width: 220px; height: 140px; }
+  .contact-section { right: 50%; bottom: 12px; transform: translateX(50%); }
+  #contact3DContainer { width: 220px; height: 220px; }
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    right: 50%;
+    bottom: 18px;
+    transform: translateX(50%);
+    width: min(76vw, 360px);
+    height: min(76vw, 360px);
+  }
+  #contact3DContainer {
+    width: min(76vw, 360px);
+    height: min(76vw, 360px);
+  }
 }
 
 /* NAVIGATION BUTTONS */
