@@ -50,39 +50,47 @@ body {
   .obssd-title { display: none !important; }
 }
 
-/* CONTACT (restored) */
+/* CONTACT (3D) */
 .contact-section {
   position: fixed;
   right: 16px;
   bottom: 0;
   z-index: 1001;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  pointer-events: none;
+  align-items: flex-end;
+  justify-content: center;
+  width: 320px;
+  height: 180px;
+  pointer-events: auto;
+  cursor: pointer;
 }
-.contact-image-container {
+#contact-3d-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: auto;
+  position: absolute;
+  inset: 0;
+}
+#contact3DContainer {
   position: relative;
   display: block;
   width: 320px;
+  height: 180px;
   pointer-events: auto;
   cursor: pointer;
   transition: transform 0.06s ease-out, filter 0.24s ease-out;
 }
-.contact-image-container:hover {
+#contact3DContainer:hover {
   transform: scale(1.03);
 }
-.contact-image-container.flash {
+#contact3DContainer.flash {
   filter: brightness(1.16);
   transition-duration: 0.06s, 0s;
 }
-.contact-image {
-  width: 100%;
-  display: block;
-}
 @media (max-width: 1200px) {
   .contact-section { right: 4px; }
-  .contact-image-container { width: 200px; }
+  #contact3DContainer { width: 220px; height: 140px; }
 }
 
 /* NAVIGATION BUTTONS */
@@ -168,10 +176,8 @@ body {
   <img src="obssd_assets/OBSSD_TITLE.png">
 </div>
 
-<div class="contact-section">
-  <div class="contact-image-container" id="contactImageContainer">
-    <img src="obssd_assets/CONTACT_TITLE.png" class="contact-image">
-  </div>
+<div class="contact-section" id="contact3DContainer" aria-label="Open contact page">
+  <canvas id="contact-3d-canvas"></canvas>
 </div>
 
 <!-- NAVIGATION BUTTONS -->
@@ -186,22 +192,6 @@ body {
     <img src="obssd_assets/WEB_STORE.png" class="nav-button-image">
   </div>
 </div>
-
-<!-- Contact image click handler -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const contactImageContainer = document.getElementById("contactImageContainer");
-  if (contactImageContainer) {
-    contactImageContainer.addEventListener("pointerenter", () => {
-      contactImageContainer.classList.add("flash");
-      window.setTimeout(() => contactImageContainer.classList.remove("flash"), 30);
-    });
-    contactImageContainer.addEventListener("click", () => {
-      window.location.href = "https://obssd.online/contact";
-    });
-  }
-});
-</script>
 
 <!-- Navigation buttons click handlers -->
 <script>
@@ -244,6 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const isMobileDevice = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
   if (!isMobileDevice) {
     import('./obssd_shared/three.js?v=31');
+    import('./obssd_shared/contact.js?v=31');
   }
 </script>
 

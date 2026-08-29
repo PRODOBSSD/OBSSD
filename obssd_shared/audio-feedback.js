@@ -46,7 +46,9 @@
       visualsButton: 'https://obssd.online/visuals',
       musicButton: 'https://obssd.online/music',
       storeButton: 'https://obssd.online/store',
-      contactImageContainer: 'https://obssd.online/contact'
+      contactImageContainer: 'https://obssd.online/contact',
+      contact3DContainer: 'https://obssd.online/contact',
+      'contact-3d-canvas': 'https://obssd.online/contact'
     };
     if (destinations[element.id]) {
       window.location.href = destinations[element.id];
@@ -67,8 +69,12 @@
   }
 
   function handleClick(event) {
-    const element = event.target.closest('.nav-button-container, .contact-button, #contactImageContainer, .logo-img, button');
-    if (!element || element.closest('#obssd-volume-control')) return;
+    let element = event.target.closest('.nav-button-container, .contact-button, #contactImageContainer, .logo-img, #contact3DContainer, #contact-3d-canvas, button');
+    if (!element) return;
+    if (element.id === 'contact-3d-canvas') {
+      element = element.closest('#contact3DContainer') || element;
+    }
+    if (element.closest('#obssd-volume-control')) return;
 
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -106,16 +112,24 @@
     });
   }
 
+  function bindHoverTargets(root = document) {
+    root.querySelectorAll('.nav-button-container, .contact-button, #contactImageContainer, #contact3DContainer, .logo-img, #contact-3d-canvas').forEach((element) => {
+      if (element.dataset.obssdHoverBound === 'true') return;
+      element.dataset.obssdHoverBound = 'true';
+      element.addEventListener('pointerenter', playHoverSound);
+    });
+  }
+
   function initialize() {
     addVolumeControl();
     setAudioVolume();
-
-    document.querySelectorAll('.nav-button-container, .contact-button, #contactImageContainer, .logo-img').forEach((element) => {
-      element.addEventListener('pointerenter', playHoverSound);
-    });
+    bindHoverTargets();
     document.addEventListener('click', handleClick, true);
 
-    new MutationObserver(setAudioVolume).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(() => {
+      setAudioVolume();
+      bindHoverTargets();
+    }).observe(document.body, { childList: true, subtree: true });
   }
 
   if (document.readyState === 'loading') {

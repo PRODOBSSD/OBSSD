@@ -47,6 +47,7 @@ html, body, spline-viewer, * {
 .nav-button-container.is-loading,
 .contact-button.is-loading,
 #contactImageContainer.is-loading,
+#contact3DContainer.is-loading,
 .logo-img.is-loading,
 button.is-loading {
   opacity: 0.42;
