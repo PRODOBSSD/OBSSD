@@ -53,14 +53,14 @@ body {
 /* CONTACT (3D) */
 .contact-section {
   position: fixed;
-  right: 16px;
-  bottom: 0;
+  right: 8px;
+  bottom: 8px;
   z-index: 1001;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  width: 320px;
-  height: 180px;
+  width: 270px;
+  height: 270px;
   pointer-events: auto;
   cursor: pointer;
 }
@@ -73,10 +73,12 @@ body {
   inset: 0;
 }
 #contact3DContainer {
-  position: relative;
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
   display: block;
-  width: 320px;
-  height: 180px;
+  width: 270px;
+  height: 270px;
   pointer-events: auto;
   cursor: pointer;
   transition: transform 0.06s ease-out, filter 0.24s ease-out;
@@ -234,8 +236,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const isMobileDevice = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
   if (!isMobileDevice) {
     import('./obssd_shared/three.js?v=31');
-    import('./obssd_shared/contact.js?v=31');
   }
+  import('./obssd_shared/contact.js?v=31');
 </script>
 
 </body>
