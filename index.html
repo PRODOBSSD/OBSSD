@@ -5,7 +5,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
+function gtag(){dataLayer.push(arguments);} 
 gtag('js', new Date());
 gtag('config', 'G-NLWC8KV66N');
 </script>
@@ -106,6 +106,28 @@ body {
   #contact3DContainer {
     width: min(76vw, 360px);
     height: min(76vw, 360px);
+  }
+}
+
+/* Mobile: center contact button exactly in the viewport */
+@media (max-width: 768px) {
+  .contact-section,
+  #contact3DContainer {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: min(76vw, 360px);
+    height: min(76vw, 360px);
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  /* keep transition behavior */
+  #contact3DContainer {
+    transition: transform 0.06s ease-out, filter 0.24s ease-out;
   }
 }
 
