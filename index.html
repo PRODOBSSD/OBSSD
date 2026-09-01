@@ -5,12 +5,13 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLWC8KV66N"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
+function gtag(){dataLayer.push(arguments);} 
 gtag('js', new Date());
 gtag('config', 'G-NLWC8KV66N');
 </script>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="OBSSD is a New Zealand based producer and visual artist.">
 <title>OBSSD</title>
 
@@ -76,6 +77,7 @@ body {
   position: fixed;
   right: 8px;
   bottom: 8px;
+  z-index: 1001;
   display: block;
   width: 270px;
   height: 270px;
@@ -95,17 +97,34 @@ body {
   #contact3DContainer { width: 220px; height: 220px; }
 }
 
+/* Mobile: position contact lower on the screen to avoid overlapping nav */
 @media (max-width: 768px) {
-  .contact-section {
-    right: 50%;
-    bottom: 18px;
-    transform: translateX(50%);
-    width: min(76vw, 360px);
-    height: min(76vw, 360px);
-  }
+  .contact-section,
   #contact3DContainer {
+    position: fixed;
+    left: 50%;
+    bottom: 24px; /* placed lower to avoid nav overlap */
+    top: auto;
+    right: auto;
+    transform: translateX(-50%);
     width: min(76vw, 360px);
     height: min(76vw, 360px);
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 1003; /* ensure it's on top of other content */
+    touch-action: manipulation; /* reduce default touch gestures */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* keep transition behavior */
+  #contact3DContainer {
+    transition: transform 0.06s ease-out, filter 0.24s ease-out;
+  }
+
+  /* Prevent jump on touch: include translateX in the scaled transform for mobile */
+  #contact3DContainer:hover,
+  #contact3DContainer:active {
+    transform: translateX(-50%) scale(1.03);
   }
 }
 
@@ -251,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!isMobileDevice) {
     import('./obssd_shared/three.js?v=31');
   }
-  import('./obssd_shared/contact.js?v=31');
+  import('./obssd_shared/contact.js?v=32');
 </script>
 
 </body>
