@@ -54,6 +54,24 @@ const eyeLookInfluence = 0.55;
 const blinkMeshes = [];
 const blinkOpenDuration = 150;
 let blinkStartedAt = -Infinity;
+let lastRenderTime = performance.now();
+let lastPointerX = 0;
+let lastPointerY = 0;
+const headPosition = new THREE.Vector3();
+const direction = new THREE.Vector3();
+const eyeDirection = new THREE.Vector3();
+const eyeForward = new THREE.Vector3();
+const deltaRotation = new THREE.Quaternion();
+const desiredWorldRotation = new THREE.Quaternion();
+const parentRotation = new THREE.Quaternion();
+const currentHeadWorldRotation = new THREE.Quaternion();
+const headRotationDelta = new THREE.Quaternion();
+const inheritedEyeWorldRotation = new THREE.Quaternion();
+const eyeLookRotation = new THREE.Quaternion();
+const subtleEyeLookRotation = new THREE.Quaternion();
+const desiredEyeWorldRotation = new THREE.Quaternion();
+const eyeParentWorldRotation = new THREE.Quaternion();
+const desiredEyeLocalRotation = new THREE.Quaternion();
 const modelRoot = new THREE.Group();
 scene.add(modelRoot);
 
@@ -180,60 +198,63 @@ function updatePointerTarget() {
         return;
     }
 
-    const headPosition = new THREE.Vector3();
     headBone.getWorldPosition(headPosition);
-    const direction = pointerTarget.clone().sub(headPosition).normalize();
-    const deltaRotation = new THREE.Quaternion().setFromUnitVectors(headRestWorldForward, direction);
-    const desiredWorldRotation = deltaRotation.multiply(headRestWorldRotation);
-    const parentRotation = new THREE.Quaternion();
+    direction.copy(pointerTarget).sub(headPosition).normalize();
+    deltaRotation.setFromUnitVectors(headRestWorldForward, direction);
+    desiredWorldRotation.copy(deltaRotation).multiply(headRestWorldRotation);
 
     if (headBone.parent) {
         headBone.parent.getWorldQuaternion(parentRotation);
         parentRotation.invert();
+    } else {
+        parentRotation.identity();
     }
 
     const desiredLocalRotation = parentRotation.multiply(desiredWorldRotation);
     headBone.quaternion.slerp(desiredLocalRotation, 0.18);
 
     headBone.updateMatrixWorld(true);
-    const currentHeadWorldRotation = headBone.getWorldQuaternion(new THREE.Quaternion());
-    const headRotationDelta = currentHeadWorldRotation
-        .multiply(headRestWorldRotation.clone().invert());
+    headBone.getWorldQuaternion(currentHeadWorldRotation);
+    headRotationDelta.copy(currentHeadWorldRotation).multiply(headRestWorldRotation.clone().invert());
 
     eyeBones.forEach((eyeBone) => {
-        const inheritedEyeWorldRotation = headRotationDelta
-            .clone()
-            .multiply(eyeRestWorldRotations.get(eyeBone));
-        const eyeDirection = pointerTarget.clone().sub(headPosition).normalize();
-        const eyeForward = new THREE.Vector3(0, 1, 0)
-            .applyQuaternion(inheritedEyeWorldRotation);
-        const eyeLookRotation = new THREE.Quaternion().setFromUnitVectors(
+        inheritedEyeWorldRotation.copy(headRotationDelta).multiply(eyeRestWorldRotations.get(eyeBone));
+        eyeDirection.copy(pointerTarget).sub(headPosition).normalize();
+        eyeForward.set(0, 1, 0).applyQuaternion(inheritedEyeWorldRotation);
+        eyeLookRotation.setFromUnitVectors(
             eyeForward,
             eyeDirection
         );
-        const subtleEyeLookRotation = new THREE.Quaternion().slerp(
-            eyeLookRotation,
-            eyeLookInfluence
-        );
-        const desiredEyeWorldRotation = subtleEyeLookRotation
-            .multiply(inheritedEyeWorldRotation);
-        const eyeParentWorldRotation = eyeBone.parent
-            ? eyeBone.parent.getWorldQuaternion(new THREE.Quaternion()).invert()
-            : new THREE.Quaternion();
-        const desiredEyeLocalRotation = eyeParentWorldRotation.multiply(desiredEyeWorldRotation);
+        subtleEyeLookRotation.identity().slerp(eyeLookRotation, eyeLookInfluence);
+        desiredEyeWorldRotation.copy(subtleEyeLookRotation).multiply(inheritedEyeWorldRotation);
+        if (eyeBone.parent) {
+            eyeBone.parent.getWorldQuaternion(eyeParentWorldRotation);
+            eyeParentWorldRotation.invert();
+        } else {
+            eyeParentWorldRotation.identity();
+        }
+        desiredEyeLocalRotation.copy(eyeParentWorldRotation).multiply(desiredEyeWorldRotation);
         eyeBone.quaternion.slerp(desiredEyeLocalRotation, 0.18);
     });
 }
 
 function animate() {
     const currentTime = performance.now();
+    const elapsed = currentTime - lastRenderTime;
+    if (elapsed < 33) return;
+
     if (idleMixer) {
-        idleMixer.update((currentTime - lastFrameTime) / 1000);
+        idleMixer.update(Math.min((currentTime - lastFrameTime) / 1000, 0.1));
     }
     lastFrameTime = currentTime;
-    updatePointerTarget();
+    if (pointer.x !== lastPointerX || pointer.y !== lastPointerY) {
+        updatePointerTarget();
+        lastPointerX = pointer.x;
+        lastPointerY = pointer.y;
+    }
     updateBlink();
     renderer.render(scene, camera);
+    lastRenderTime = currentTime;
 }
 
 function updateBlink() {
@@ -256,6 +277,16 @@ window.addEventListener('click', () => {
         blinkMeshes.forEach(({ node, index }) => {
             node.morphTargetInfluences[index] = 1;
         });
+    }
+});
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        renderer.setAnimationLoop(null);
+    } else {
+        lastFrameTime = performance.now();
+        lastRenderTime = lastFrameTime - 33;
+        renderer.setAnimationLoop(animate);
     }
 });
 

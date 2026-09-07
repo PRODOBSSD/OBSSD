@@ -18,7 +18,7 @@ if (canvas && container) {
     alpha: true,
     powerPreference: 'high-performance'
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setClearColor(0x000000, 0);
 
   const ambient = new THREE.HemisphereLight(0xfff9f2, 0x3a312f, 3.8);
@@ -47,7 +47,7 @@ if (canvas && container) {
     const rect = container.getBoundingClientRect();
     const width = Math.max(160, rect.width);
     const height = Math.max(100, rect.height);
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
     renderer.setPixelRatio(dpr);
     renderer.setSize(width, height, false);
@@ -120,9 +120,15 @@ if (canvas && container) {
   resizeRenderer();
   window.addEventListener('resize', resizeRenderer);
 
+  let lastFrameTime = performance.now();
+
   function animate() {
+    const currentTime = performance.now();
+    const elapsed = currentTime - lastFrameTime;
+    if (elapsed < 33) return;
+
     if (contactMixer) {
-      contactMixer.update(0.016);
+      contactMixer.update(Math.min(elapsed / 1000, 0.1));
     }
 
     if (contactModel) {
@@ -132,7 +138,17 @@ if (canvas && container) {
     }
 
     renderer.render(scene, camera);
+    lastFrameTime = currentTime;
   }
 
   renderer.setAnimationLoop(animate);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      renderer.setAnimationLoop(null);
+    } else {
+      lastFrameTime = performance.now() - 33;
+      renderer.setAnimationLoop(animate);
+    }
+  });
 }

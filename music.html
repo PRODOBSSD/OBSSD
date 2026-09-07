@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="obssd_shared/custom.css">
+<link rel="preload" href="obssd_shared/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="obssd_shared/custom.css"></noscript>
 <script src="obssd_shared/audio-feedback.js" defer></script>
 <meta charset="UTF-8">
-<meta name="description" content="Music portfolio">
+<meta name="description" content="OBSSD music portfolio, commissioned music, and beat store.">
+<link rel="canonical" href="https://obssd.online/music">
+<meta property="og:title" content="OBSSD Music">
+<meta property="og:description" content="OBSSD music portfolio, commissioned music, and beat store.">
+<meta property="og:url" content="https://obssd.online/music">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>MUSIC</title>
 
@@ -199,47 +206,48 @@ body {
 <body>
 
 <!-- LOGO -->
-<div class="logo-container">
+<header class="logo-container">
   <a href="https://obssd.online/">
-    <img src="/obssd_assets/OBSSD_TITLE.webp" class="logo-img">
+    <img src="/obssd_assets/OBSSD_TITLE.webp" class="logo-img" alt="OBSSD logo" width="340" height="73">
   </a>
-</div>
+</header>
 
+<main>
 <!-- COMMISSIONS -->
 <div class="section-title"><span>Commissioned Music</span></div>
 
 <div class="carousel">
 
 <div class="card">
-<iframe src="https://www.youtube.com/embed/TTvMRHAfayM?si=pRIa6Oz8dKjC7c2Q" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/TTvMRHAfayM?si=pRIa6Oz8dKjC7c2Q" title="OBSSD commissioned music video" loading="lazy" allowfullscreen></iframe>
 </div>
   
 <div class="card">
-<iframe src="https://www.youtube.com/embed/pgJQw0UT2oo?si=sgGayW7p-Ds0SHlY" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/pgJQw0UT2oo?si=sgGayW7p-Ds0SHlY" title="OBSSD commissioned music video" loading="lazy" allowfullscreen></iframe>
 </div>
 
 <div class="card">
-<iframe src="https://www.youtube.com/embed/hvbJdreAlu4?si=cGBX7mVOyzdfwnAe" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/hvbJdreAlu4?si=cGBX7mVOyzdfwnAe" title="OBSSD commissioned music video" loading="lazy" allowfullscreen></iframe>
 </div>
 
 <div class="card">
-<iframe src="https://www.youtube.com/embed/CGVWFii0uJY?si=Gp3rqeGfJYKbgPmu" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/CGVWFii0uJY?si=Gp3rqeGfJYKbgPmu" title="OBSSD commissioned music video" loading="lazy" allowfullscreen></iframe>
 </div>
 
 <div class="card">
-<iframe src="https://www.youtube.com/embed/CwgNxq1GEng?rel=0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/CwgNxq1GEng?rel=0" title="OBSSD commissioned music video" loading="lazy" allowfullscreen></iframe>
 </div>
 
 <div class="card">
-<iframe src="https://www.youtube.com/embed/O1AivjzRhLo?si=BPSfFsk9dWrI3iKu" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/O1AivjzRhLo?si=BPSfFsk9dWrI3iKu" title="OBSSD commissioned music video" loading="lazy" allowfullscreen></iframe>
 </div>
 
 <div class="card">
-<iframe src="https://www.youtube.com/embed/49euGyoaeMw?si=5s00bEtBYuFlbPNz" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/49euGyoaeMw?si=5s00bEtBYuFlbPNz" title="OBSSD commissioned music video" loading="lazy" allowfullscreen></iframe>
 </div>
   
 <div class="card">
-<iframe src="https://www.youtube.com/embed/wb2p0ew3t24?si=CVEgtBEi7DusziP1" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/wb2p0ew3t24?si=CVEgtBEi7DusziP1" title="OBSSD commissioned music video" loading="lazy" allowfullscreen></iframe>
 </div>
 
 </div>
@@ -249,12 +257,15 @@ body {
 
 <div class="beatstars-section">
   <div class="beatstars-embed">
-    <iframe 
+    <iframe title="OBSSD beat store" loading="lazy"
       src="https://player.beatstars.com/?storeId=150661"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
     </iframe>
   </div>
 </div>
+
+<!-- End primary content -->
+</main>
 
 
 <!-- CONTACT FOOTER -->

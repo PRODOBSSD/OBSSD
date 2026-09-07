@@ -3,10 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Unsubscribe from Weekly Loops</title>
-  <meta name="description" content="Unsubscribe from OBSSD weekly loop emails">
-  <link rel="stylesheet" href="obssd_shared/custom.css">
+  <meta name="description" content="Unsubscribe from OBSSD weekly loop emails.">
+  <link rel="canonical" href="https://obssd.online/unsubscribe">
+  <meta property="og:title" content="Unsubscribe from OBSSD emails">
+  <meta property="og:description" content="Unsubscribe from OBSSD weekly loop emails.">
+  <meta property="og:url" content="https://obssd.online/unsubscribe">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="preload" href="obssd_shared/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="obssd_shared/custom.css"></noscript>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"></noscript>
   <script src="obssd_shared/audio-feedback.js" defer></script>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Montserrat';
@@ -101,7 +110,7 @@
   </style>
 </head>
 <body>
-  <div class="unsubscribe-container">
+  <main class="unsubscribe-container">
     <h2>Unsubscribe from Weekly Loops</h2>
     <form id="unsubscribe-form" autocomplete="off">
       <label for="unsubscribe-email">Email Address</label>
@@ -111,7 +120,7 @@
     <div class="success-message" id="success-message">You have been unsubscribed.</div>
     <div class="error-message" id="error-message">There was a problem. Please try again.</div>
     <div class="custom-description">Your information is secure and will not be shared.</div>
-  </div>
+  </main>
   <script>
     const SUBSCRIBE_URL = "https://script.google.com/macros/s/AKfycbx8foiTr9yDC1opGbhpSFdg2ZDjvgpgKx3OGN5dbVoIQ2gpUw42uIx2bEQLLx88is2d/exec";
 

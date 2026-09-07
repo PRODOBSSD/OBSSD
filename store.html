@@ -11,13 +11,20 @@
   </script>
 
   <meta charset="UTF-8">
-  <meta name="description" content="Shop items created by New Zealand based producer and visual artist OBSSD">
+  <meta name="description" content="Shop music, visual, and creative releases from OBSSD.">
+  <link rel="canonical" href="https://obssd.online/store">
+  <meta property="og:title" content="OBSSD Store">
+  <meta property="og:description" content="Shop music, visual, and creative releases from OBSSD.">
+  <meta property="og:url" content="https://obssd.online/store">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>STORE</title>
 
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
-  <link rel="stylesheet" href="obssd_shared/custom.css">
+  <link rel="preload" href="obssd_shared/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="obssd_shared/custom.css"></noscript>
   <script src="obssd_shared/audio-feedback.js" defer></script>
 
 <style>
@@ -239,19 +246,20 @@ body {
 <body>
 
 <!-- LOGO -->
-<div class="logo-container">
+<header class="logo-container">
   <a href="https://obssd.online/">
-    <img src="obssd_assets/OBSSD_TITLE.webp" class="logo-img">
+    <img src="obssd_assets/OBSSD_TITLE.webp" class="logo-img" alt="OBSSD logo" width="340" height="73">
   </a>
-</div>
+</header>
 
 <!-- GRID -->
+<main>
 <div class="product-grid">
 
   <!-- ITEM -->
   <div class="product-card">
     <a href="https://mobworld.cc/b/thm3u" target="_blank" class="product-image-wrapper">
-      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1000/https://pe56d.s3.amazonaws.com/o_1je5o4t1ionnmnp1ir5oq11ics7.png">
+      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1000/https://pe56d.s3.amazonaws.com/o_1je5o4t1ir5oq11ics7.png" alt="Bundle Kit product preview" loading="lazy" decoding="async">
       <div class="product-overlay">VIEW</div>
     </a>
 
@@ -269,7 +277,7 @@ body {
   <!-- ITEM -->
   <div class="product-card">
     <a href="https://mobworld.cc/b/eAOqc" target="_blank" class="product-image-wrapper">
-      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1je101kbl1nso6nrlk6vfl18261a.jpg">
+      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1je101kbl1nso6nrlk6vfl18261a.jpg" alt="Afterlife product preview" loading="lazy" decoding="async">
       <div class="product-overlay">VIEW</div>
     </a>
 
@@ -287,7 +295,7 @@ body {
   <!-- ITEM -->
   <div class="product-card">
     <a href="https://mobworld.cc/b/wn5aG" target="_blank" class="product-image-wrapper">
-      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1ip0g986k1dajkvbs4j6vo85110.jpg">
+      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1ip0g986k1dajkvbs4j6vo85110.jpg" alt="Rebirth product preview" loading="lazy" decoding="async">
       <div class="product-overlay">VIEW</div>
     </a>
 
@@ -305,7 +313,7 @@ body {
   <!-- ITEM -->
   <div class="product-card">
     <a href="https://www.instagram.com/p/DL_6Z46zVBd/" target="_blank" class="product-image-wrapper">
-      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ivup4icn16rr3a4if0gbu1up810.jpg">
+      <img class="product-image" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ivup4icn16rr3a4if0gbu1up810.jpg" alt="Takeover product preview" loading="lazy" decoding="async">
       <div class="product-overlay">VIEW</div>
     </a>
 
@@ -323,7 +331,7 @@ body {
   <!-- ITEM -->
   <div class="product-card">
     <a href="https://www.instagram.com/p/DQI0S1yEltV/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="product-image-wrapper">
-      <img class="product-image" src="obssd_assets\5K_@imobssd.webp">
+      <img class="product-image" src="obssd_assets/5K_@imobssd.webp" alt="5k Kit product preview" loading="lazy" decoding="async">
       <div class="product-overlay">VIEW</div>
     </a>
 
@@ -339,11 +347,12 @@ body {
   </div>
 
 </div>
+</main>
 
 <!-- CONTACT FOOTER -->
 <div class="contact-footer">
   <a href="https://obssd.online/contact" class="contact-button">
-    <img src="/obssd_assets/CONTACT_FOOTER.webp" alt="Contact">
+    <img src="/obssd_assets/CONTACT_FOOTER.webp" alt="Contact OBSSD" width="250" height="72" loading="lazy">
   </a>
 </div>
 

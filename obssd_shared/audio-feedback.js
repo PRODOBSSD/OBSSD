@@ -126,10 +126,6 @@
     bindHoverTargets();
     document.addEventListener('click', handleClick, true);
 
-    new MutationObserver(() => {
-      setAudioVolume();
-      bindHoverTargets();
-    }).observe(document.body, { childList: true, subtree: true });
   }
 
   if (document.readyState === 'loading') {

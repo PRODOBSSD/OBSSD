@@ -12,13 +12,19 @@ gtag('config', 'G-NLWC8KV66N');
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="OBSSD is a New Zealand based producer and visual artist.">
-<title>OBSSD</title>
+<meta name="description" content="OBSSD is a New Zealand based producer and visual artist working across music and visuals.">
+<link rel="canonical" href="https://obssd.online/">
+<meta property="og:title" content="OBSSD | Music and Visuals">
+<meta property="og:description" content="OBSSD is a New Zealand based producer and visual artist working across music and visuals.">
+<meta property="og:url" content="https://obssd.online/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<title>OBSSD | Music and Visuals</title>
 
 <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
-<link rel="stylesheet" href="obssd_shared/custom.css">
+<link rel="preload" href="obssd_shared/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="obssd_shared/custom.css"></noscript>
 <script src="obssd_shared/audio-feedback.js" defer></script>
-<link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 html, body {
@@ -46,6 +52,9 @@ body {
 }
 .obssd-title img {
   width: 380px;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 @media (max-width: 1500px) {
   .obssd-title { display: none !important; }
@@ -158,6 +167,7 @@ body {
 }
 .nav-button-image {
   width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -207,26 +217,29 @@ body {
 
 <body>
 
-<div class="obssd-title">
-  <img src="obssd_assets/OBSSD_TITLE.webp">
-</div>
+<header class="obssd-title">
+  <img src="obssd_assets/OBSSD_TITLE.webp" alt="OBSSD logo">
+</header>
 
-<div class="contact-section" id="contact3DContainer" aria-label="Open contact page">
+<main>
+<a class="contact-section" id="contact3DContainer" href="https://obssd.online/contact">
   <canvas id="contact-3d-canvas"></canvas>
-</div>
+  <span class="visually-hidden">Open contact page</span>
+</a>
 
 <!-- NAVIGATION BUTTONS -->
-<div class="nav-buttons-section">
-  <div class="nav-button-container" id="visualsButton">
-    <img src="obssd_assets/WEB_VISUALS.webp" class="nav-button-image">
-  </div>
-  <div class="nav-button-container" id="musicButton">
-    <img src="obssd_assets/WEB_MUSIC.webp" class="nav-button-image">
-  </div>
-  <div class="nav-button-container" id="storeButton">
-    <img src="obssd_assets/WEB_STORE.webp" class="nav-button-image">
-  </div>
-</div>
+<nav class="nav-buttons-section" aria-label="Primary navigation">
+  <a class="nav-button-container" id="visualsButton" href="https://obssd.online/visuals">
+    <img src="obssd_assets/WEB_VISUALS.webp" class="nav-button-image" alt="Visuals">
+  </a>
+  <a class="nav-button-container" id="musicButton" href="https://obssd.online/music">
+    <img src="obssd_assets/WEB_MUSIC.webp" class="nav-button-image" alt="Music">
+  </a>
+  <a class="nav-button-container" id="storeButton" href="https://obssd.online/store">
+    <img src="obssd_assets/WEB_STORE.webp" class="nav-button-image" alt="Store">
+  </a>
+</nav>
+</main>
 
 <!-- Navigation buttons click handlers -->
 <script>

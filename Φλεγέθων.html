@@ -12,12 +12,18 @@ gtag('config', 'G-NLWC8KV66N');
 <meta charset="UTF-8">
 <meta name="description" content="OBSSD is a New Zealand based producer and visual artist.">
 <title>Φλεγέθων</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://obssd.online/%CE%A6%CE%BB%CE%B5%CE%B3%CE%AD%CE%B8%CF%89%CE%BD.html">
+<meta property="og:title" content="Φλεγέθων | OBSSD">
+<meta property="og:description" content="OBSSD is a New Zealand based producer and visual artist.">
+<meta property="og:url" content="https://obssd.online/%CE%A6%CE%BB%CE%B5%CE%B3%CE%AD%CE%B8%CF%89%CE%BD.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 
 <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png">
-<link rel="stylesheet" href="obssd_shared/custom.css">
+<link rel="preload" href="obssd_shared/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="obssd_shared/custom.css"></noscript>
 <script src="obssd_shared/audio-feedback.js" defer></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 /* ✅ Fade setup */
@@ -45,11 +51,14 @@ body {
 
 <body>
 <!-- SPLINE -->
+<main>
 <spline-viewer id="splineScene" url="https://prod.spline.design/OZmIiiTAh2CeM1bU/scene.splinecode"></spline-viewer>
+</main>
 
 <!-- Logo removal -->
 <script>
 function removeSplineLogo() {
+  const startedAt = performance.now();
   const interval = setInterval(() => {
     const viewer = document.querySelector('spline-viewer');
     if (viewer && viewer.shadowRoot) {
@@ -58,6 +67,9 @@ function removeSplineLogo() {
         logo.remove();
         clearInterval(interval);
       }
+    }
+    if (performance.now() - startedAt > 10000) {
+      clearInterval(interval);
     }
   }, 500);
 }

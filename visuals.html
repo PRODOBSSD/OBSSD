@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Visual portfolio">
+  <meta name="description" content="OBSSD visual portfolio featuring animation and cover art projects.">
+  <link rel="canonical" href="https://obssd.online/visuals">
+  <meta property="og:title" content="OBSSD Visuals">
+  <meta property="og:description" content="OBSSD visual portfolio featuring animation and cover art projects.">
+  <meta property="og:url" content="https://obssd.online/visuals">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>VISUALS</title>
   <link rel="icon" href="/obssd_assets/OBSSD_FAVICON_96.png" sizes="96x96" type="image/png">
-  <link rel="stylesheet" href="obssd_shared/custom.css">
+  <link rel="preload" href="obssd_shared/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="obssd_shared/custom.css"></noscript>
   <script src="obssd_shared/audio-feedback.js" defer></script>
 
 <style>
@@ -98,6 +105,10 @@ body {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   cursor: zoom-in;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  text-align: left;
 }
 
 .thumb img {
@@ -188,6 +199,10 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
+  border: 0;
+  padding: 0;
+  width: 100%;
+  color: inherit;
 }
 
 .lightbox.active {
@@ -212,19 +227,20 @@ body {
 
 <body>
 
-<div class="logo-container">
+<header class="logo-container">
   <a href="https://obssd.online/">
-    <img src="/obssd_assets/OBSSD_TITLE.webp" class="logo-img">
+    <img src="/obssd_assets/OBSSD_TITLE.webp" class="logo-img" alt="OBSSD logo" width="340" height="73">
   </a>
-</div>
+</header>
 
+<main>
 <div class="gallery">
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://youtu.be/QTU6aBoTkME')">
-      <img src="obssd_work/unseen thumbnail.jpg">
+    <button type="button" class="thumb" onclick="openLink('https://youtu.be/QTU6aBoTkME')">
+      <img src="obssd_work/unseen thumbnail.jpg" alt="UNSEEN animation thumbnail" loading="eager" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>UNSEEN</span></div>
     <!--  <div class="date"><span>2026</span></div> Use if I need to add date-->
@@ -233,10 +249,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://youtu.be/795Fs6Bp0eQ')">
-      <img src="obssd_work/prxjectsin @imobssd.png">
+    <button type="button" class="thumb" onclick="openLink('https://youtu.be/795Fs6Bp0eQ')">
+      <img src="obssd_work/prxjectsin @imobssd.png" alt="PRXJECT SIN animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>PRXJECT SIN</span></div>
     <!--  <div class="date"><span>2026</span></div> Use if I need to add date-->
@@ -245,10 +261,10 @@ body {
   </div>
   
   <div class="item">
-    <div class="thumb" onclick="openLink('https://youtu.be/wrbIWuQMaCs')">
-      <img src="obssd_work/juzerts blakktrukk @imobssd.png">
+    <button type="button" class="thumb" onclick="openLink('https://youtu.be/wrbIWuQMaCs')">
+      <img src="obssd_work/juzerts blakktrukk @imobssd.png" alt="Jusertz BLAKK TRUKK animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Jusertz "BLAKK TRUKK"</span></div>
     <!--  <div class="date"><span>2026</span></div> Use if I need to add date-->
@@ -257,10 +273,10 @@ body {
   </div>
   
   <div class="item">
-    <div class="thumb" onclick="openLink('https://youtu.be/OrHd5_i1dF4')">
-      <img src="obssd_work/juzerts nina @imobssd.png">
+    <button type="button" class="thumb" onclick="openLink('https://youtu.be/OrHd5_i1dF4')">
+      <img src="obssd_work/juzerts nina @imobssd.png" alt="Jusertz NINA animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Jusertz "NINA"</span></div>
     <!--  <div class="date"><span>2026</span></div> Use if I need to add date-->
@@ -269,10 +285,10 @@ body {
   </div>
   
   <div class="item">
-    <div class="thumb" onclick="openLink('https://youtu.be/neSlrS5cmqA')">
-      <img src="obssd_work/Fears 4you @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://youtu.be/neSlrS5cmqA')">
+      <img src="obssd_work/Fears 4you @imobssd.webp" alt="Parei Fears animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Parei "Fears"</span></div>
     <!--  <div class="date"><span>2026</span></div> Use if I need to add date-->
@@ -281,10 +297,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLightbox(this)">
-      <img src="obssd_work/2CURSED COVERART @imobssd.jpg">
+    <button type="button" class="thumb" onclick="openLightbox(this)">
+      <img src="obssd_work/2CURSED COVERART @imobssd.jpg" alt="Awful 2CURSED cover art" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Awful "2CURSED"</span></div>
       <div class="type"><span>cover art</span></div>
@@ -292,10 +308,10 @@ body {
   </div>
   
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=fiIwhJZmwr4')">
-      <img src="obssd_work/mobeats_healyou_@imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=fiIwhJZmwr4')">
+      <img src="obssd_work/mobeats_healyou_@imobssd.webp" alt="Mo Beats heal you animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Mo Beats "heal you"</span></div>
     <!--  <div class="date"><span>2026</span></div> Use if I need to add date-->
@@ -304,10 +320,10 @@ body {
   </div>
   <!-- LINK ITEM -->
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=Y68mjK2Typs')">
-      <img src="obssd_work/mobeats champion @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=Y68mjK2Typs')">
+      <img src="obssd_work/mobeats champion @imobssd.webp" alt="Mo Beats CHAMPION animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Mo Beats "CHAMPION"</span></div>
     <!--  <div class="date"><span>2026</span></div> Use if I need to add date-->
@@ -316,10 +332,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.behance.net/gallery/241857001/AFTERLIFE-Visualizer')">
-      <img src="obssd_work/mob afterlife @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.behance.net/gallery/241857001/AFTERLIFE-Visualizer')">
+      <img src="obssd_work/mob afterlife @imobssd.webp" alt="MOB AFTERLIFE animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>MOB "AFTERLIFE"</span></div>
       <div class="type"><span>animation</span></div>
@@ -327,10 +343,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=CfTFY0MDc3c')">
-      <img src="obssd_work/conic cover @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=CfTFY0MDc3c')">
+      <img src="obssd_work/conic cover @imobssd.webp" alt="Conic visualizer thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Conic "Visualizer"</span></div>
       <div class="type"><span>animation</span></div>
@@ -338,10 +354,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=jlS8YdcC5OE')">
-      <img src="obssd_work/pareidolia social @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=jlS8YdcC5OE')">
+      <img src="obssd_work/pareidolia social @imobssd.webp" alt="Parei Social animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Parei "Social"</span></div>
       <div class="type"><span>animation</span></div>
@@ -349,10 +365,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLightbox(this)">
-      <img src="/obssd_work/monkayo anhedonia @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLightbox(this)">
+      <img src="/obssd_work/monkayo anhedonia @imobssd.webp" alt="Monkayo Anhedonia cover art" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Monkayo "Anhedonia"</span></div>
       <div class="type"><span>cover art</span></div>
@@ -360,10 +376,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=wrjdRVCnlM0')">
-      <img src="obssd_work/5K kit @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=wrjdRVCnlM0')">
+      <img src="obssd_work/5K kit @imobssd.webp" alt="OBSSD 5k Kit animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>OBSSD "5k Kit"</span></div>
       <div class="type"><span>animation</span></div>
@@ -371,10 +387,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLightbox(this)">
-      <img src="/obssd_work/piet repentance @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLightbox(this)">
+      <img src="/obssd_work/piet repentance @imobssd.webp" alt="Piet Repentance cover art" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Piet "Repentance"</span></div>
       <div class="type"><span>cover art</span></div>
@@ -382,10 +398,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=GbHWDa6HLkM')">
-      <img src="obssd_work/6astard lonely in heave @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=GbHWDa6HLkM')">
+      <img src="obssd_work/6astard lonely in heave @imobssd.webp" alt="6astard Lonely In Heaven animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>6astard "Lonely In Heaven"</span></div>
       <div class="type"><span>animation</span></div>
@@ -393,10 +409,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=SSbpC3ukOTA')">
-      <img src="obssd_work/kujo gon3 @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=SSbpC3ukOTA')">
+      <img src="obssd_work/kujo gon3 @imobssd.webp" alt="Kujo GON3 animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Kujo "GON3"</span></div>
       <div class="type"><span>animation</span></div>
@@ -404,10 +420,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=Tjtl97dO8sw')">
-      <img src="obssd_work/ploo sexdeath @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=Tjtl97dO8sw')">
+      <img src="obssd_work/ploo sexdeath @imobssd.webp" alt="Ploo S3X DEATH animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Ploo "S3X DEATH"</span></div>
       <div class="type"><span>animation</span></div>
@@ -415,10 +431,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=dsceb7czeaI')">
-      <img src="obssd_work/pareidolia diamonds @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=dsceb7czeaI')">
+      <img src="obssd_work/pareidolia diamonds @imobssd.webp" alt="Parei Diamonds animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Parei "Diamonds"</span></div>
       <div class="type"><span>animation</span></div>
@@ -426,10 +442,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=o0dInSecOBM')">
-      <img src="obssd_work/mob takeover @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=o0dInSecOBM')">
+      <img src="obssd_work/mob takeover @imobssd.webp" alt="MOB Takeover animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>MOB "Takeover"</span></div>
       <div class="type"><span>animation</span></div>
@@ -437,10 +453,10 @@ body {
   </div>
 
   <div class="item">
-    <div class="thumb" onclick="openLink('https://www.youtube.com/watch?v=2ifqAF9ix1c')">
-      <img src="obssd_work/mob rebirth @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLink('https://www.youtube.com/watch?v=2ifqAF9ix1c')">
+      <img src="obssd_work/mob rebirth @imobssd.webp" alt="MOB Rebirth animation thumbnail" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>MOB "Rebirth"</span></div>
       <div class="type"><span>animation</span></div>
@@ -448,10 +464,10 @@ body {
   </div>
 
  <div class="item">
-    <div class="thumb" onclick="openLightbox(this)">
-      <img src="/obssd_work/6astard restlessdteams 1 @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLightbox(this)">
+      <img src="/obssd_work/6astard restlessdteams 1 @imobssd.webp" alt="6astard Restless Dreams cover art" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>6astard "Restless Dreams"</span></div>
       <div class="type"><span>cover art</span></div>
@@ -459,10 +475,10 @@ body {
   </div>
 
  <div class="item">
-    <div class="thumb" onclick="openLightbox(this)">
-      <img src="/obssd_work/mokayo phantom @imobssd.webp">
+    <button type="button" class="thumb" onclick="openLightbox(this)">
+      <img src="/obssd_work/mokayo phantom @imobssd.webp" alt="Monkayo Phantom cover art" loading="lazy" decoding="async">
       <div class="overlay">VIEW</div>
-    </div>
+    </button>
     <div class="meta">
       <div class="title"><span>Monkayo "Phantom"</span></div>
       <div class="type"><span>cover art</span></div>
@@ -471,15 +487,18 @@ body {
 
 </div>
 
+<!-- End primary content -->
+</main>
+
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img">
-</div>
+<button type="button" class="lightbox" id="lightbox" aria-label="Close artwork preview" onclick="closeLightbox()">
+  <img id="lightbox-img" alt="Expanded artwork preview">
+</button>
 
 <!-- CONTACT FOOTER -->
 <div class="contact-footer">
   <a href="https://obssd.online/contact" class="contact-button">
-    <img src="/obssd_assets/CONTACT_FOOTER.webp" alt="Contact">
+    <img src="/obssd_assets/CONTACT_FOOTER.webp" alt="Contact OBSSD" width="250" height="72" loading="lazy">
   </a>
 </div>
 
@@ -490,6 +509,7 @@ function openLightbox(el) {
   const lightImg = document.getElementById('lightbox-img');
 
   lightImg.src = img.src;
+  lightImg.alt = img.alt;
   box.classList.add('active');
 }
 
